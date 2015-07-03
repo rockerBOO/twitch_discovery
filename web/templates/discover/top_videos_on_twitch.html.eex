@@ -1,0 +1,33 @@
+    <div class="mui-container">
+      <div class="mui-panel">
+        <h1>Twitch Discovery - Top Videos</h1>
+      </div>
+
+		<div class="mui-panel">
+			<h2>Games</h2>
+			<form>
+				<div class="mui-select">
+				<select name="game">
+					<%= for game <- @games do %>
+					<option value="<%= game["game"]["name"] %>"><%= game["game"]["name"] %> (<%= game["viewers"] %>)</option>
+					<%= end %>
+				</select>
+				</div>
+			</form>
+		</div>
+
+	  	<%= for video <- @videos do %>
+		<div class="mui-panel">
+			<h2><a href="<%= video["url"] %>"><%= video["title"] %></a></h2>
+			<div class="video_meta">
+				<span class="video_meta views"><%= video["views"] %></span>
+				<span class="video_meta length"><%= video["length_hours"] %>:<%= video["length_minutes"] %>:<%= video["length_seconds"] %></span>
+			</div>
+			<a href="<%= video["url"] %>">
+				<img src="<%= video["thumbnail"] %>">
+			</a>
+
+  		</div>
+		<% end %>
+
+    </div>
