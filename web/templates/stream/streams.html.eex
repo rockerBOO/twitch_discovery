@@ -1,0 +1,37 @@
+    <div class="mui-container">
+      <div class="mui-panel">
+        <h1>Twitch Discovery - Streams</h1>
+      </div>
+
+    <div class="mui-panel">
+      <div class="mui-dropdown" style="float: left">
+        <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
+          Games
+          <span class="mui-caret"></span>
+        </button>
+        <ul class="mui-dropdown-menu">
+        <li><a href="/streams">/</a></li>
+        <%= for game <- @games do %>
+        <li><a href="/streams?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
+        <%= end %>
+        </ul>
+      </div>
+      <div style="float: left">
+        <a href="/streams/summary">Stream Stats</a>
+      </div>
+    </div>
+
+      <%= for stream <- @streams do %>
+    <div class="mui-panel">
+      <a href="<%= stream["channel_url"] %>">
+        <img src="<%= stream["thumbnail"] %>">
+      </a>
+      <h2><a href="<%= stream["channel_url"] %>"><%= stream["channel_name"] %></a></h2>
+
+      <div class="stream_meta">
+        <span class="stream_meta views"><%= stream["viewers"] %></span>
+      </div>
+      </div>
+    <% end %>
+
+    </div>
