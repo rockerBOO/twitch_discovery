@@ -17,6 +17,11 @@ defmodule TwitchDiscovery.Router do
 
     get "/", PageController, :index
 
+    get "/search", SearchController, :index
+    get "/search/streams", SearchController, :streams
+
+    get "/streams", DiscoverController, :streams
+    get "/discover/channel/:channel", DiscoverController, :videos_in_channel
     get "/discover", DiscoverController, :index
     get "/discover/videos/top", DiscoverController, :top_videos_on_twitch
   end

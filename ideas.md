@@ -7,14 +7,15 @@ Ideas
 ### Discovery Starting Points
 * # of followers/# of channel views
 * find by language
-* find by game
 * mature streams
 * tag streams
 * follower of followers for streamers
 * subset by teams
 * find new videos of streamers
-* top videos on twitch
-* Get videos per channel
+
+* top videos on twitch [X]
+* Get videos per channel [X]
+* find by game [X]
 
 ### Search
 * channels

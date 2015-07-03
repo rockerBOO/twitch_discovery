@@ -1,5 +1,11 @@
     <div class="mui-container">
       <div class="mui-panel">
         <h1>Twitch Discovery</h1>
+
+        <ul>
+          <li><a href="/discover/videos/top">Top Videos</a></li>
+          <li><a href="/streams">Streams by Game</a></li>
+          <li><a href="/search/streams">Search Streams</a></li>
+        </ul>
       </div>
     </div>
