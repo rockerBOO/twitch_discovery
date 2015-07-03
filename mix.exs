@@ -18,7 +18,7 @@ defmodule TwitchDiscovery.Mixfile do
   def application do
     [mod: {TwitchDiscovery, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :httpoison]]
+                    :phoenix_ecto, :postgrex, :httpoison, :mongo]]
   end
 
   # Specifies which paths to compile per environment
@@ -33,7 +33,7 @@ defmodule TwitchDiscovery.Mixfile do
      {:phoenix_ecto, "~> 0.5"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.1"},
-
+     {:mongo, github: "checkiz/elixir-mongo"},
      # {:rest_twitch, github: "rockerboo/rest_twitch"},
      {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
      {:httpoison, "~> 0.7"},

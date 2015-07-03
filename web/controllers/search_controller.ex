@@ -12,9 +12,8 @@ defmodule TwitchDiscovery.SearchController do
       :thumbnail]
   end
 
-
   def streams(conn, %{"q" => query} = params) do
-    games = RestTwitch.Games.top()
+    games = RestTwitch.Games.top(%{"limit" => 20})
     streams = RestTwitch.Search.streams(params)
       |> Enum.map(fn (stream) ->
         stream
@@ -22,7 +21,7 @@ defmodule TwitchDiscovery.SearchController do
 
     IO.inspect streams
 
-    render conn, "streams.html", streams: streams, games: games
+    render conn, "streams.html", search: query, streams: streams, games: games
   end
 
   def streams(conn, _params) do

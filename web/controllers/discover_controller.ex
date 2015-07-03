@@ -21,7 +21,7 @@ defmodule TwitchDiscovery.DiscoverController do
   end
 
   def streams(conn, params) do
-    games = get_games(10)
+    games = get_games(20)
 
     streams = "/streams?%s"
       |> sprintf([URI.encode_query(params)])
@@ -70,7 +70,7 @@ defmodule TwitchDiscovery.DiscoverController do
   end
 
   def top_videos_on_twitch(conn, params) do
-    games = get_games(100)
+    games = get_games(20)
 
     videos = RestTwitch.Videos.top(params)
       |> Enum.map(fn (video) ->

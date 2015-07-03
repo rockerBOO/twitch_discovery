@@ -11,7 +11,7 @@
 			  </button>
 			  <ul class="mui-dropdown-menu">
 				<%= for game <- @games do %>
-				<li><a href="#"><%= game["game"]["name"] %></a></li>
+				<li><a href="/streams?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
 				<%= end %>
 			  </ul>
 			</div>
