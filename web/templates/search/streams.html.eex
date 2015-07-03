@@ -1,6 +1,6 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h1>Twitch Discovery - Top Videos</h1>
+        <h1>Twitch Discovery - Streams</h1>
       </div>
 
 		<div class="mui-panel">
@@ -18,16 +18,15 @@
 			<form>
 		</div>
 
-	  	<%= for video <- @videos do %>
+	  	<%= for stream <- @streams do %>
 		<div class="mui-panel">
-			<a href="<%= video["url"] %>">
-				<img src="<%= video["thumbnail"] %>">
+			<a href="<%= stream["channel"]["url"] %>">
+				<img src="<%= stream["preview"]["medium"] %>">
 			</a>
-			<h2><a href="<%= video["url"] %>"><%= video["title"] %></a></h2>
+			<h2><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h2>
 
-			<div class="video_meta">
-				<span class="video_meta views"><%= video["views"] %></span>
-				<span class="video_meta length"><%= video["length_hours"] %>:<%= video["length_minutes"] %>:<%= video["length_seconds"] %></span>
+			<div class="stream_meta">
+				<span class="stream_meta views"><%= stream["viewers"] %></span>
 			</div>
   		</div>
 		<% end %>

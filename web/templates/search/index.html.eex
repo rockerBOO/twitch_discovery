@@ -1,0 +1,11 @@
+    <div class="mui-container">
+      <div class="mui-panel">
+        <h1>Twitch Discovery - Search</h1>
+
+        <form action="/search/streams">
+          <div class="mui-form-group">
+            <input type="text" name="q" class="mui-form-control"  value="" />
+          </div>
+        </form>
+      </div>
+    </div>
