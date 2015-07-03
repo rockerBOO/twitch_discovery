@@ -18,6 +18,7 @@ defmodule TwitchDiscovery.Router do
     get "/", PageController, :index
 
     get "/discover", DiscoverController, :index
+    get "/discover/videos/top", DiscoverController, :top_videos_on_twitch
   end
 
   # Other scopes may use custom stacks.

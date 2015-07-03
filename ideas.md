@@ -21,7 +21,7 @@ Ideas
 * streams
 * videos
 
-AUTHENTICATED
+## AUTHENTICATED
 * followed channels
 * followed streams
 * videos

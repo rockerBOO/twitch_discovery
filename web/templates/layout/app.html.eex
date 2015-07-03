@@ -18,6 +18,17 @@
       font-size: 32px;
       margin: 18px;
     }
+
+    .video_meta {
+      float: left;
+      display: block;
+    }
+
+    .video_meta .views, .video_meta .length  {
+      font-size: 18px;
+      padding-right: 10px;
+    }
+
     </style>
   </head>
   <body>
