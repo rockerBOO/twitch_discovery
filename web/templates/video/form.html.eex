@@ -1,0 +1,46 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below:</p>
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :title, "Title" %>
+    <%= text_input f, :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :description, "Description" %>
+    <%= text_input f, :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :status, "Status" %>
+    <%= text_input f, :status, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :broadcast_id, "Broadcast" %>
+    <%= number_input f, :broadcast_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :channel_name, "Channel name" %>
+    <%= text_input f, :channel_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :channel_display_name, "Channel display name" %>
+    <%= text_input f, :channel_display_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

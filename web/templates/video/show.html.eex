@@ -1,0 +1,37 @@
+<h2>Show video</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @video.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @video.description %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @video.status %>
+  </li>
+
+  <li>
+    <strong>Broadcast:</strong>
+    <%= @video.broadcast_id %>
+  </li>
+
+  <li>
+    <strong>Channel name:</strong>
+    <%= @video.channel_name %>
+  </li>
+
+  <li>
+    <strong>Channel display name:</strong>
+    <%= @video.channel_display_name %>
+  </li>
+
+</ul>
+
+<%= link "Back", to: video_path(@conn, :index) %>
