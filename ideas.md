@@ -8,7 +8,6 @@ Ideas
 * # of followers/# of channel views
 * find by language
 * mature streams
-* tag streams
 * follower of followers for streamers
 * subset by teams
 * find new videos of streamers
@@ -16,6 +15,11 @@ Ideas
 * top videos on twitch [X]
 * Get videos per channel [X]
 * find by game [X]
+
+
+* tag streams
+* schedules
+* timezone support
 
 ### Search
 * channels
