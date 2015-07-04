@@ -10,17 +10,20 @@
         </form>
       </div>
 
-	  	<%= for stream <- @streams do %>
-		<div class="mui-panel">
-			<a href="<%= stream["channel"]["url"] %>">
-				<img src="<%= stream["preview"]["medium"] %>">
-			</a>
-			<h2><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h2>
+    <div class="mui-panel">
+  		<div class="mui-row">
+        <%= for stream <- @streams do %>
+        <div class="mui-col-md-4">
+    			<a href="<%= stream["channel"]["url"] %>">
+    				<img src="<%= stream["preview"]["medium"] %>">
+    			</a>
+    			<h4><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h4>
 
-			<div class="stream_meta">
-				<span class="stream_meta views"><%= stream["viewers"] %></span>
-			</div>
+    			<div class="stream_meta">
+    				<span class="views"><%= stream["viewers"] %></span>
+            <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["name"] %></a></span>
+    			</div>
+        </div>
+        <% end %>
   		</div>
-		<% end %>
-
     </div>

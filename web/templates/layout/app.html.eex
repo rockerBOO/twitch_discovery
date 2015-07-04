@@ -29,6 +29,10 @@
       padding-right: 10px;
     }
 
+    .stream-block {
+      margin-bottom: 10px;
+    }
+
     </style>
   </head>
   <body>

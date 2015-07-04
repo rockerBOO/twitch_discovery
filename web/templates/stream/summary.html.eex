@@ -1,7 +1,7 @@
-    <div class="mui-container">
-      <div class="mui-panel">
-        <h1>Twitch Discovery - Streams Online!</h1>
-      </div>
+  <!-- <div class="mui-container"> -->
+    <div class="mui-panel">
+      <h1>Twitch Discovery - Streams Online!</h1>
+    </div>
 
     <div class="mui-panel">
       <div class="mui-dropdown">
@@ -18,11 +18,11 @@
       </div>
     </div>
 
-      <div class="mui-panel">
-        <strong><%= @viewers %></strong> Viewers
-      </div>
-
-      <div class="mui-panel">
-        <strong><%= @channels %></strong> Channels
-      </div>
+    <div class="mui-panel">
+      <strong><%= @viewers %></strong> Viewers
     </div>
+
+    <div class="mui-panel">
+      <strong><%= @channels %></strong> Channels
+    </div>
+  </div>
