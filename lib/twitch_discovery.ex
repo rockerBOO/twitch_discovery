@@ -6,6 +6,9 @@ defmodule TwitchDiscovery do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    # redis_client = Exredis.start
+    {:ok, redis_client} = Exredis.start_link()
+
     children = [
       # Start the endpoint when the application starts
       supervisor(TwitchDiscovery.Endpoint, []),

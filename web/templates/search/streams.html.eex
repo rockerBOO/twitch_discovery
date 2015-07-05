@@ -20,7 +20,7 @@
     			<h4><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h4>
 
     			<div class="stream_meta">
-    				<span class="views"><%= stream["viewers"] %></span>
+    				<strong class="views"><%= stream["viewers"] %></strong> viewers
             <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["name"] %></a></span>
     			</div>
         </div>

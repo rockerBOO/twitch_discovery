@@ -28,17 +28,15 @@ defmodule TwitchDiscovery.DiscoverController do
           length_minutes = length.minutes
           length_seconds = length.seconds
 
-          %{
-            "id" => video["_id"],
+          Map.merge(video, %{
             "length_hours" => length_hours,
             "length_minutes" => length_minutes,
-            "length_seconds" => length_seconds,
-            "thumbnail" => video["preview"],
-            "title" => video["title"],
-            "url" => video["url"],
-            "views" => video["views"]
-          }
+            "length_seconds" => length_seconds
+          })
         end)
+
+    IO.inspect videos
+
     render conn, "videos_in_channel.html", videos: videos
   end
 
@@ -52,17 +50,14 @@ defmodule TwitchDiscovery.DiscoverController do
           length_minutes = length.minutes
           length_seconds = length.seconds
 
-          %{
-            "id" => video["_id"],
+          Map.merge(video, %{
             "length_hours" => length_hours,
             "length_minutes" => length_minutes,
-            "length_seconds" => length_seconds,
-            "thumbnail" => video["preview"],
-            "title" => video["title"],
-            "url" => video["url"],
-            "views" => video["views"]
-          }
+            "length_seconds" => length_seconds
+          })
         end)
+
+    IO.inspect videos
 
     render conn, "top_videos_on_twitch.html", videos: videos, games: games
   end
