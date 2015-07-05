@@ -11,9 +11,9 @@ Ideas
 * follower of followers for streamers
 * subset by teams
 * find new videos of streamers
+* Get videos per channel
 
 * top videos on twitch [X]
-* Get videos per channel [X]
 * find by game [X]
 
 
@@ -23,7 +23,7 @@ Ideas
 
 ### Search
 * channels
-* streams
+* streams [X]
 * videos
 
 ## AUTHENTICATED

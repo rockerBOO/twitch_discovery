@@ -16,10 +16,13 @@ defmodule TwitchDiscovery.SearchController do
     games = RestTwitch.Games.top(%{"limit" => 20})
     streams = RestTwitch.Search.streams(params)
       |> Enum.map(fn (stream) ->
+        TwitchDiscovery.Indexer.Stream.process(stream)
+          # |> IO.inspect
+
         stream
         end)
 
-    IO.inspect streams
+    # IO.inspect streams
 
     render conn, "streams.html", search: query, streams: streams, games: games
   end
