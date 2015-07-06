@@ -34,7 +34,7 @@ defmodule TwitchDiscovery.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.1"},
      {:exredis, ">= 0.1.1"},
-     {:rest_twitch, git: "git@github.com:rockerBOO/rest_twitch.git"},
+     {:rest_twitch, github: "rockerBOO/rest_twitch"},
      # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
      {:httpoison, "~> 0.7"},
      {:timex, "~> 0.15.0"},
