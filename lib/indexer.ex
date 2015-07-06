@@ -1,4 +1,4 @@
-defmodule RestTwitch.Indexer do
+defmodule TwitchDiscovery.Indexer do
   def map_captured(captured, watch) do
     # Assemble new values based on modification watching
     Enum.map(watch, fn (field) ->
