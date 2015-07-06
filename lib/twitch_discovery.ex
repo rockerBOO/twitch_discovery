@@ -9,6 +9,8 @@ defmodule TwitchDiscovery do
     # redis_client = Exredis.start
     {:ok, redis_client} = Exredis.start_link()
 
+    Process.register(redis_client, :redis_client)
+
     # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
 
     children = [

@@ -16,7 +16,7 @@
         <%= end %>
         </ul>
       </div>
-      <div style="float: left">
+      <div style="float: left; padding: 12.5px;">
         <a href="/streams/summary">Stream Stats</a>
       </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="stream-block mui-col-md-4">
           <a href="<%= stream["channel"]["url"] %>">
             <img src="<%= stream["preview"]["medium"] %>">
-          </a>
+          </a> <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>">Preview</a>
           <h4><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h4>
 
           <div class="stream_meta">
