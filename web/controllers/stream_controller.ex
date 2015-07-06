@@ -6,6 +6,10 @@ defmodule TwitchDiscovery.StreamController do
     games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
 
     streams = RestTwitch.Streams.live(params, %{ttl: 60})
+      |> Enum.map(fn (stream) ->
+        TwitchDiscovery.Indexer.Stream.process(stream)
+        stream
+      end)
 
     render conn, "streams.html", streams: streams, games: games
   end

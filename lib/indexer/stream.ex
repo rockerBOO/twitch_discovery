@@ -47,6 +47,20 @@ defmodule TwitchDiscovery.Indexer.Stream do
     }
   end
 
+  def save_modified(captured, watch) do
+    # IO.puts "captured"
+    # IO.inspect captured
+    # IO.inspect watched
+
+    # metric_save({"title", stream["channel"]["status"]})
+
+    Indexer.map_captured(captured.meta, watch)
+      |> Indexer.save(captured.meta["stream_id"])
+
+    Indexer.map_captured(captured.meta, watch)
+      |> Indexer.save(captured.meta["stream_id"])
+  end
+
   def capture(stream) do
     filters = filters(stream)
     metrics = metrics(stream)
@@ -59,7 +73,9 @@ defmodule TwitchDiscovery.Indexer.Stream do
 
   def process(stream) do
     capture(stream)
-      # |> save_modified()
+      |> Indexer.save_modified([
+        "game", "channel", "title", "language",
+        "mature", "fps", "height"])
 
     broadcast =  TwitchDiscovery.Indexer.Broadcast.process(stream)
 

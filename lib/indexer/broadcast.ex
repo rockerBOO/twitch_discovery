@@ -1,6 +1,5 @@
 defmodule TwitchDiscovery.Indexer.Broadcast do
-
-  # # Broadcast
+  alias RestTwitch.Indexer
 
   def is_modified?(stream) do
 
@@ -13,55 +12,14 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
 
     # metric_save({"title", stream["channel"]["status"]})
 
-    map_captured(captured.meta, watch)
-      |> save(captured.meta["broadcast_id"])
+    Indexer.map_captured(captured.meta, watch)
+      |> Indexer.save(captured.meta["broadcast_id"])
 
-    map_captured(captured.filters, watch)
-      |> save(captured.meta["broadcast_id"])
+    Indexer.map_captured(captured.filters, watch)
+      |> Indexer.save(captured.meta["broadcast_id"])
   end
 
-  def map_captured(captured, watch) do
-    # Assemble new values based on modification watching
-    Enum.map(watch, fn (field) ->
-      case captured[field] do
-        nil -> nil
-        value -> Map.put(%{}, field, value)
-      end
-    end)
-    # Remove false responses...
-    |> Enum.filter(fn (x) -> x end)
-    # Reduce list of maps to single map
-    |> reduce()
-  end
 
-  def reduce([]) do
-    []
-  end
-
-  def reduce(value) do
-    value |> Enum.reduce(fn (value, acc) -> Map.merge(acc, value) end)
-  end
-
-  def save(document, id) do
-    IO.puts "Save me!"
-    IO.inspect document
-
-    # IO.inspect mongo_get(mongo_conn, id)
-
-    # case mongo_get(mongo_conn, id) do
-    #   %Mongo.Cursor{_} -> mongo_update(mongo_conn, id, document)
-    #   _ -> raise %Elirc.Error{reason: "Mongo get WTF"}
-    # end
-  end
-
-  def mongo_get(mongo_conn, id) do
-    mongo_conn
-      |> Mongo.db("twitch_discovery_dev")
-      |> Mongo.Db.collection("broadcast")
-      |> Mongo.Collection.find(%{"broadcast_id" => id})
-      |> Mongo.Find.exec()
-      |> Mongo.Cursor.exec("broadcast")
-  end
 
   # ## Meta
   #   broadcast_id = {broadcast, stream["_id"]}
@@ -119,11 +77,10 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
     %{meta: meta, metrics: metrics, filters: filters}
   end
 
-
   def process(stream) do
     capture(stream)
       |> save_modified([
         "game", "channel", "title", "language",
-        "mature", "fps", "height", "game"])
+        "mature", "fps", "height"])
   end
 end
