@@ -21,7 +21,7 @@
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.8.4"},
   "ranch": {:hex, :ranch, "1.1.0"},
-  "rest_twitch": {:git, "git://github.com/rockerboo/rest_twitch.git", "5f432001112c2434afa327f19f0bb24928880046", []},
+  "rest_twitch": {:git, "git@github.com:rockerBOO/rest_twitch.git", "4e15252cf102d9c14990e7f9fac2277df43048fc", []},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
   "timex": {:hex, :timex, "0.15.0"},
   "tzdata": {:hex, :tzdata, "0.1.6"}}

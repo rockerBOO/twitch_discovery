@@ -1,5 +1,5 @@
 defmodule TwitchDiscovery.Indexer.Stream do
-
+  alias TwitchDiscovery.Indexer
   # # Broadcast
   # ## Meta
   #   broadcast_id = {broadcast, stream["_id"]}
@@ -73,7 +73,7 @@ defmodule TwitchDiscovery.Indexer.Stream do
 
   def process(stream) do
     capture(stream)
-      |> Indexer.save_modified([
+      |> save_modified([
         "game", "channel", "title", "language",
         "mature", "fps", "height"])
 

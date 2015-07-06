@@ -1,5 +1,5 @@
 defmodule TwitchDiscovery.Indexer.Broadcast do
-  alias RestTwitch.Indexer
+  alias TwitchDiscovery.Indexer
 
   def is_modified?(stream) do
 
