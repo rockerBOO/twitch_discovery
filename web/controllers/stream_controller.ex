@@ -3,7 +3,7 @@ defmodule TwitchDiscovery.StreamController do
   import ExPrintf
 
   def index(conn, params) do
-    games = RestTwitch.Games.top(%{"limit" => 100}, %{ttl: 3600})
+    games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
 
     streams = RestTwitch.Streams.live(params, %{ttl: 60})
 
