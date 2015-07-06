@@ -9,11 +9,14 @@ defmodule TwitchDiscovery do
     # redis_client = Exredis.start
     {:ok, redis_client} = Exredis.start_link()
 
+    # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
+
     children = [
       # Start the endpoint when the application starts
       supervisor(TwitchDiscovery.Endpoint, []),
       # Start the Ecto repository
       worker(TwitchDiscovery.Repo, []),
+      worker(RestTwitch.Cache, [redis_client]),
       # Here you could define other workers and supervisors as children
       # worker(TwitchDiscovery.Worker, [arg1, arg2, arg3]),
     ]

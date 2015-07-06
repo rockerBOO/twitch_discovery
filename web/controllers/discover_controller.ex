@@ -43,7 +43,7 @@ defmodule TwitchDiscovery.DiscoverController do
   def top_videos_on_twitch(conn, params) do
     games = get_games(20)
 
-    videos = RestTwitch.Videos.top(params)
+    videos = RestTwitch.Videos.top(params, Process.whereis(:rest_client))
       |> Enum.map(fn (video) ->
           length = video_length(video["length"])
           length_hours = length.hours
@@ -63,6 +63,6 @@ defmodule TwitchDiscovery.DiscoverController do
   end
 
   def get_games(limit \\ 10) do
-    RestTwitch.Games.top(%{"limit" => limit})
+    RestTwitch.Games.top(%{"limit" => limit}, Process.whereis(:redis_client))
   end
 end
