@@ -27,12 +27,6 @@
       margin: 7px;
     }
 
-    .app-bar {
-      /*background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_ms5000watts-320x180.jpg");
-      background-size: 33%;*/
-      padding: 10px;
-    }
-
     #footer {
       margin-bottom: 300px;
     }
