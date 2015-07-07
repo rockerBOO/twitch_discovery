@@ -39,6 +39,7 @@ defmodule TwitchDiscovery.Mixfile do
      {:httpoison, "~> 0.7"},
      {:timex, "~> 0.15.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:exrm, "~> 0.15.3", only: :dev},
      {:cowboy, "~> 1.0"}]
   end
 end

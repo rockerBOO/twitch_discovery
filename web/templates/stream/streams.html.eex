@@ -29,9 +29,8 @@
               <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>"><i class="fa fa-eye"></i>
  Preview</a>
             </div>
-            <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
-
             <div class="stream_meta">
+              <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
               <span class="views"><%= stream["viewers"] %> viewers</span>
               <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["display_name"] %></a></span>
             </div>
