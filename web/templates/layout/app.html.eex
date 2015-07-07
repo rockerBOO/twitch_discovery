@@ -13,7 +13,7 @@
 
     <style type="text/css">
     body {
-      font-family: "Roboto", sans;
+      font-family: Roboto, Helvetica, Calibri, Arial, sans;
     }
 
     .fa-bars {
