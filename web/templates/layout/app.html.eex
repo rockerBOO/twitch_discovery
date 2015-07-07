@@ -277,11 +277,11 @@ window.onload = function () {
         <!-- <i class="fa fa-bars"></i> -->
        <a href="/"><img src="http://elirc.rockerboo.net/assets/images/discovery.svg" style="width: 225px" /></a>
     </div>
-        <div class="mui-container">
-          <button class="mui-btn mui-btn-default" onclick="window.location = '/streams';">Streams</button>
-          <button class="mui-btn mui-btn-default" onclick="window.location = '/search/streams';">Search</button>
-          <button class="mui-btn mui-btn-default" onclick="window.location = '/about';">About</button>
-          <button class="mui-btn mui-btn-default" onclick="window.location = '/discover/videos/top';">Videos</button>
+        <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams';">Streams</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/discover/videos/top';">Videos</button>
       </div>
     <div class="inner">
       <%= @inner %>
