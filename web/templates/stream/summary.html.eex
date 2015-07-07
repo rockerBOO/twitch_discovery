@@ -8,7 +8,7 @@
           <span class="mui-caret"></span>
         </button>
         <ul class="mui-dropdown-menu">
-        <li><a href="/streams">/</a></li>
+        <li><a href="/streams/summary">/</a></li>
         <%= for game <- @games do %>
         <li><a href="/streams/summary?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
         <%= end %>

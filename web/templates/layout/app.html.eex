@@ -7,13 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- load MUI -->
-    <link href="//cdn.muicss.com/mui-0.1.14/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="//cdn.muicss.com/mui-0.1.14/css/mui.min.css" rel="stylesheet" type="text/css" /> -->
     <script src="//cdn.muicss.com/mui-0.1.14/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <style type="text/css">
+
+    .mui-panel {
+      background-color: #111;
+    }
+
     body {
-      font-family: Roboto, Helvetica, Calibri, Arial, sans;
+      /*font-family: Roboto, Helvetica, Calibri, Arial, sans;*/
     }
 
     .fa-bars {
@@ -25,7 +30,6 @@
       /*background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_ms5000watts-320x180.jpg");
       background-size: 33%;*/
       padding: 10px;
-      padding-left: 16px;
     }
 
     #preview_video_meta {
@@ -40,12 +44,19 @@
 
     .stream-block {
       margin-bottom: 10px;
-      height: 300px;
+      /*height: 300px;*/
     }
 
     .stream-block img {
-      width: 320px;
-      max-width: 320px;
+      width: 100%;
+      /*max-height: 30vh;*/
+    }
+
+    .stream-block .stream-image {
+
+      clear: both;
+      width: 100%;
+      display: block;
     }
 
     .inner {
@@ -274,14 +285,16 @@ window.onload = function () {
   </head>
   <body>
     <div class="app-bar mui-appbar">
+      <div class="mui-container">
         <!-- <i class="fa fa-bars"></i> -->
        <a href="/"><img src="http://elirc.rockerboo.net/assets/images/discovery.svg" style="width: 225px" /></a>
+      </div>
     </div>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams';">Streams</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/discover/videos/top';">Videos</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
       </div>
     <div class="inner">
       <%= @inner %>
