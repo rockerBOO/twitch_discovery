@@ -1,9 +1,7 @@
-  <!-- <div class="mui-container"> -->
-    <div class="mui-panel">
-      <h1>Twitch Discovery - Streams Online!</h1>
-    </div>
 
+  <div class="mui-container">
     <div class="mui-panel">
+      <h1>Streams Online</h1>
       <div class="mui-dropdown">
         <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
           Games

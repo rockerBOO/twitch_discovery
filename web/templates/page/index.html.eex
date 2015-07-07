@@ -1,12 +1,19 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h1>Twitch Discovery</h1>
+        <h2>Discover new streams on Twitch!</h2>
+        <p>Our objective is to give you the control to watch the streams you want to see.</p>
+        <p>&nbsp;</p>
+        <div>
+          <div style="float: left; width: 50%;">
+            <a href="http://i.imgur.com/b7Iz9Jo.jpg"><img src="http://i.imgur.com/ZpwqWpi.jpg"></a><br>
+            <h4>Preview the streams before you leave the site, to make it easy to check out new streams. Soon will support following, about, and schedules about the streamers.</h4>
+          </div>
+          <div style="float: left; width: 50%;">
+            <a href="http://i.imgur.com/MySQ6Fy.jpg"><img src="http://i.imgur.com/KUthh74.jpg"></a><br>
+            <h4>Live streams, in popular order =(, but soon more sort options. Can filter by game.</h4>
+          </div>
+        </div>
+        <div class="mui-divider"></div>
+        <div style="clear:both;"><span></span></div>
 
-        <ul>
-          <li><a href="/discover/videos/top">Top Videos</a></li>
-          <li><a href="/streams">Streams by Game</a></li>
-          <li><a href="/search/streams">Search Streams</a></li>
-          <li><a href="/about">About</a></li>
-        </ul>
-      </div>
     </div>

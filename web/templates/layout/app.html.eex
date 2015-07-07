@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <title>Discovery - A Twitch discovery tool</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,8 +22,8 @@
     }
 
     .app-bar {
-      background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_lirik-320x180.jpg");
-      background-size: 33%;
+      /*background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_lirik-320x180.jpg");*/
+      /*background-size: 33%;*/
       padding: 10px;
       padding-left: 16px;
     }
@@ -39,10 +40,12 @@
 
     .stream-block {
       margin-bottom: 10px;
+      height: 300px;
     }
 
     .stream-block img {
       width: 320px;
+      max-width: 320px;
     }
 
     .inner {
@@ -274,6 +277,12 @@ window.onload = function () {
         <!-- <i class="fa fa-bars"></i> -->
        <a href="/"><img src="http://elirc.rockerboo.net/assets/images/discovery.svg" style="width: 225px" /></a>
     </div>
+        <div class="mui-container">
+          <button class="mui-btn mui-btn-default" onclick="window.location = '/streams';">Streams</button>
+          <button class="mui-btn mui-btn-default" onclick="window.location = '/search/streams';">Search</button>
+          <button class="mui-btn mui-btn-default" onclick="window.location = '/about';">About</button>
+          <button class="mui-btn mui-btn-default" onclick="window.location = '/discover/videos/top';">Videos</button>
+      </div>
     <div class="inner">
       <%= @inner %>
     </div>
@@ -285,7 +294,10 @@ window.onload = function () {
       <div id="preview_chat">
       </div>
       <div id="preview_meta">
-        Meta Information, follow links, schedule
+        <button  class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button>
+        <p>
+          Meta Information, follow links, schedule, coming soon...
+        </p>
       </div>
     </div>
   </body>
