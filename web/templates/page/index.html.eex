@@ -1,19 +1,23 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h2>Discover new streams on Twitch!</h2>
-        <p>Our objective is to give you the control to watch the streams you want to see.</p>
-        <p>&nbsp;</p>
-        <div>
-          <div style="float: left; width: 50%;">
-            <a href="http://i.imgur.com/b7Iz9Jo.jpg"><img src="http://i.imgur.com/ZpwqWpi.jpg"></a><br>
-            <h4>Preview the streams before you leave the site, to make it easy to check out new streams. Soon will support following, about, and schedules about the streamers.</h4>
-          </div>
-          <div style="float: left; width: 50%;">
-            <a href="http://i.imgur.com/MySQ6Fy.jpg"><img src="http://i.imgur.com/KUthh74.jpg"></a><br>
-            <h4>Live streams, in popular order =(, but soon more sort options. Can filter by game.</h4>
-          </div>
-        </div>
-        <div class="mui-divider"></div>
-        <div style="clear:both;"><span></span></div>
+      <h3>Welcome to Discovery!</h3>
 
+      <p>This site aims to provide a better platform to explore and discover new streamers on <a href="http://twitch.tv/">Twitch.TV</a>. With a responsive and clean layout, exploring the world of streaming is now easier than ever!</p>
+      </div>
+      <div class="mui-panel">
+        <div style="float: left; width: 50%;">
+          <a href="http://i.imgur.com/b7Iz9Jo.jpg"><img src="http://i.imgur.com/ZpwqWpi.jpg"></a><br>
+          <h4>Preview the streams before you leave the site, to make it easy to check out new streams. Soon will support following, about, and schedules about the streamers.</h4>
+        </div>
+        <div style="float: left; width: 50%;">
+          <a href="http://i.imgur.com/MySQ6Fy.jpg"><img src="http://i.imgur.com/KUthh74.jpg"></a><br>
+          <h4>Live streams, in popular order =(, but soon more sort options. Can filter by game.</h4>
+        </div>
+      </div>
+
+      <div class="mui-panel">
+        <p>This site was made by rockerBOO at <a href="http://twitch.tv/rockerBOO">twitch.tv/rockerBOO</a></p>
+
+        <p>The project is open source and you can find out more at <a href="https://github.com/rockerBOO/twitch_discovery">github.com/rockerBOO/twitch_discovery</a></p>
+      </div>
     </div>
