@@ -47,21 +47,21 @@
       padding-right: 10px;
     }
 
-    .stream-block .stream_meta {
+    .stream-block .stream_meta, .channel-block .channel-meta {
       height: 6.5em;
     }
 
-    .stream-block {
+    .stream-block, .channel-block {
       margin-bottom: 10px;
       /*height: 300px;*/
     }
 
-    .stream-block img {
+    .stream-block img, .channel-block img  {
       width: 100%;
       /*max-height: 30vh;*/
     }
 
-    .stream-block .stream-image {
+    .stream-block .stream-image, .channel-block .channel-image {
 
       clear: both;
       width: 100%;
@@ -302,6 +302,7 @@ window.onload = function () {
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams';">Streams</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/channels';">Channels</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/discover/videos/top';">Videos</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
       </div>
@@ -309,7 +310,9 @@ window.onload = function () {
       <%= @inner %>
     </div>
     <div id="footer">
-      &nbsp;
+      <div class="mui-container">
+        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a>
+      </div>
     </div>
     <div id="preview" class="preview_off">
       <div></div>

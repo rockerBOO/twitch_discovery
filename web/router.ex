@@ -21,6 +21,10 @@ defmodule TwitchDiscovery.Router do
     get "/", PageController, :index
     get "/about", PageController, :about
 
+    get "/channels", ChannelController, :index
+    get "/channel/:channel", ChannelController, :channel
+    get "/channel", ChannelController, :lookup
+
     get "/streams/summary", StreamController, :summary
     get "/streams", StreamController, :index
 
