@@ -19,6 +19,7 @@ defmodule TwitchDiscovery.Router do
     resources "/videos", VideoController
 
     get "/", PageController, :index
+    get "/about", PageController, :about
 
     get "/streams/summary", StreamController, :summary
     get "/streams", StreamController, :index

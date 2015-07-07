@@ -1,0 +1,10 @@
+  <div class="mui-container">
+    <div class="mui-panel">
+      <h1>About</h1>
+      <div class="mui-divider"></div>
+      <p>gunnaren: where's the about page?</p>
+
+      <p><a href="https://github.com/rockerBOO/twitch_discovery">Github</a>
+      </p>
+    </div>
+  </div>
