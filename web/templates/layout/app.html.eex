@@ -11,6 +11,8 @@
     <script src="//cdn.muicss.com/mui-0.1.14/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="icon" type="image/png" href="<%= static_path(@conn, "/assets/images/favicon.png") %>" />
+    <link rel="stylesheet" href="">
    <!--  <link rel="stylesheet" href="http://twitchdiscovery.com/css/app.css"> -->
     <style type="text/css">
 
@@ -56,7 +58,6 @@
     }
 
     .stream-block .stream-image, .channel-block .channel-image {
-
       clear: both;
       width: 100%;
       display: block;
