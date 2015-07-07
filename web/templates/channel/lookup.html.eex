@@ -1,0 +1,26 @@
+    <div class="mui-container">
+      <div class="mui-panel">
+        <h1>Channel > <%= @channel %></h1>
+      </div>
+
+
+      <div class="mui-panel">
+        <div class="mui-row">
+          <%= for follow <- @follows do %>
+          <div class="channel-block mui-col-md-3">
+            <div class="channel-image">
+              <a href="<%= follow["channel"]["url"] %>" title="<%= follow["channel"]["status"] %>">
+                <img src="<%= follow["channel"]["logo"] %>">
+              </a>
+            </div>
+            <div class="channel-meta">
+              <h4><a href="<%= follow["channel"]["url"] %>" title="<%= follow["channel"]["status"] %>"><%= cutoff follow["channel"]["status"] %></a></h4>
+              <span class="name"><a href="<%= follow["channel"]["url"] %>"><%= follow["channel"]["display_name"] %></a></span>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    </div>
