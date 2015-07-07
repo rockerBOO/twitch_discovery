@@ -11,6 +11,7 @@
     <script src="//cdn.muicss.com/mui-0.1.14/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+   <!--  <link rel="stylesheet" href="http://twitchdiscovery.com/css/app.css"> -->
     <style type="text/css">
 
     .mui-panel {
@@ -32,6 +33,10 @@
       padding: 10px;
     }
 
+    #footer {
+      margin-bottom: 300px;
+    }
+
     #preview_video_meta {
       float: left;
       display: block;
@@ -40,6 +45,10 @@
     #preview_video_meta .views, #preview_video_meta .length  {
       font-size: 18px;
       padding-right: 10px;
+    }
+
+    .stream-block .stream_meta {
+      height: 6.5em;
     }
 
     .stream-block {
@@ -298,6 +307,9 @@ window.onload = function () {
       </div>
     <div class="inner">
       <%= @inner %>
+    </div>
+    <div id="footer">
+      &nbsp;
     </div>
     <div id="preview" class="preview_off">
       <div></div>

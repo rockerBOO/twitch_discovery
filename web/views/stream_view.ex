@@ -14,8 +14,8 @@ defmodule TwitchDiscovery.StreamView do
     string_size = String.length(str)
 
     case String.length(str) do
-      x when x in 0..28 -> str
-      _ -> String.slice(str, 0..28) <> " ..."
+      x when x in 0..23 -> str
+      _ -> String.slice(str, 0..23) <> " ..."
     end
   end
 end
