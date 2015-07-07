@@ -16,8 +16,8 @@
       </div>
 
       <div class="mui-panel">
-        <p>This site was made by rockerBOO at <a href="http://twitch.tv/rockerBOO">twitch.tv/rockerBOO</a></p>
-
-        <p>The project is open source and you can find out more at <a href="https://github.com/rockerBOO/twitch_discovery">github.com/rockerBOO/twitch_discovery</a></p>
+        <p>This site was made by <strong><a href="https://twitter.com/rockerBOO">rockerBOO</a></strong> at <a href="http://twitch.tv/rockerBOO">twitch.tv/rockerBOO</a></p>
+        <p>Logo by <strong><a href="http://twitch.tv/fogthecatman">Fogthecatman</a></strong> at <a href="http://twitch.tv/fogthecatman">twitch.tv/fogthecatman</a></p>
+        <p>The project is open source and you can find out more at <a href="https://github.com/rockerBOO/twitch_discovery">github.com/rockerBOO/<strong>twitch_discovery</strong></a></p>
       </div>
     </div>
