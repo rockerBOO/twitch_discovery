@@ -22,8 +22,8 @@
     }
 
     .app-bar {
-      /*background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_lirik-320x180.jpg");*/
-      /*background-size: 33%;*/
+      /*background: url("http://static-cdn.jtvnw.net/previews-ttv/live_user_ms5000watts-320x180.jpg");
+      background-size: 33%;*/
       padding: 10px;
       padding-left: 16px;
     }

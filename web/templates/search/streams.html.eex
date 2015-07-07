@@ -1,6 +1,6 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h1>Twitch Discovery - Search > Streams</h1>
+        <h1>Search > Streams</h1>
       </div>
       <div class="mui-panel">
         <form action="/search/streams">
