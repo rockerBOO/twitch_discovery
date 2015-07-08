@@ -14,7 +14,7 @@
           </ul>
         </div>
         &nbsp;
-        <div style="margin-left: 10px; float: left;">
+        <div style="margin-left: 9px; float: left;">
           <!-- <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"> -->
           <button class="mui-btn mui-btn-primary"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
         </div>
