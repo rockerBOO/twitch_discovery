@@ -13,6 +13,16 @@
           <%= end %>
           </ul>
         </div>
+        &nbsp;
+        <div style="margin-left: 10px; float: left;">
+          <!-- <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"> -->
+          <button class="mui-btn mui-btn-default"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
+        </div>
+        <div id="games-search">
+          <form class="mui-form-inline" class="games-search-on">
+            <div class="mui-form-group"><input type="text" placeholder="Programming" id="games-search-input" name="game" class="mui-form-control  mui-empty mui-dirty"></div>
+          </form>
+        </div>
         <%= if logged_in?(@conn) do %>
          &nbsp;
         <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button>
@@ -31,7 +41,11 @@
               </a>
             </div>
             <div style="clear:both;">
-              <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>"><i class="fa fa-eye"></i>
+              <a class="preview" href="javascript:;"
+                data-channel="<%= stream["channel"]["name"] %>"
+                data-title="<%= stream["channel"]["status"] %>"
+                data-display-name="<%= stream["channel"]["display_name"] %>"
+              ><i class="fa fa-eye"></i>
  Preview</a>
             </div>
             <div class="stream_meta">

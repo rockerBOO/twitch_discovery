@@ -125,6 +125,17 @@
   padding: 10px;
 }
 
+#preview_close {
+  text-align: right;
+  padding-right: 10px;
+}
+
+#preview_meta_button_container {
+  float: right;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
 #preview_video iframe {
   width: 100%;
   height: 100%;
@@ -205,7 +216,7 @@
     }
 
     /*33/33/33*/
-    @media all and (min-width: 950px) and (max-width: 1050px) {
+    @media all and (min-width: 950px) {
       #preview_video {
         width: 33.33%;
         display: block;
@@ -217,7 +228,7 @@
       }
 
       #preview_meta {
-        width: 33%;
+        width: 33.33%;
         display: block;
       }
     }
@@ -251,7 +262,7 @@ function twitchPlayer(channel) {
 
     var player = document.getElementById("preview_video")
 
-    player.appendChild(container);
+    player.appendChild(container)
 }
 
 function twitchChat(channel) {
@@ -259,10 +270,24 @@ function twitchChat(channel) {
 
     var chat = document.getElementById("preview_chat")
 
-    chat.appendChild(container);
+    chat.appendChild(container)
+}
+
+function twitchMeta(meta) {
+    var container = document.createElement('div');
+
+    container.innerHTML = "<div><h3>" + meta.title + "</h3>" +
+    "<h4><a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h4></div>";
+
+    var followButton = document.getElementById("preview_follow_button")
+    var metaNode = document.getElementById("channel_meta")
+
+    followButton.setAttribute("data-channel", meta.channel)
+    metaNode.appendChild(container)
 }
 
 function clearPreview() {
+  document.getElementById("channel_meta").innerHTML = ""
   document.getElementById("preview_chat").innerHTML = ""
   video = document.getElementById("preview_video")
 
@@ -274,7 +299,9 @@ window.onload = function () {
   $("a.preview").click(function(event) {
       event.preventDefault()
 
-      channel = event.currentTarget.getAttribute("data-channel")
+      channel       = event.currentTarget.getAttribute("data-channel")
+      title         = event.currentTarget.getAttribute("data-title")
+      display_name  = event.currentTarget.getAttribute("data-display-name")
 
       console.log(event)
       console.log(channel)
@@ -283,6 +310,7 @@ window.onload = function () {
 
       twitchPlayer(channel)
       twitchChat(channel)
+      twitchMeta({channel: channel, title: title, display_name: display_name})
 
       document.getElementById("preview_video").parentNode.classList.remove("preview_off")
 
@@ -308,7 +336,7 @@ window.onload = function () {
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
           <%= if logged_in?(@conn) == false do %>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';">Auth</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_white.png" style="width: 18px; margin-top: -1px;"> Auth</button>
           <% end %>
       </div>
     <div class="inner">
@@ -320,17 +348,15 @@ window.onload = function () {
       </div>
     </div>
     <div id="preview" class="preview_off">
-      <div></div>
+      <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button></div>
       <div style="clear:both;"><span></span></div>
-      <div id="preview_video">
-      </div>
-      <div id="preview_chat">
-      </div>
+      <div id="preview_video"></div>
+      <div id="preview_chat"></div>
       <div id="preview_meta">
-        <button  class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button>
-        <p>
-          Meta Information, follow links, schedule, coming soon...
-        </p>
+        <div id="preview_meta_button_container">
+          <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow();">Follow</button>
+        </div>
+        <div id="channel_meta"></div>
       </div>
     </div>
   </body>

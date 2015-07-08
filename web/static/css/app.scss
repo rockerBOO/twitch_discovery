@@ -50,3 +50,18 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 	font-size: 1.3em;
 }
 
+#games-search {
+	float: left;
+}
+
+// Hackalis (Blasted Jesus Edition)
+#games-search-input {
+    width: 0;
+    opacity: 0;
+    transition: width .4s, opacity .4s;
+}
+
+#games-search-input.games-search-on   {
+    width: 250px;
+    opacity: 1;
+}
