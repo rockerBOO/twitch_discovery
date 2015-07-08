@@ -24,15 +24,11 @@ defmodule TwitchDiscovery.OAuthController do
     user_info(token)
 
     save(conn, token)
-
-    conn
   end
 
   defp user_info(token) do
     # Request the user's data with the access token
-    headers = [{"Authorization", "OAuth " <> token.access_token}]
-
-    OAuth2.Twitch.get!("/user", headers)
+    RestTwitch.Request.get_token_body!("/user", token.access_token)
   end
 
   def error(conn, error, message) do
