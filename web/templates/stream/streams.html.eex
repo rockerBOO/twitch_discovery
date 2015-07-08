@@ -7,7 +7,7 @@
             <span class="mui-caret"></span>
           </button>
           <ul class="mui-dropdown-menu">
-          <li><a href="/streams">/</a></li>
+          <li><a href="/streams">All</a></li>
           <%= for game <- @games do %>
           <li><a href="/streams?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
           <%= end %>
@@ -16,7 +16,7 @@
         &nbsp;
         <div style="margin-left: 10px; float: left;">
           <!-- <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"> -->
-          <button class="mui-btn mui-btn-default"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
+          <button class="mui-btn mui-btn-primary"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
         </div>
         <div id="games-search">
           <form class="mui-form-inline" class="games-search-on">
@@ -24,7 +24,6 @@
           </form>
         </div>
         <%= if logged_in?(@conn) do %>
-         &nbsp;
         <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button>
         <% end %>
         &nbsp;
