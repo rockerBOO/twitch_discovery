@@ -1,24 +1,24 @@
     <div class="mui-container">
-			<div class="mui-panel">
-				<h1>Top Videos</h1>
-				<div class="mui-dropdown">
-				  <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
-				    Games
-				    <span class="mui-caret"></span>
-				  </button>
-				  <ul class="mui-dropdown-menu">
-					<%= for game <- @games do %>
-					<li><a href="/discover/videos/top?game=<%= game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
-					<%= end %>
-				  </ul>
-				</div>
+      <div class="mui-panel">
+        <h1>Top Videos</h1>
+        <div class="mui-dropdown">
+          <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
+            Games
+            <span class="mui-caret"></span>
+          </button>
+          <ul class="mui-dropdown-menu">
+          <%= for game <- @games do %>
+          <li><a href="/discover/videos/top?game=<%= game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
+          <%= end %>
+          </ul>
+        </div>
         <%= if logged_in?(@conn) do %>
          &nbsp;
         <button class="mui-btn mui-btn-primary" onclick="window.location = '/videos/following';">Following</button>
         <% end %>
-				<form>
+        <form>
 
-			</div>
+      </div>
 
       <div class="mui-panel">
         <div class="mui-row">
