@@ -61,6 +61,10 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
     transition: all .4s;
 }
 
+#games-search > form > div {
+	padding-top: 9px;
+}
+
 #games-search-input.games-search-on   {
     width: 250px;
     opacity: 1;

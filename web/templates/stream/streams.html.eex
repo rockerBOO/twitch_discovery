@@ -24,10 +24,7 @@
           </form>
         </div>
         <%= if logged_in?(@conn) do %>
-        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button>
-        <% end %>
-        &nbsp;
-        <button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button>
+        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button><% end %><button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button>
       </div>
 
       <div class="mui-panel">
