@@ -11,6 +11,7 @@
   "hackney": {:hex, :hackney, "1.2.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
   "idna": {:hex, :idna, "1.0.2"},
+  "number": {:hex, :number, "0.3.4"},
   "oauth2": {:hex, :oauth2, "0.1.1"},
   "phoenix": {:hex, :phoenix, "0.14.0"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "0.5.0"},
@@ -21,7 +22,6 @@
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.8.4"},
   "ranch": {:hex, :ranch, "1.1.0"},
-  "rest_twitch": {:git, "git://github.com/rockerBOO/rest_twitch.git", "ad28642a286d86a11de6c5dc784e2c42e53bcff5", []},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
   "timex": {:hex, :timex, "0.15.0"},
   "tzdata": {:hex, :tzdata, "0.1.6"}}

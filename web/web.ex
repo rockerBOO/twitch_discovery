@@ -46,6 +46,10 @@ defmodule TwitchDiscovery.Web do
       # Import URL helpers from the router
       import TwitchDiscovery.Router.Helpers
 
+      import TwitchDiscovery.Session, only: [current_user: 1, logged_in?: 1]
+
+      use TwitchDiscovery.View.Helpers
+
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
     end

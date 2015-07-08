@@ -4,7 +4,7 @@
 
         <form action="/search/streams">
           <div class="mui-form-group">
-            <input type="text" name="q" class="mui-form-control" placeholder="Stream Title" value="" />
+            <input type="text" name="q" class="mui-form-control" placeholder="Stream Title" value="" autofocus />
           </div>
         </form>
       </div>

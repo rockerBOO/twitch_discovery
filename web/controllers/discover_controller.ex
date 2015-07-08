@@ -43,7 +43,7 @@ defmodule TwitchDiscovery.DiscoverController do
   def top_videos_on_twitch(conn, params) do
     games = get_games(20)
 
-    videos = RestTwitch.Videos.top(params, Process.whereis(:rest_client))
+    videos = RestTwitch.Videos.top(params, %{ttl: 3600})
       |> Enum.map(fn (video) ->
           length = video_length(video["length"])
           length_hours = length.hours
@@ -58,6 +58,17 @@ defmodule TwitchDiscovery.DiscoverController do
         end)
 
     IO.inspect videos
+
+    render conn, "top_videos_on_twitch.html", videos: videos, games: games
+  end
+
+  def videos_following(conn, params) do
+    games = get_games(20)
+
+    token = get_session(conn, :access_token)
+    defaults = %{"limit" => 24}
+
+    videos = RestTwitch.Users.videos(token.access_token, Map.merge(defaults, params))
 
     render conn, "top_videos_on_twitch.html", videos: videos, games: games
   end

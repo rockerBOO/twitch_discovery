@@ -11,7 +11,7 @@
     <script src="//cdn.muicss.com/mui-0.1.14/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="icon" type="image/png" href="<%= static_path(@conn, "/assets/images/favicon.png") %>" />
+    <link rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon.png") %>" />
     <link rel="stylesheet" href="">
    <!--  <link rel="stylesheet" href="http://twitchdiscovery.com/css/app.css"> -->
     <style type="text/css">
@@ -43,21 +43,28 @@
       padding-right: 10px;
     }
 
-    .stream-block .stream_meta, .channel-block .channel-meta {
+    .stream-block .stream_meta,
+    .channel-block .channel-meta,
+    .video-block .video-meta  {
       height: 6.5em;
     }
+
 
     .stream-block, .channel-block {
       margin-bottom: 10px;
       /*height: 300px;*/
     }
 
-    .stream-block img, .channel-block img  {
+    .stream-block img,
+    .channel-block img,
+    .video-block img  {
       width: 100%;
       /*max-height: 30vh;*/
     }
 
-    .stream-block .stream-image, .channel-block .channel-image {
+    .stream-block .stream-image,
+    .channel-block .channel-image,
+    .video-block .video-image {
       clear: both;
       width: 100%;
       display: block;
@@ -296,10 +303,13 @@ window.onload = function () {
     </div>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams';">Streams</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/channels';">Channels</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/discover/videos/top';">Videos</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
+          <%= if logged_in?(@conn) == false do %>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';">Auth</button>
+          <% end %>
       </div>
     <div class="inner">
       <%= @inner %>

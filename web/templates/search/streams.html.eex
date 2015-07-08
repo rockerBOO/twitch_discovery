@@ -10,20 +10,26 @@
         </form>
       </div>
 
-    <div class="mui-panel">
-  		<div class="mui-row">
-        <%= for stream <- @streams do %>
-        <div class="mui-col-md-4">
-    			<a href="<%= stream["channel"]["url"] %>">
-    				<img src="<%= stream["preview"]["medium"] %>">
-    			</a> <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>">Preview</a>
-    			<h4><a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["status"] %></a></h4>
-
-    			<div class="stream_meta">
-    				<strong class="views"><%= stream["viewers"] %></strong> viewers
-            <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["name"] %></a></span>
-    			</div>
+      <div class="mui-panel">
+        <div class="mui-row">
+          <%= for stream <- @streams do %>
+          <div class="stream-block mui-col-md-4">
+            <div class="stream-image">
+              <a href="<%= stream["channel"]["url"] %>">
+                <img src="<%= stream["preview"]["large"] %>">
+              </a>
+            </div>
+            <div style="clear:both;">
+              <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>"><i class="fa fa-eye"></i>
+ Preview</a>
+            </div>
+            <div class="stream_meta">
+              <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
+              <span class="views"><%= stream["viewers"] %> viewers</span>
+              <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["display_name"] %></a></span>
+            </div>
+          </div>
+          <% end %>
         </div>
-        <% end %>
-  		</div>
+      </div>
     </div>
