@@ -12,7 +12,12 @@
 					<%= end %>
 				  </ul>
 				</div>
+        <%= if logged_in?(@conn) do %>
+         &nbsp;
+        <button class="mui-btn mui-btn-primary" onclick="window.location = '/videos/following';">Following</button>
+        <% end %>
 				<form>
+
 			</div>
 
       <div class="mui-panel">
