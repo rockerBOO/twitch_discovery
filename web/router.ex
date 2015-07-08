@@ -16,7 +16,10 @@ defmodule TwitchDiscovery.Router do
     pipe_through :browser # Use the default browser stack
 
 
-    resources "/videos", VideoController
+    resources "/_videos", VideoController
+
+    get "/auth/twitch/callback", OAuthController, :callback
+    get "/auth/twitch", OAuthController, :auth
 
     get "/", PageController, :index
     get "/about", PageController, :about
@@ -27,6 +30,7 @@ defmodule TwitchDiscovery.Router do
 
     get "/streams/summary", StreamController, :summary
     get "/streams", StreamController, :index
+    get "/streams/following", StreamController, :following
 
     get "/search", SearchController, :index
     get "/search/streams", SearchController, :streams
@@ -34,6 +38,7 @@ defmodule TwitchDiscovery.Router do
     get "/discover/channel/:channel", DiscoverController, :videos_in_channel
     get "/discover", DiscoverController, :index
     get "/discover/videos/top", DiscoverController, :top_videos_on_twitch
+    get "/videos/following", DiscoverController, :videos_following
   end
 
   # Other scopes may use custom stacks.

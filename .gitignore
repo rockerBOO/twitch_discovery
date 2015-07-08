@@ -1,3 +1,5 @@
+.env
+
 # Mix artifacts
 /_build
 /deps

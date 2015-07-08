@@ -19,6 +19,9 @@ $mui-accent-color:        mui-color('cyan', 'A200');
 $mui-accent-color-dark:   mui-color('cyan', 'A100');
 $mui-accent-color-light:  mui-color('cyan', 'A400');
 
+$mui-hr-color: 			  mui-color('white-alpha-12');
+$mui-divider-color: 	  mui-color('white-alpha-12');
+
 $mui-body-bg-color: 	  mui-color('black-alpha-87');
 
 $mui-base-font-family:    Roboto, Helvetica, Calibri, Arial, sans;
@@ -26,6 +29,8 @@ $mui-base-font-color: 	  mui-color('grey', '400');
 $mui-base-font-size:      16px;
 
 $mui-panel-bg-color:      mui-color('black-alpha-87');
+
+$mui-input-placeholder-color: mui-color('white-alpha-12');
 
 $mui-dropdown-bg-color:   mui-color('black-alpha-87');
 $mui-dropdown-link-font-color-disabled: 	mui-color('grey', '200');
@@ -37,11 +42,11 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 // import MUI SASS
 @import "bower_components/mui/src/sass/mui";
 
-.stream-block h4 a, .channel-block h4 a {
+.stream-block h4 a, .channel-block h4 a, .video-block h4 a {
 	color: mui-color('white');
 }
 
-.stream-block h4, .channel-block h4 {
+.stream-block h4, .channel-block h4, .video-block h4 {
 	font-size: 1.3em;
 }
 

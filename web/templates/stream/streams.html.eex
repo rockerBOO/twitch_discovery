@@ -12,7 +12,12 @@
           <li><a href="/streams?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
           <%= end %>
           </ul>
-        </div>&nbsp;
+        </div>
+        <%= if logged_in?(@conn) do %>
+         &nbsp;
+        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button>
+        <% end %>
+        &nbsp;
         <button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button>
       </div>
 
@@ -31,7 +36,7 @@
             </div>
             <div class="stream_meta">
               <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
-              <span class="views"><%= stream["viewers"] %> viewers</span>
+              <span class="views"><%= number_format stream["viewers"] %> viewers</span>
               <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["display_name"] %></a></span>
             </div>
           </div>

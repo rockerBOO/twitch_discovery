@@ -1,34 +1,36 @@
     <div class="mui-container">
-		<div class="mui-panel">
-			<h1>Top Videos</h1>
-			<div class="mui-dropdown">
-			  <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
-			    Games
-			    <span class="mui-caret"></span>
-			  </button>
-			  <ul class="mui-dropdown-menu">
-				<%= for game <- @games do %>
-				<li><a href="/discover/videos/top?game=<%= game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
-				<%= end %>
-			  </ul>
+			<div class="mui-panel">
+				<h1>Top Videos</h1>
+				<div class="mui-dropdown">
+				  <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
+				    Games
+				    <span class="mui-caret"></span>
+				  </button>
+				  <ul class="mui-dropdown-menu">
+					<%= for game <- @games do %>
+					<li><a href="/discover/videos/top?game=<%= game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
+					<%= end %>
+				  </ul>
+				</div>
+				<form>
 			</div>
-			<form>
-		</div>
 
-	    <div class="mui-panel">
-	      <div class="mui-row">
-	        <%= for video <- @videos do %>
-	        <div class="video-block mui-col-md-4">
-	          <a href="<%= video["url"] %>">
-	            <img src="<%= video["preview"] %>">
-	          </a>
-	          <h4><a href="<%= video["url"] %>"><%= video["title"] %></a></h4>
+      <div class="mui-panel">
+        <div class="mui-row">
+          <%= for video <- @videos do %>
+          <div class="video-block mui-col-md-4">
+            <div class="video-image">
+              <a href="<%= video["url"] %>">
+                <img src="<%= video["preview"] %>">
+              </a>
+            </div>
+            <div class="video-meta">
+              <h4><a href="<%= video["channel"]["url"] %>" title="<%= video["title"] %>"><%= cutoff video["title"] %></a></h4>
+              <span class="name"><a href="<%= video["url"] %>"><%= video["channel"]["display_name"] %></a></span>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
 
-	          <div class="video_meta">
-	            <span class="views"><%= video["views"] %> views </span>
-	            <span class="name">on <a href="<%= video["channel"]["url"] %>"><%= video["channel"]["display_name"] %></a></span>
-	          </div>
-	        </div>
-	        <% end %>
-	      </div>
     </div>
