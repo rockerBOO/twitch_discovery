@@ -25,6 +25,7 @@ defmodule TwitchDiscovery.StreamController do
 
     games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
     streams = RestTwitch.Users.streams(token.access_token, Map.merge(defaults, params))
+      |> Map.fetch!("streams")
       |> Enum.map(fn (stream) ->
         # TwitchDiscovery.Indexer.Stream.process(stream)
         stream

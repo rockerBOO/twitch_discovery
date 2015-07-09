@@ -69,6 +69,7 @@ defmodule TwitchDiscovery.DiscoverController do
     defaults = %{"limit" => 24}
 
     videos = RestTwitch.Users.videos(token.access_token, Map.merge(defaults, params))
+      |> Map.fetch!("videos")
 
     render conn, "following.html", videos: videos
   end
