@@ -22,6 +22,7 @@ defmodule TwitchDiscovery.Router do
     get "/auth/twitch", OAuthController, :auth
 
     get "/follow/:channel", UserController, :follow
+    get "/follows/:channel", UserController, :follows
 
     get "/", PageController, :index
     get "/about", PageController, :about

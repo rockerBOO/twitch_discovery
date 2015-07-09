@@ -8,7 +8,7 @@ defmodule TwitchDiscovery.OAuthController do
   based on the chosen strategy.
   """
   def auth(conn, _params) do
-    redirect conn, external: OAuth2.Twitch.authorize_url!(%{scope: "user_read"})
+    redirect conn, external: OAuth2.Twitch.authorize_url!(%{scope: "user_follows_edit user_read"})
   end
 
   @doc """

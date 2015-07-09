@@ -11,6 +11,15 @@ defmodule TwitchDiscovery.UserController do
 
     result = RestTwitch.Follows.follow(token.access_token, user["name"], channel)
 
-    IO.inspect result
+    json conn, %{status: "ok"}
+  end
+
+  def follows(conn, %{"channel" => channel}) do
+    user  = get_session(conn, :current_user)
+
+    case RestTwitch.Follows.follows(user["name"], channel) do
+      %{"created_at": _} -> json conn, %{status: "ok"}
+      _ ->json conn, %{status: "error"}
+    end
   end
 end

@@ -1,0 +1,18 @@
+<div id="pagination">
+  <div id="pagination_previous">
+    <!-- -->
+    <%= if is_first?(@conn) do %>
+      First :D
+    <% else %>
+      <a href="/streams">Previous</a>
+    <% end %>
+  </div>
+  <div id="pagination_next">
+    <%= if is_first?(@conn) do %>
+      <a href="/streams?limit=24&amp;offset=24">Next</a>
+    <% else %>
+      <a href="/streams?limit=24&amp;offset=24">Next</a>
+    <% end %>
+
+  </div>
+</div>
