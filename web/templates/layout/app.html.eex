@@ -29,6 +29,12 @@
       margin: 7px;
     }
 
+    .mui-panel h1:first-of-type {
+      margin-top: 0;
+    }
+
+
+
     #footer {
       margin-bottom: 300px;
     }
@@ -82,7 +88,7 @@
 
 #preview {
   /*height: calc(21vw/21vh*150);*/
-  height: 30vh;
+  height: 40vh;
   min-height: 250px;
   position: fixed;
   bottom: 0;
@@ -125,8 +131,26 @@
   padding: 10px;
 }
 
+#preview_title {
+  width: 80%;
+  float: left;
+  font-size: 1.2em;
+  line-height: 1.1em;
+  margin: 15px;
+  padding: 0;
+  max-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#preview_title a {
+  color: #fff;
+}
+
 #preview_close {
-  text-align: right;
+  position: absolute;
+  right: 0;
+  background: transparent;
   padding-right: 10px;
 }
 
@@ -156,8 +180,14 @@
       #preview_meta {
         display: none;
       }
+
       #preview_chat {
         display: none;
+      }
+
+      .preview {
+          opacity: 1;
+          visibility: visible;
       }
     }
 
@@ -176,6 +206,11 @@
       #preview_meta {
         width: 0;
         display: none;
+      }
+
+      .preview {
+          opacity: 1;
+          visibility: visible;
       }
     }
 
@@ -276,8 +311,12 @@ function twitchChat(channel) {
 function twitchMeta(meta) {
     var container = document.createElement('div');
 
-    container.innerHTML = "<div><h3>" + meta.title + "</h3>" +
-    "<h4><a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h4></div>";
+    container.innerHTML = "<h3>" + meta.display_name + "</h3>";
+
+    document.getElementById("preview_title").innerHTML = "<img src=\"http://s.jtvnw.net/"
+      + "jtv_user_pictures/hosted_images/GlitchIcon_white.png\" style=\"width: 24px; "
+      + "margin-top: -1px;\"> "
+      + "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
 
     var followButton = document.getElementById("preview_follow_button")
     var metaNode = document.getElementById("channel_meta")
@@ -348,7 +387,10 @@ window.onload = function () {
       </div>
     </div>
     <div id="preview" class="preview_off">
-      <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button></div>
+      <div id="preview_bar">
+        <h2 id="preview_title"></h2>
+        <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button></div>
+      </div>
       <div style="clear:both;"><span></span></div>
       <div id="preview_video"></div>
       <div id="preview_chat"></div>
