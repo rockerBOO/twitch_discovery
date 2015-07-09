@@ -21,22 +21,14 @@
       </div>
 
       <div class="mui-panel">
-        <div class="mui-row">
-          <%= for video <- @videos do %>
-          <div class="video-block mui-col-md-4">
-            <div class="video-image">
-              <a href="<%= video["url"] %>">
-                <img src="<%= video["preview"] %>">
-              </a>
+          <%= if @videos == [] do %>
+            <%= render TwitchDiscovery.VideoView, "no_videos_found.html" %>
+          <% else %>
+            <div class="mui-row">
+            <%= for video <- @videos do %>
+              <%= render TwitchDiscovery.VideoView, "video_block.html", video: video %>
+            <% end %>
             </div>
-            <div class="video-meta">
-              <h4><a href="<%= video["channel"]["url"] %>" title="<%= video["title"] %>"><%= cutoff video["title"] %></a></h4>
-              <span class="name"><a href="<%= video["url"] %>"><%= video["channel"]["display_name"] %></a></span>
-              <span class="date">on <%= video["created_date"] %></span>
-            </div>
-          </div>
           <% end %>
-        </div>
       </div>
-
     </div>

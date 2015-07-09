@@ -1,8 +1,6 @@
     <div class="mui-container">
       <div class="mui-panel">
         <h1>Search > Streams</h1>
-      </div>
-      <div class="mui-panel">
         <form action="/search/streams">
           <div class="mui-form-group">
             <input type="text" name="q" class="mui-form-control"  value="<%= @search %>" />
@@ -11,25 +9,14 @@
       </div>
 
       <div class="mui-panel">
-        <div class="mui-row">
-          <%= for stream <- @streams do %>
-          <div class="stream-block mui-col-md-4">
-            <div class="stream-image">
-              <a href="<%= stream["channel"]["url"] %>">
-                <img src="<%= stream["preview"]["large"] %>">
-              </a>
+          <%= if @streams == [] do %>
+            <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
+          <% else %>
+            <div class="mui-row">
+              <%= for stream <- @streams do %>
+                <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
+              <% end %>
             </div>
-            <div style="clear:both;">
-              <a class="preview" href="javascript:;" data-channel="<%= stream["channel"]["name"] %>"><i class="fa fa-eye"></i>
- Preview</a>
-            </div>
-            <div class="stream_meta">
-              <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
-              <span class="views"><%= stream["viewers"] %> viewers</span>
-              <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["display_name"] %></a></span>
-            </div>
-          </div>
           <% end %>
-        </div>
       </div>
     </div>

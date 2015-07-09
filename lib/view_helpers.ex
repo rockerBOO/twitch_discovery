@@ -9,6 +9,24 @@ defmodule TwitchDiscovery.View.Helpers do
         Number.Delimit.number_to_delimited(number)
       end
 
+      def button_toggle_mui(is_active_page?) do
+        if is_active_page? do
+          "accent"
+        else
+          "primary"
+        end
+      end
+
+      def is_active_page?(url, conn) do
+        parts = String.split(url, "/")
+
+        if parts == conn.path_info do
+          true
+        else
+          false
+        end
+      end
+
       def cutoff(title) do
         if title == nil do
           title
