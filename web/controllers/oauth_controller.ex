@@ -8,7 +8,7 @@ defmodule TwitchDiscovery.OAuthController do
   based on the chosen strategy.
   """
   def auth(conn, _params) do
-    redirect conn, external: OAuth2.Twitch.authorize_url!
+    redirect conn, external: OAuth2.Twitch.authorize_url!(%{scope: "user_read"})
   end
 
   @doc """
@@ -21,14 +21,7 @@ defmodule TwitchDiscovery.OAuthController do
     # Exchange an auth code for an access token
     token = OAuth2.Twitch.get_token!([code: code])
 
-    user_info(token)
-
     save(conn, token)
-  end
-
-  defp user_info(token) do
-    # Request the user's data with the access token
-    RestTwitch.Request.get_token_body!("/user", token.access_token)
   end
 
   def error(conn, error, message) do
@@ -40,7 +33,12 @@ defmodule TwitchDiscovery.OAuthController do
   def save(conn, token) do
     IO.inspect token
 
+    # Request the user's data with the access token
+    user = RestTwitch.Request.get_token_body!("/user", token.access_token)
+      |> Poison.decode!()
+
     conn
+      |> put_session(:current_user, user)
       |> put_session(:access_token, token)
       |> redirect(to: "/?auth=ok")
   end
