@@ -63,14 +63,14 @@ defmodule TwitchDiscovery.DiscoverController do
   end
 
   def videos_following(conn, params) do
-    games = get_games(20)
+    # games = get_games(20)
 
     token = get_session(conn, :access_token)
     defaults = %{"limit" => 24}
 
     videos = RestTwitch.Users.videos(token.access_token, Map.merge(defaults, params))
 
-    render conn, "top_videos_on_twitch.html", videos: videos, games: games
+    render conn, "following.html", videos: videos
   end
 
   def get_games(limit \\ 10) do

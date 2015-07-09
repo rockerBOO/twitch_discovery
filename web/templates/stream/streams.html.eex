@@ -19,7 +19,7 @@
           <button class="mui-btn mui-btn-primary"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
         </div>
         <div id="games-search">
-          <form class="mui-form-inline" class="games-search-on">
+          <form action="/streams" class="mui-form-inline" class="games-search-on">
             <div class="mui-form-group"><input type="text" placeholder="Programming" id="games-search-input" name="game" class="mui-form-control  mui-empty mui-dirty"></div>
           </form>
         </div>
@@ -28,30 +28,17 @@
       </div>
 
       <div class="mui-panel">
-        <div class="mui-row">
-          <%= for stream <- @streams do %>
-          <div class="stream-block mui-col-md-4">
-            <div class="stream-image">
-              <a href="<%= stream["channel"]["url"] %>">
-                <img src="<%= stream["preview"]["large"] %>">
-              </a>
-              <div>
-                <a class="preview" href="javascript:;"
-                  data-channel="<%= stream["channel"]["name"] %>"
-                  data-title="<%= stream["channel"]["status"] %>"
-                  data-display-name="<%= stream["channel"]["display_name"] %>"
-                ><i class="fa fa-eye"></i>
-   Preview</a>
-              </div>
-            </div>
 
-            <div class="stream_meta">
-              <h4><a href="<%= stream["channel"]["url"] %>" title="<%= stream["channel"]["status"] %>"><%= cutoff stream["channel"]["status"] %></a></h4>
-              <span class="views"><%= number_format stream["viewers"] %> viewers</span>
-              <span class="name">on <a href="<%= stream["channel"]["url"] %>"><%= stream["channel"]["display_name"] %></a></span>
-            </div>
-          </div>
+
+        <%= if @streams == [] do %>
+          <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
+        <% else %>
+          <div class="mui-row">
+          <%= for stream <- @streams do %>
+            <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
           <% end %>
-        </div>
+          </div>
+        <% end %>
+
       </div>
     </div>

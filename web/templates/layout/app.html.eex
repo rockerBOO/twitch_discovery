@@ -88,8 +88,7 @@
 
 #preview {
   /*height: calc(21vw/21vh*150);*/
-  height: 40vh;
-  min-height: 250px;
+  height: 45vh;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -106,8 +105,10 @@
   float: left;
   width: 33.33%;
   min-width: 33.33%;
+  display: block;
   height: 100%;
 }
+
 #preview_chat {
   float: left;
   width: 33.33%;
@@ -132,13 +133,12 @@
 }
 
 #preview_title {
-  width: 80%;
   float: left;
   font-size: 1.2em;
   line-height: 1.1em;
   margin: 15px;
   padding: 0;
-  max-height: 30px;
+  max-height: 50px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -160,10 +160,10 @@
   padding-bottom: 10px;
 }
 
-#preview_video iframe {
-  width: 100%;
+#preview_media {
   height: 100%;
 }
+
     @media all and (max-width: 550px) {
       #preview {
         height: calc(500/10vh*1.6)px;
@@ -191,7 +191,7 @@
       }
     }
 
-    /*50/50/0*/
+    /*50/50/0
     @media all and (min-width: 550px) and (max-width: 650px) {
       #preview_video {
         width: 50%;
@@ -215,14 +215,14 @@
     }
 
     /*33/66/0*/
-    @media all and (min-width: 650px) and (max-width: 830px) {
+    @media all and (min-width: 550px) and (max-width: 830px) {
       #preview_video {
-        width: 33.33%;
+        width: 50%;
         display: block;
       }
 
       #preview_chat {
-        width: 66.66%;
+        width: 50%;
         display: block;
       }
 
@@ -235,18 +235,18 @@
     /*33/33/33*/
     @media all and (min-width: 830px) and (max-width: 950px) {
       #preview_video {
-        width: 33.33%;
+        width: 50%;
         display: block;
       }
 
       #preview_chat {
-        width: 33.33%;
+        width: 50%;
         display: block;
       }
 
       #preview_meta {
-        width: 33.33%;
-        display: block;
+        width: 0;
+        display: none;
       }
     }
 
@@ -311,12 +311,9 @@ function twitchChat(channel) {
 function twitchMeta(meta) {
     var container = document.createElement('div');
 
-    container.innerHTML = "<h3>" + meta.display_name + "</h3>";
+    container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
 
-    document.getElementById("preview_title").innerHTML = "<img src=\"http://s.jtvnw.net/"
-      + "jtv_user_pictures/hosted_images/GlitchIcon_white.png\" style=\"width: 24px; "
-      + "margin-top: -1px;\"> "
-      + "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
+    document.getElementById("preview_title").innerHTML = "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
 
     var followButton = document.getElementById("preview_follow_button")
     var metaNode = document.getElementById("channel_meta")
@@ -331,7 +328,7 @@ function clearPreview() {
   video = document.getElementById("preview_video")
 
   video.innerHTML = ""
-  video.parentNode.classList.add("preview_off")
+  video.parentNode.parentNode.classList.add("preview_off")
 }
 
 window.onload = function () {
@@ -351,7 +348,7 @@ window.onload = function () {
       twitchChat(channel)
       twitchMeta({channel: channel, title: title, display_name: display_name})
 
-      document.getElementById("preview_video").parentNode.classList.remove("preview_off")
+      document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
 
       // .getAttribute("data-course-id"))
 
@@ -369,13 +366,13 @@ window.onload = function () {
       </div>
     </div>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams';">Streams</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/channels';">Channels</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/discover/videos/top';">Videos</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/search/streams';">Search</button>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/about';">About</button>
+          <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
+          <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button>
+          <button class="mui-btn mui-btn-<%= "discover/videos/top" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/discover/videos/top';">Videos</button>
+          <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>
+          <button class="mui-btn mui-btn-<%= "about" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/about';">About</button>
           <%= if logged_in?(@conn) == false do %>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_white.png" style="width: 18px; margin-top: -1px;"> Auth</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="/images/twitch.svg" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
           <% end %>
       </div>
     <div class="inner">
@@ -392,13 +389,15 @@ window.onload = function () {
         <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button></div>
       </div>
       <div style="clear:both;"><span></span></div>
-      <div id="preview_video"></div>
-      <div id="preview_chat"></div>
-      <div id="preview_meta">
-        <div id="preview_meta_button_container">
-          <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow();">Follow</button>
+      <div id="preview_media">
+        <div id="preview_video"></div>
+        <div id="preview_chat"></div>
+        <div id="preview_meta">
+          <div id="preview_meta_button_container">
+            <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow();">Follow</button>
+          </div>
+          <div id="channel_meta">skjhfkjsdhfsdjfhkdsjhfkjshfs dfhsdkj fhsdjkf hsdkjhf kjsdshfkjsdh kjshd fkjhdsfkjsdh fkjsdh fkjsdh fkjsdh fkjsdh fkjsdhf kjshflkshfkjlds fhgfikwh oirhwifhaoifdhn siujhlkash fkjdh fkj dhsfkj hskjdhfjkjahfd9 snfwiuhfn ihsubnfiue bnfiuisdnfiu shdkfjhsdfhksjf sdhfk kjdh fkj dfk dkjhdskfj hsdkfjh sfhwe9u hwehkjhw ekfhk jsdhfiuh 9usd hfu shkjfh kjshfkjsdhf kjsdhf kjsdh shfsu9b sijhf sjkhdhfkjshdfkjlh sdkfjh kjfh kjsdh fkjshd fkjshd</div>
         </div>
-        <div id="channel_meta"></div>
       </div>
     </div>
   </body>
