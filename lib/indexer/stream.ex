@@ -1,5 +1,12 @@
 defmodule TwitchDiscovery.Indexer.Stream do
   alias TwitchDiscovery.Indexer
+  use TwitchDiscovery.IndexBase
+
+
+  def db_key(id) do
+    "tw-stream-" <> Integer.to_string(id)
+  end
+
   # # Broadcast
   # ## Meta
   #   broadcast_id = {broadcast, stream["_id"]}
@@ -55,10 +62,10 @@ defmodule TwitchDiscovery.Indexer.Stream do
     # metric_save({"title", stream["channel"]["status"]})
 
     Indexer.map_captured(captured.meta, watch)
-      |> Indexer.save(captured.meta["stream_id"])
+      |> save(captured.meta["stream_id"])
 
     Indexer.map_captured(captured.meta, watch)
-      |> Indexer.save(captured.meta["stream_id"])
+      |> save(captured.meta["stream_id"])
   end
 
   def capture(stream) do
@@ -78,6 +85,5 @@ defmodule TwitchDiscovery.Indexer.Stream do
         "mature", "fps", "height"])
 
     broadcast =  TwitchDiscovery.Indexer.Broadcast.process(stream)
-
   end
 end
