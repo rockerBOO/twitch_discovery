@@ -11,6 +11,8 @@ defmodule TwitchDiscovery do
 
     Process.register(redis_client, :redis_client)
 
+    {:ok, _} = MongoPool.start_link(database: "discovery")
+
     # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
 
     children = [

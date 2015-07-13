@@ -2,101 +2,102 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
   alias TwitchDiscovery.Indexer
   use TwitchDiscovery.IndexBase
   require Logger
+  use Timex
+  require Logger
 
   def db_key(id) do
-    "tw-broadcast-" <> Integer.to_string(id)
+    "td-broadcast-" <> Integer.to_string(id)
   end
 
   def db_key(id, field) do
-    "tw-broadcast-" <> Integer.to_string(id) <> "-" <> field
+    "td-broadcast-" <> Integer.to_string(id) <> "-" <> field
   end
 
-  def find_modified(captured_fields, watch_fields) do
+  # HashSet for captured fields
+  def generate_hash_set(captured_fields) do
     broadcast_id = captured_fields.id
+    modified     = HashSet.new
 
-
-    Logger.debug "Find Modified " <> Integer.to_string(broadcast_id)
-    IO.inspect captured_fields
-    IO.inspect watch_fields
-
-    Logger.debug "modified"
-    modified = HashSet.new
-
+    # Process captured filters
+    # [{"language", stream["channel"]["broadcaster_language"]},..]
     modified = captured_fields.filters
       |> Enum.reduce(modified, fn ({key, value}, modified) ->
-        HashSet.put(modified, {key, value})
+        HashSet.put(modified, {String.to_atom(key), value})
       end)
       |> IO.inspect
 
+    # Pass in previous modified and apply meta data
     modified = captured_fields.meta
       |> Enum.reduce(modified, fn ({key, value}, modified) ->
-        HashSet.put(modified, {key, value})
+        HashSet.put(modified, {String.to_atom(key), value})
       end)
 
-    modified
-      |> Enum.map(fn ({key, value}) ->
-        process_modified(broadcast_id, {key, value})
+    captured_fields.metrics
+      |> Enum.reduce(modified, fn ({key, value}, modified) ->
+        HashSet.put(modified, {String.to_atom(key), value})
       end)
-      |> IO.inspect
-
   end
 
+  def convert_hash_set_to_map(hash_set) do
+    hash_set
+      |> Enum.reduce(%{}, fn ({key, value}, acc) ->
+        Map.merge(acc, Map.put(%{}, key, value))
+      end)
+  end
 
-  def process_modified(id, {field, value}) do
-    case is_field_modified?(id, field, value) do
-      true -> save_field(id, field, value)
-      false -> nil
+  def save(data, id) do
+    key   = db_key(id)
+    redis = :redis_client |> Process.whereis()
+
+    Logger.debug "Sending json data to #{key} on Redis"
+
+    redis |> Exredis.query(["SETEX", key, 86400, Poison.encode!(data)])
+  end
+
+  def redis_client() do
+    :redis_client
+      |> Process.whereis()
+  end
+
+  def redis_get(key) do
+    redis_client()
+      |> Exredis.query(["GET", key])
+  end
+
+  def get_current_index() do
+    case redis_get("broadcast_index") do
+      :undefined -> 0
+      index -> index
     end
   end
 
-  def process_modified(id, []) do
-    :ok
-  end
-
-  def is_field_modified?(id, field, value) do
-    redis = :redis_client |> Process.whereis()
-    key   = db_key(id)
-
-    cached_value = redis |> Exredis.query(["HGETALL", key])
-
-    Logger.debug "is_field_modified?"
-    IO.inspect cached_value
-
-    case cached_value do
-      :undefined -> true
-      nil -> true
-      cv -> IO.inspect cv; value == cv
+  def get_processing_index() do
+    case redis_get("broadcast_index") do
+      2 -> 0
+      1 -> 2
+      0 -> 1
     end
   end
 
-  def save_field(id, field, value) when is_float(value) do
-    save_field(id, field, round(value))
+  def mongo_save(data, id) do
+    index = get_current_index()
+
+    Logger.debug "Saving to broadcasts-#{index}"
+    IO.inspect data
+
+
+    # {:ok, mongo} = Mongo.Connection.start_link(database: "discovery")
+
+
+    collection = "broadcasts-" <> Integer.to_string(index)
+
+    try do
+      Mongo.insert_one(MongoPool, collection, data)
+    rescue
+      e in Mongo.Error -> e
+    end
   end
 
-  def save_field(id, field, value) do
-    Logger.debug "Save Field --"
-    Logger.debug Integer.to_string(id)
-    Logger.debug "field: " <> field
-    IO.inspect value
-
-    redis = :redis_client |> Process.whereis()
-    key   = db_key(id)
-
-    Logger.debug "HSET" <> key <> " " <> field
-
-    redis |> Exredis.query(["HSET", key, field, value])
-    redis |> Exredis.query(["EXPIRE", key, 86400])
-  end
-
-  def save_modified(captured, watch) do
-    # metric_save({"title", stream["channel"]["status"]})
-
-    Indexer.map_captured(captured.meta, watch)
-      # |> save(captured.meta["broadcast_id"])
-
-    Indexer.map_captured(captured.filters, watch)
-      # |> save(captured.meta["broadcast_id"])
-  end
 
   # ## Meta
   #   broadcast_id = {broadcast, stream["_id"]}
@@ -107,7 +108,8 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
   end
 
   def meta(stream) do
-    [{"title",        stream["title"]}]
+    [{"id", id(stream)},
+     {"title", stream["title"]}]
   end
 
   # ## Filters
@@ -116,13 +118,27 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
   #   started = {broadcast, "2011-03-19T15:42:22Z"} # stream"created_at"
   #   ended = {broadcast, Date.now}
   def filters(stream) do
-    [{"language", stream["channel"]["broadcaster_language"]},
-     {"mature",   stream["channel"]["mature"]},
-     {"fps",      stream["average_fps"]},
-     {"height",   stream["height"]},
-     {"game",     stream["game"]},
-     {"channel",  stream["channel"]["name"]},
-     {"started",  stream["created_at"]}]
+    IO.inspect stream["created_at"]
+
+    {:ok, created_at} = case DateFormat.parse(stream["created_at"], "{ISOz}") do
+      {:ok, created_at} -> DateFormat.format(created_at, "{s-epoch}")
+      {:error, message} -> Logger.error message
+    end
+
+    IO.inspect created_at
+
+    {created_at, _} = Integer.parse(created_at)
+
+    # created_at = DateFormat.format(created_at, "{s-epoch}")
+
+    [{"language",   stream["channel"]["broadcaster_language"]},
+     {"mature",     stream["channel"]["mature"]},
+     {"fps",        stream["average_fps"]},
+     {"height",     stream["height"]},
+     {"game",       stream["game"]},
+     {"channel",    stream["channel"]["name"]},
+     {"started_at", created_at}]
+
   end
 
   # viewers = {stream, [{184729423947, 3283}, {184729423947, 3283}]} # "viewers"
@@ -142,11 +158,22 @@ defmodule TwitchDiscovery.Indexer.Broadcast do
   end
 
   def process(stream) do
-    fields = ["game", "channel", "title", "language",
-      "mature", "fps", "height"]
+    data = capture(stream)
 
-    capture(stream)
-      |> find_modified(fields)
-      # |> save()
+    save(stream, data.id)
+
+    mongo_data = generate_hash_set(data)
+      |> convert_hash_set_to_map
+
+    mongo_save(mongo_data, data.id)
+
+    data
+  end
+
+  def process(set_key, stream) do
+    data = process(stream)
+
+
+    # add_to_set(set_key, data.id)
   end
 end

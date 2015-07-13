@@ -86,4 +86,13 @@ defmodule TwitchDiscovery.Indexer.Stream do
 
     broadcast =  TwitchDiscovery.Indexer.Broadcast.process(stream)
   end
+
+  def process(set_key, stream) do
+    capture(stream)
+      |> save_modified([
+        "game", "channel", "title", "language",
+        "mature", "fps", "height"])
+
+    TwitchDiscovery.Indexer.Broadcast.process(set_key, stream)
+  end
 end

@@ -29,25 +29,25 @@ function twitchPlayer(channel) {
 }
 
 function twitchChat(channel) {
-    container = chatContainer(channel)
+  container = chatContainer(channel)
 
-    var chat = document.getElementById("preview_chat")
+  var chat = document.getElementById("preview_chat")
 
-    chat.appendChild(container)
+  chat.appendChild(container)
 }
 
 function twitchMeta(meta) {
-    var container = document.createElement('div');
+  var container = document.createElement('div');
 
-    container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
+  container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
 
-    document.getElementById("preview_title").innerHTML = "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
+  document.getElementById("preview_title").innerHTML = "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
 
-    var followButton = document.getElementById("preview_follow_button")
-    var metaNode = document.getElementById("channel_meta")
+  var followButton = document.getElementById("preview_follow_button")
+  var metaNode = document.getElementById("channel_meta")
 
-    followButton.setAttribute("onclick", "window.location = \"/follow/" + channel + "\"")
-    metaNode.appendChild(container)
+  followButton.setAttribute("onclick", "window.location = \"/follow/" + channel + "\"")
+  metaNode.appendChild(container)
 }
 
 function clearPreview() {

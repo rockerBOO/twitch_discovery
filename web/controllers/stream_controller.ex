@@ -11,7 +11,7 @@ defmodule TwitchDiscovery.StreamController do
 
     streams = RestTwitch.Streams.live(Map.merge(defaults, params), %{ttl: 60})
       |> Enum.map(fn (stream) ->
-        TwitchDiscovery.Indexer.Stream.process(stream)
+        TwitchDiscovery.Indexer.Stream.process("live-streams", stream)
         stream
       end)
 

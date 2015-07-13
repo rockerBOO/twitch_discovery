@@ -1,0 +1,38 @@
+
+#filter_form .name {
+	float: left;
+	margin-right: 10px;
+	font-size: 1.3em;
+	font-weight: 700;
+}
+
+#filter_form .input-field {
+	float: left;
+	margin-right: 10px;
+	font-size: 1.2em;
+}
+
+#filter_form .mui-select {
+	font-size: 1.3em;
+}
+
+.input-field label {
+	font-weight: normal;
+}
+
+.broadcast-game-search {
+  width: 150px;
+  padding-top:0;
+  float: left;
+}
+
+.hide-options {
+	width: 0;
+	display: none;
+    visibility: none;
+}
+
+.options {
+    opacity: 100;
+    transition: opacity .4s, visibilty .4s;
+}

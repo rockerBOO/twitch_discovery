@@ -24,6 +24,7 @@
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
           <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button>
+          <button class="mui-btn mui-btn-<%= "broadcasts" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/broadcasts';">Broadcasts</button>
           <button class="mui-btn mui-btn-<%= "discover/videos/top" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/discover/videos/top';">Videos</button>
           <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>
           <button class="mui-btn mui-btn-<%= "about" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/about';">About</button>
@@ -54,9 +55,7 @@
           <div id="preview_meta_button_container">
             <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow(this);">Follow</button>
           </div>
-          <div id="channel_meta">
-            skjhfkjsdhfsdjfhkdsjhfkjshfs dfhsdkj fhsdjkf hsdkjhf kjsdshfkjsdh kjshd fkjhdsfkjsdh fkjsdh fkjsdh fkjsdh fkjsdh fkjsdhf kjshflkshfkjlds fhgfikwh oirhwifhaoifdhn siujhlkash fkjdh fkj dhsfkj hskjdhfjkjahfd9 snfwiuhfn ihsubnfiue bnfiuisdnfiu shdkfjhsdfhksjf sdhfk kjdh fkj dfk dkjhdskfj hsdkfjh sfhwe9u hwehkjhw ekfhk jsdhfiuh 9usd hfu shkjfh kjshfkjsdhf kjsdhf kjsdh shfsu9b sijhf sjkhdhfkjshdfkjlh sdkfjh kjfh kjsdh fkjshd fkjshd
-          </div>
+          <div id="channel_meta"></div>
         </div>
       </div>
     </div>
@@ -82,6 +81,18 @@
 
             document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
         });
+
+        $("#search-fps-toggle").click(function (event) {
+            $("#search-fps-options").toggleClass("hide-options")
+        })
+
+        $("#search-mature-toggle").click(function (event) {
+            $("#search-mature-options").toggleClass("hide-options")
+        })
+
+        // $("#filter").submit(function (event) {
+        //   event.preventDefault()
+        // })
       }
           </script>
   </body>

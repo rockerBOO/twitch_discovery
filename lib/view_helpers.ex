@@ -17,6 +17,31 @@ defmodule TwitchDiscovery.View.Helpers do
         end
       end
 
+      def selected(option, selected) when is_integer(option) and is_binary(selected) do
+        int = case Integer.parse(selected) do
+          {int, _} -> int
+          :error -> nil
+        end
+
+        selected(option, int)
+      end
+
+      def selected(option, selected) do
+        if option == selected do
+          " selected"
+        else
+          ""
+        end
+      end
+
+      def checked(option, checked) do
+        if option == checked do
+          " checked"
+        else
+          ""
+        end
+      end
+
       def is_active_page?(url, conn) do
         parts = String.split(url, "/")
 
