@@ -19,12 +19,12 @@
           <button class="mui-btn mui-btn-primary"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
         </div>
         <div id="games-search">
-          <form action="/streams" class="mui-form-inline" class="games-search-on">
-            <div class="mui-form-group"><input type="text" placeholder="Programming" id="games-search-input" name="game" class="mui-form-control  mui-empty mui-dirty"></div>
+          <form action="/streams" id="filter_form" class="mui-form-inline games-search-on">
+            <div class="mui-form-group"><input type="text" placeholder="Programming" id="games-search-input" name="game" class="games-search-input mui-form-control  mui-empty mui-dirty"></div>
           </form>
         </div>
         <%= if logged_in?(@conn) do %>
-        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button><% end %><button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button>
+        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button><% end %><!-- <button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button> -->
       </div>
 
 

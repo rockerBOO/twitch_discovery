@@ -11,6 +11,8 @@ defmodule TwitchDiscovery do
 
     Process.register(redis_client, :redis_client)
 
+    {:ok, _} = MongoPool.start_link(database: "discovery")
+
     # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
 
     children = [
@@ -27,6 +29,10 @@ defmodule TwitchDiscovery do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TwitchDiscovery.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  def quantum() do
+
   end
 
   # Tell Phoenix to update the endpoint configuration

@@ -17,10 +17,10 @@
     </div>
 
     <div class="mui-panel">
-      <strong><%= @viewers %></strong> Viewers
+      <strong><%= number_format @viewers %></strong> Viewers watching
     </div>
 
     <div class="mui-panel">
-      <strong><%= @channels %></strong> Channels
+      <strong><%= number_format @channels %></strong> Streams online
     </div>
   </div>

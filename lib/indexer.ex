@@ -21,22 +21,4 @@ defmodule TwitchDiscovery.Indexer do
     value |> Enum.reduce(fn (value, acc) -> Map.merge(acc, value) end)
   end
 
-  def save(document, id) do
-    IO.puts "Save me!"
-    IO.inspect document
-    IO.inspect id
-
-    key = "process-broadcast-" <> Integer.to_string(id)
-
-    IO.puts "KEY:"
-    IO.inspect key
-
-    redis = :redis_client |> Process.whereis()
-
-    redis
-      |> Exredis.query(["SET", key, Poison.encode!(document)])
-
-    redis
-      |> Exredis.query(["EXPIRE", key, 86400])
-  end
 end

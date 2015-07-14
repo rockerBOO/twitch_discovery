@@ -19,13 +19,13 @@ $mui-accent-color:        mui-color('indigo', '500');
 $mui-accent-color-dark:   mui-color('indigo', '700');
 $mui-accent-color-light:  mui-color('indigo', '100');
 
-$mui-hr-color: 			  mui-color('white-alpha-12');
-$mui-divider-color: 	  mui-color('white-alpha-12');
+$mui-hr-color:            mui-color('white-alpha-12');
+$mui-divider-color:       mui-color('white-alpha-12');
 
-$mui-body-bg-color: 	  mui-color('black-alpha-87');
+$mui-body-bg-color:       mui-color('black-alpha-87');
 
 $mui-base-font-family:    Roboto, Helvetica, Calibri, Arial, sans;
-$mui-base-font-color: 	  mui-color('grey', '400');
+$mui-base-font-color:     mui-color('grey', '400');
 $mui-base-font-size:      16px;
 
 $mui-panel-bg-color:      mui-color('black-alpha-87');
@@ -33,47 +33,62 @@ $mui-panel-bg-color:      mui-color('black-alpha-87');
 $mui-input-placeholder-color: mui-color('white-alpha-12');
 
 $mui-dropdown-bg-color:   mui-color('black-alpha-87');
-$mui-dropdown-link-font-color-disabled: 	mui-color('grey', '200');
+$mui-dropdown-link-font-color-disabled:     mui-color('grey', '200');
 $mui-dropdown-link-bg-color-hover:  mui-color('deep-purple', 'A700');
-$mui-dropdown-link-bg-color-active: 	mui-color('deep-purple', 'A700');
+$mui-dropdown-link-bg-color-active:     mui-color('deep-purple', 'A700');
 
 $mui-btn-default-bg-color: mui-color('black-alpha-87');
 
 // import MUI SASS
 @import "bower_components/mui/src/sass/mui";
 
-.stream-block h4 a, .channel-block h4 a, .video-block h4 a {
-	color: mui-color('white');
-}
 
-.stream-block h4, .channel-block h4, .video-block h4 {
-	font-size: 1.3em;
+.mui-select-menu {
+	background-color: $mui-dropdown-bg-color;
+
+	> div {
+	    &:hover {
+	      background-color: $mui-dropdown-link-bg-color-hover;
+	    }
+
+	    &[selected] {
+	      background-color: $mui-dropdown-link-bg-color-active;
+	    }
+	}
 }
 
 #games-search {
-	float: left;
+    float: left;
 }
 
 // Hackalis (Blasted Jesus Edition)
-#games-search-input {
+.games-search-input {
     width: 0;
     opacity: 0;
     transition: all .4s;
 }
 
 #games-search > form > div {
-	padding-top: 9px;
+    padding-top: 9px;
 }
 
-#games-search-input.games-search-on   {
+.games-search-input.games-search-on   {
     width: 250px;
     opacity: 1;
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
-.stream-image {
+
+.stream-image,.broadcast-image {
   position: relative;
 }
+
+.stream-image:hover .preview,
+.broadcast-image:hover .preview {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .preview {
     /* Move the preview to the left corner */
@@ -92,10 +107,7 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
     transition: opacity .4s, visibilty .4s;
 }
 
-.stream-image:hover .preview {
-    opacity: 1;
-    visibility: visible;
-}
+
 
 #preview_bar {
   height: 50px;
@@ -103,75 +115,91 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
   background-color: $mui-primary-color;
 }
 
-    .mui-panel {
-      background-color: #111;
-    }
+.mui-panel {
+  background-color: #111;
+}
 
-    body {
-      /*font-family: Roboto, Helvetica, Calibri, Arial, sans;*/
-    }
+body {
+  /*font-family: Roboto, Helvetica, Calibri, Arial, sans;*/
+}
 
-    .fa-bars {
-      font-size: 32px;
-      margin: 7px;
-    }
+.fa-bars {
+  font-size: 32px;
+  margin: 7px;
+}
 
-    .mui-panel h1:first-of-type {
-      margin-top: 0;
-    }
-
-
-
-    #footer {
-      margin-bottom: 300px;
-    }
-
-    #preview_video_meta {
-      float: left;
-      display: block;
-    }
-
-    #preview_video_meta .views, #preview_video_meta .length  {
-      font-size: 18px;
-      padding-right: 10px;
-    }
-
-    .stream-block .stream_meta,
-    .channel-block .channel-meta,
-    .video-block .video-meta  {
-      height: 6.5em;
-    }
+.mui-panel h1:first-of-type {
+  margin-top: 0;
+}
 
 
-    .stream-block, .channel-block {
-      margin-bottom: 10px;
-      /*height: 300px;*/
-    }
 
-    .stream-block img,
-    .channel-block img,
-    .video-block img  {
-      width: 100%;
-      /*max-height: 30vh;*/
-    }
+#footer {
+  margin-bottom: 300px;
+}
 
-    .stream-block .stream-image,
-    .channel-block .channel-image,
-    .video-block .video-image {
-      clear: both;
-      width: 100%;
-      display: block;
-    }
+#preview_video_meta {
+  float: left;
+  display: block;
+}
 
-    .inner {
-      margin-bottom: 20px;
-    }
+#preview_video_meta .views, #preview_video_meta .length  {
+  font-size: 18px;
+  padding-right: 10px;
+}
 
-    @media all and (max-width: 400px) {
-      .stream-block img {
-        width: calc(100vw - 75px);
-      }
-    }
+.stream-block h4 a,
+.channel-block h4 a,
+.video-block h4 a,
+.broadcast-block h4 a {
+  color: mui-color('white');
+}
+
+.stream-block h4,
+.channel-block h4,
+.video-block h4,
+.broadcast-block h4 {
+  font-size: 1.3em;
+}
+
+.stream-block .stream_meta,
+.channel-block .channel-meta,
+.video-block .video-meta,
+.broadcast-block .broadcast-meta  {
+  height: 6.5em;
+}
+
+.stream-block, .channel-block, .broadcast-block  {
+  margin-bottom: 10px;
+  /*height: 300px;*/
+}
+
+.stream-block img,
+.channel-block img,
+.video-block img,
+.broadcast-block img  {
+  width: 100%;
+  /*max-height: 30vh;*/
+}
+
+.stream-block .stream-image,
+.channel-block .channel-image,
+.video-block .video-image,
+.broadcast-block .broadcast-image {
+  clear: both;
+  width: 100%;
+  display: block;
+}
+
+.inner {
+  margin-bottom: 20px;
+}
+
+@media all and (max-width: 400px) {
+  .stream-block img {
+    width: calc(100vw - 75px);
+  }
+}
 
 #preview {
   /*height: calc(21vw/21vh*150);*/
@@ -192,7 +220,7 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 
 #preview_media {
   background: #000;
-	height: 100%;
+    height: 100%;
 }
 
 #preview_video {
@@ -224,6 +252,12 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
   height: 100%;
   width: 0;
   padding: 10px;
+}
+
+#preview_meta h3 {
+  margin: 0;
+  margin-top: 9px;
+  line-height: 1.6;
 }
 
 #preview_title {
@@ -363,9 +397,35 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 }
 
 #pagination_previous {
-	float: left;
+    float: left;
 }
 
 #pagination_next {
-	float: right;
+    float: right;
+}
+
+.mui-dropdown-menu {
+	overflow: auto;
+	max-height: 90vh;
+}
+
+.autocomplete-suggestions {
+	border: 1px solid rgba(0, 0, 0, 0.87);
+	background: #111;
+	cursor: default;
+	overflow: auto;
+}
+
+.autocomplete-suggestion {
+	padding: 10px 5px;
+	font-size: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.autocomplete-selected {
+	background: rgba(0, 0, 0, 0.87);
+}
+.autocomplete-suggestions strong {
+	font-weight: normal;
+	color: #673AB7;
 }

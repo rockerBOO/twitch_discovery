@@ -22,3 +22,9 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :quantum, cron: [
+  # Every minute
+  "*/5 * * * *": &TwitchDiscovery.Index.index/0
+  # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
+]
