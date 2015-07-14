@@ -1,5 +1,5 @@
 defmodule TwitchDiscovery.Index.Stream do
-	use TwitchDiscovery.Index.Base
+  use TwitchDiscovery.Index.Base
   alias TwitchDiscovery.Parser.Stream
   alias TwitchDiscovery.Parser.Broadcast
 
