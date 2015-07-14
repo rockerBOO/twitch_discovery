@@ -78,7 +78,6 @@ defmodule TwitchDiscovery.StreamController do
         result -> result |> Poison.decode!()
       end
     end)
-    |> IO.inspect
 
     # broadcasts = Enum.to_list results
 
