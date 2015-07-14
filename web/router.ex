@@ -36,8 +36,8 @@ defmodule TwitchDiscovery.Router do
     get "/games/autocomplete", GameController, :autocomplete
 
     get "/streams/summary", StreamController, :summary
-    get "/streams", StreamController, :index
-    get "/streams2", StreamController, :index2
+    # get "/streams", StreamController, :index
+    get "/streams", StreamController, :index2
     get "/streams/following", StreamController, :following
 
     get "/search", SearchController, :index
