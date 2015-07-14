@@ -24,6 +24,7 @@
   "poison": {:hex, :poison, "1.4.0"},
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.8.4"},
+  "quantum": {:hex, :quantum, "1.2.4"},
   "ranch": {:hex, :ranch, "1.1.0"},
   "rest_twitch": {:git, "git://github.com/rockerBOO/rest_twitch.git", "bc89e56fb40c07bf40f405b12c99e38bc7efdccf", []},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},

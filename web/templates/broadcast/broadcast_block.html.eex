@@ -15,10 +15,14 @@
 
             <div class="broadcast_meta">
               <h4><a href="<%= @broadcast["channel"]["url"] %>"><%= cutoff @broadcast["channel"]["status"] %></a></h4>
+              <span class="views"><%= number_format @broadcast["viewers"] %> viewers</span>
+              <span class="name">on <a href="<%= @broadcast["channel"]["url"] %>"><%= @broadcast["channel"]["display_name"] %></a></span>
+              <!--
               <span class="name"><%= @broadcast["channel"]["name"] %></span>
               <span class="name"><%= round @broadcast["average_fps"] %> fps</span>
               <span class="name">Mature: <%= @broadcast["channel"]["mature"] %></span>
               <span class="name">Viewers: <%= @broadcast["viewers"] %></span>
               <span class="name"> <%= @broadcast["created_at"] %></span>
+              -->
             </div>
           </div>

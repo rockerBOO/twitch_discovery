@@ -60,6 +60,7 @@
       </div>
     </div>
     <script src="<%= static_path(@conn, "/js/functions.js") %>"></script>
+ <script src="<%= static_path(@conn, "/js/autocomplete.js") %>"></script>
       <script type="text/javascript">
 
       window.onload = function () {
@@ -90,10 +91,13 @@
             $("#search-mature-options").toggleClass("hide-options")
         })
 
-        // $("#filter").submit(function (event) {
-        //   event.preventDefault()
-        // })
+        $('#games-search-input').autocomplete({
+          serviceUrl: '/games/autocomplete',
+          width: 'rekt',
+          onSelect: function () { $("#filter_form").submit() }
+        });
       }
-          </script>
+
+    </script>
   </body>
 </html>

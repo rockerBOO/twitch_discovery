@@ -4,13 +4,13 @@ defmodule TwitchDiscovery.BroadcastController do
 
   import ExPrintf
 
-  alias TwitchDiscovery.Indexer.Broadcast
+  alias TwitchDiscovery.Index.Stream
+  alias TwitchDiscovery.Parser.Broadcast
   require Logger
 
   defmodule Error do
     defexception reason: ""
   end
-
 
   def parse_params_to_query(params) do
     mature = case params["mature"] do
@@ -29,9 +29,10 @@ defmodule TwitchDiscovery.BroadcastController do
 
     query = %{}
 
+    IO.puts "mature"
     IO.inspect mature
 
-    if mature == "yes" or mature == "no" do
+    if mature == true or mature == false do
       query = Map.put(query, "mature", mature)
     end
 
@@ -138,34 +139,48 @@ defmodule TwitchDiscovery.BroadcastController do
 
   def sorting(params) do
     case params do
+      %{"started_at" => "All"} -> %{"viewers" => -1}
       %{"uptime" => _} -> %{"started_at" => -1}
-      %{"started_at" => _} -> %{"started_at" => 1}
+      %{"started_at" => _} -> %{"started_at" => -1}
       _ -> %{"viewers" => -1}
     end
   end
 
   def index(conn, params) do
-	  index = Broadcast.get_current_index()
+	  index = TwitchDiscovery.Index.get_current_index()
 
-    Logger.debug "Querying data from broadcasts-" <> Integer.to_string(index)
+    Logger.debug "Querying data from broadcasts-" <> index
 
     # {:ok, mongo} = Mongo.Connection.start_link(database: "discovery")
 
-    collection = "broadcasts-" <> Integer.to_string(index)
+    collection = "broadcasts-" <> index
 
     query = %{
       "$query" => parse_params_to_query(params),
       "$orderby" => sorting(params)
     }
 
-    broadcasts = Mongo.find(MongoPool, collection, query)
-      |> Enum.to_list
-      |> Enum.map(fn (result) ->
-          Broadcast.db_key(result["id"])
-            |> Broadcast.redis_get()
-            |> Poison.decode!()
-        end)
-      # |> IO.inspect
+    Logger.debug "Query on #{collection}"
+    IO.inspect query
+
+    broadcasts = Mongo.find(MongoPool, collection, query, limit: 24)
+    |> Enum.to_list
+    |> Enum.map(fn (result) ->
+      key = Broadcast.db_key(result["id"])
+
+      IO.inspect key
+
+      result = key
+      |> TwitchDiscovery.Index.redis_get()
+
+      case result do
+        :undefined -> nil
+        result -> result |> Poison.decode!()
+      end
+    end)
+    |> Enum.reject(fn (result) ->
+      nil == result
+    end)
 
     # broadcasts = Enum.to_list results
 

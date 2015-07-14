@@ -1,8 +1,11 @@
     <div class="mui-container">
       <div class="mui-panel">
         <form id="filter_form" name="filter_form">
-          <div class="name" style="float: left;">Game</div>
-          <div class="mui-form-group input-field broadcast-game-search"><input type="text" placeholder="Programming" name="game" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>"></div>
+          <div class="name">Game</div>
+          <div class="mui-form-group input-field broadcast-game-search">
+              <input type="text" placeholder="Programming" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>">
+          </div>
+   <!--        <div class="mui-form-group input-field broadcast-game-search"><input type="text" placeholder="Programming" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>"></div> -->
           <div class="name"> Viewers</div>
           <div class="mui-select input-field">
             <select name="viewers">
@@ -15,7 +18,7 @@
               <option<%= 200 |> selected(viewers) |> raw %>>200</option>
               <option<%= 150 |> selected(viewers) |> raw %>>150</option>
               <option<%= 125 |> selected(viewers) |> raw %>>125</option>
-              <option<%= 100 |> selected(viewers) |> raw %>>125</option>
+              <option<%= 100 |> selected(viewers) |> raw %>>100</option>
               <option<%= 75 |> selected(viewers) |> raw %>>75</option>
               <option<%= 50 |> selected(viewers) |> raw %>>50</option>
               <option<%= 40 |> selected(viewers) |> raw %>>40</option>
@@ -61,10 +64,13 @@
               <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15mins ago</option>
               <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins ago</option>
               <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins ago</option>
-              <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hours ago</option>
+              <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour ago</option>
               <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours ago</option>
+              <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours ago</option>
               <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours ago</option>
-              <option value="h8"<%= "h8" |> selected(@params["started_at"]) |> raw %>>8 hours ago</option>
+              <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours ago</option>
+              <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours ago</option>
+              <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours ago</option>
               <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours ago</option>
               <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours ago</option>
               <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours ago</option>

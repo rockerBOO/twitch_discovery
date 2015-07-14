@@ -62,7 +62,7 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 }
 
 // Hackalis (Blasted Jesus Edition)
-#games-search-input {
+.games-search-input {
     width: 0;
     opacity: 0;
     transition: all .4s;
@@ -72,15 +72,23 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
     padding-top: 9px;
 }
 
-#games-search-input.games-search-on   {
+.games-search-input.games-search-on   {
     width: 250px;
     opacity: 1;
     margin-left: 10px;
 }
 
-.stream-image {
+
+.stream-image,.broadcast-image {
   position: relative;
 }
+
+.stream-image:hover .preview,
+.broadcast-image:hover .preview {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .preview {
     /* Move the preview to the left corner */
@@ -99,10 +107,7 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
     transition: opacity .4s, visibilty .4s;
 }
 
-.stream-image:hover .preview {
-    opacity: 1;
-    visibility: visible;
-}
+
 
 #preview_bar {
   height: 50px;
@@ -397,4 +402,30 @@ body {
 
 #pagination_next {
     float: right;
+}
+
+.mui-dropdown-menu {
+	overflow: auto;
+	max-height: 90vh;
+}
+
+.autocomplete-suggestions {
+	border: 1px solid rgba(0, 0, 0, 0.87);
+	background: #111;
+	cursor: default;
+	overflow: auto;
+}
+
+.autocomplete-suggestion {
+	padding: 10px 5px;
+	font-size: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.autocomplete-selected {
+	background: rgba(0, 0, 0, 0.87);
+}
+.autocomplete-suggestions strong {
+	font-weight: normal;
+	color: #673AB7;
 }

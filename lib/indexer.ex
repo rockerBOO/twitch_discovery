@@ -20,4 +20,5 @@ defmodule TwitchDiscovery.Indexer do
   def reduce(value) do
     value |> Enum.reduce(fn (value, acc) -> Map.merge(acc, value) end)
   end
+
 end
