@@ -1,0 +1,102 @@
+    <div class="mui-container">
+      <div class="mui-panel">
+        <h1>Streams</h1>
+        <form id="filter_form" name="filter_form">
+          <div class="name">Game</div>
+          <div class="mui-form-group input-field broadcast-game-search">
+              <input type="text" placeholder="Programming" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>">
+          </div>
+   <!--        <div class="mui-form-group input-field broadcast-game-search"><input type="text" placeholder="Programming" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>"></div> -->
+          <div class="name"> Viewers</div>
+          <div class="mui-select input-field">
+            <select name="viewers">
+              <% viewers = @params["viewers"] %>
+              <option<%= "Any" |> selected(viewers) |> raw %>>Any</option>
+              <option<%= 1000 |> selected(viewers) |> raw %>>1000</option>
+              <option<%= 750 |> selected(viewers) |> raw %>>750</option>
+              <option<%= 500 |> selected(viewers) |> raw %>>500</option>
+              <option<%= 250 |> selected(viewers) |> raw %>>250</option>
+              <option<%= 200 |> selected(viewers) |> raw %>>200</option>
+              <option<%= 150 |> selected(viewers) |> raw %>>150</option>
+              <option<%= 125 |> selected(viewers) |> raw %>>125</option>
+              <option<%= 100 |> selected(viewers) |> raw %>>100</option>
+              <option<%= 75 |> selected(viewers) |> raw %>>75</option>
+              <option<%= 50 |> selected(viewers) |> raw %>>50</option>
+              <option<%= 40 |> selected(viewers) |> raw %>>40</option>
+              <option<%= 35 |> selected(viewers) |> raw %>>35</option>
+              <option<%= 30 |> selected(viewers) |> raw %>>30</option>
+              <option<%= 25 |> selected(viewers) |> raw %>>25</option>
+              <option<%= 20 |> selected(viewers) |> raw %>>20</option>
+              <option<%= 15 |> selected(viewers) |> raw %>>15</option>
+              <option<%= 10 |> selected(viewers) |> raw %>>10</option>
+              <option<%= 5 |> selected(viewers) |> raw %>>5</option>
+              <option<%= 0 |> selected(viewers) |> raw %>>0</option>
+            </select>
+          </div>
+          <div class="name"><a href="javascript:;" id="search-mature-toggle">Mature</a></div>
+          <div id="search-mature-options"  class="input-field options <%= if @params["mature"] == false, do: "hide-options" %>">
+            <label>
+              <input type="radio" name="mature" value="no"<%= "no" |> checked(@params["mature"]) |> raw %> />
+              No
+            </label>
+            <label>
+              <input type="radio" name="mature" value="yes"<%= "yes" |> checked(@params["mature"]) |> raw %> />
+              Yes
+            </label>
+            <label>
+              <input type="radio" name="mature" value="all"<%= "all" |> checked(@params["mature"]) |> raw %> />
+               All
+            </label>
+          </div>
+          <div class="name"><a href="javascript:;" id="search-fps-toggle">FPS</a></div>
+          <div id="search-fps-options" class="mui-select options input-field <%= if @params["fps"] == false, do: "hide-options" %>">
+            <select name="fps">
+              <option<%= "All" |> selected(@params["fps"]) |> raw %>>All</option>
+              <option<%= 60 |> selected(@params["fps"]) |> raw %>>60</option>
+              <option<%= 30 |> selected(@params["fps"]) |> raw %>>30</option>
+            </select>
+          </div>
+
+          <div class="name">Started At</div>
+          <div class="mui-select input-field">
+            <select name="started_at">
+              <option>All</option>
+              <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
+              <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15mins ago</option>
+              <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins ago</option>
+              <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins ago</option>
+              <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour ago</option>
+              <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours ago</option>
+              <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours ago</option>
+              <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours ago</option>
+              <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours ago</option>
+              <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours ago</option>
+              <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours ago</option>
+              <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours ago</option>
+              <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours ago</option>
+              <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours ago</option>
+              <option value="h30"<%= "h30" |> selected(@params["started_at"]) |> raw %>>30 hours ago</option>
+            </select>
+          </div>
+          <div style="float: right;">
+            <button type="submit" class="mui-btn mui-btn-primary mui-btn-raised">Find!</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="mui-panel">
+        <%= if @streams == [] do %>
+          <div class="mui-panel">
+          <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
+          </div>
+        <% else %>
+          <div class="mui-panel">
+            <div class="mui-row">
+            <%= for stream <- @streams do %>
+              <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
+            <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>

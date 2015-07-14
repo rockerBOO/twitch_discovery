@@ -18,10 +18,6 @@ defmodule TwitchDiscovery.Index.Stream do
     length(dataset["streams"])
   end
 
-  def get_module() do
-    TwitchDiscovery.Index.Stream
-  end
-
   def initial_url do
     "/streams?limit=100"
   end

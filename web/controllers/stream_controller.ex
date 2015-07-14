@@ -51,32 +51,40 @@ defmodule TwitchDiscovery.StreamController do
 
 
   def index2(conn, params) do
-    index = TwitchDiscovery.Indexer.Stream.get_current_index()
-
-    Logger.debug "Querying data from broadcasts-" <> Integer.to_string(index)
-
+    index = TwitchDiscovery.Index.get_current_index()
     # {:ok, mongo} = Mongo.Connection.start_link(database: "discovery")
 
-    collection = "streams-" <> Integer.to_string(index)
+    collection = "streams-" <> index
+
+    Logger.debug "Querying: #{collection}"
 
     query = %{
       "$query" => TwitchDiscovery.BroadcastController.parse_params_to_query(params),
       "$orderby" => TwitchDiscovery.BroadcastController.sorting(params)
     }
 
+    IO.puts Poison.encode!(query)
     IO.inspect query
 
-    broadcasts = Mongo.find(MongoPool, collection, query, limit: 24)
-      |> Enum.to_list
-      |> Enum.map(fn (result) ->
-          TwitchDiscovery.Indexer.Stream.db_key(result["id"])
-            |> TwitchDiscovery.Indexer.Stream.redis_get()
-            |> Poison.decode!()
-        end)
-      # |> IO.inspect
+    streams = Mongo.find(MongoPool, collection, query, limit: 24)
+    |> Enum.to_list
+    |> Enum.map(fn (result) ->
+      key = TwitchDiscovery.Parser.Stream.db_key(result["id"])
+
+      IO.inspect key
+
+      result = key
+      |> TwitchDiscovery.Index.redis_get()
+
+      case result do
+        :undefined -> IO.inspect "no redis"; nil
+        result -> result |> Poison.decode!()
+      end
+    end)
+    |> IO.inspect
 
     # broadcasts = Enum.to_list results
 
-    render conn, "broadcasts.html", broadcasts: broadcasts, params: params
+    render conn, "streams_filtered.html", streams: streams, params: params
   end
 end

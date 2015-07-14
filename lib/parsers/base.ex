@@ -3,10 +3,6 @@ defmodule TwitchDiscovery.Parser.Base do
     quote do
       require Logger
 
-      defp db_key(id) do
-        "index-base-" <> Integer.to_string(id)
-      end
-
       def redis_client() do
         :redis_client
           |> Process.whereis()
@@ -38,7 +34,6 @@ defmodule TwitchDiscovery.Parser.Base do
           |> Enum.reduce(modified, fn ({key, value}, modified) ->
             HashSet.put(modified, {String.to_atom(key), value})
           end)
-          # |> IO.inspect
 
         # Pass in previous modified and apply meta data
         modified = captured_fields.meta

@@ -1,8 +1,7 @@
 defmodule TwitchDiscovery.Parser.Broadcast do
-  alias TwitchDiscovery.Indexer
   use TwitchDiscovery.Parser.Base
-  require Logger
   use Timex
+  require Logger
 
   def db_key(id) do
     "broadcasts-" <> Integer.to_string(id)
@@ -47,7 +46,6 @@ defmodule TwitchDiscovery.Parser.Broadcast do
      {"game",       stream["game"]},
      {"channel",    stream["channel"]["name"]},
      {"started_at", created_at}]
-
   end
 
   # viewers = {stream, [{184729423947, 3283}, {184729423947, 3283}]} # "viewers"

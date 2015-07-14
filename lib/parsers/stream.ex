@@ -22,6 +22,8 @@ defmodule TwitchDiscovery.Parser.Stream do
       {:error, message} -> Logger.error message
     end
 
+    {created_at, _} = Integer.parse(created_at)
+
     [{"language",   stream["channel"]["broadcaster_language"]},
      {"mature",     stream["channel"]["mature"]},
      {"fps",        stream["average_fps"]},
