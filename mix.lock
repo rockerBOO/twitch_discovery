@@ -12,7 +12,7 @@
   "hackney": {:hex, :hackney, "1.2.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
   "idna": {:hex, :idna, "1.0.2"},
-  "mongodb": {:git, "git://github.com/ericmj/mongodb.git", "7d70ec1f336cf25e0ef2711b55762bbb22216879", []},
+  "mongodb": {:git, "git://github.com/ericmj/mongodb.git", "da18ce8df176fb110f27e169ff162d8babd41601", []},
   "number": {:hex, :number, "0.3.4"},
   "oauth2": {:hex, :oauth2, "0.1.1"},
   "pbkdf2": {:git, "git://github.com/basho/erlang-pbkdf2.git", "7076584f5377e98600a7e2cb81980b2992fb2f71", []},
@@ -26,7 +26,7 @@
   "postgrex": {:hex, :postgrex, "0.8.4"},
   "quantum": {:hex, :quantum, "1.2.4"},
   "ranch": {:hex, :ranch, "1.1.0"},
-  "rest_twitch": {:git, "git://github.com/rockerBOO/rest_twitch.git", "bc89e56fb40c07bf40f405b12c99e38bc7efdccf", []},
+  "rest_twitch": {:git, "git://github.com/rockerBOO/rest_twitch.git", "0efe82366164b557fafbf5e29d240feb0959b34d", []},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},
   "timex": {:hex, :timex, "0.16.1"},
   "tzdata": {:hex, :tzdata, "0.1.6"}}
