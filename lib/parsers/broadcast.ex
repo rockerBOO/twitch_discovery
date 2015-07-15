@@ -3,13 +3,9 @@ defmodule TwitchDiscovery.Parser.Broadcast do
   use Timex
   require Logger
 
-  def db_key(id) do
-    "broadcasts-" <> Integer.to_string(id)
-  end
+  def db_key(id), do: TwitchDiscovery.Index.Broadcast.db_key(id)
+  def db_key(), do: TwitchDiscovery.Index.Broadcast.db_key()
 
-  def db_key(id, field) do
-    "broadcasts-" <> Integer.to_string(id) <> "-" <> field
-  end
 
   # ## Meta
   #   broadcast_id = {broadcast, stream["_id"]}

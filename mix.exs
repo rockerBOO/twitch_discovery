@@ -36,6 +36,8 @@ defmodule TwitchDiscovery.Mixfile do
      {:exredis, ">= 0.1.1"},
      {:number, "~> 0.3.4"},
      {:quantum, ">= 1.2.4"},
+
+     {:exprintf, "~> 0.1", override: true},
      {:mongodb, github: "ericmj/mongodb"},
      {:rest_twitch, github: "rockerBOO/rest_twitch"},
      # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
@@ -43,6 +45,7 @@ defmodule TwitchDiscovery.Mixfile do
      {:timex, "~> 0.16.1"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:exrm, "~> 0.15.3", only: :dev},
+     {:exprof, ">= 0.2.0", only: :dev},
      {:cowboy, "~> 1.0"}]
   end
 end

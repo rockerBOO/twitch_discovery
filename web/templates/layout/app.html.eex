@@ -23,7 +23,7 @@
     </div>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
-          <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button>
+<!--           <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button> -->
 <!--           <button class="mui-btn mui-btn-<%= "broadcasts" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/broadcasts';">Broadcasts</button> -->
           <button class="mui-btn mui-btn-<%= "discover/videos/top" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/discover/videos/top';">Videos</button>
           <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>

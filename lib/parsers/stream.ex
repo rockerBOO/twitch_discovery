@@ -3,9 +3,9 @@ defmodule TwitchDiscovery.Parser.Stream do
   require Logger
   use Timex
 
-  def db_key(id) do
-    "streams-" <> Integer.to_string(id)
-  end
+  def db_key(id), do: TwitchDiscovery.Index.Stream.db_key(id)
+  def db_key(), do: TwitchDiscovery.Index.Stream.db_key()
+
 
   def id(stream) do
     stream["_id"]
