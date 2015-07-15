@@ -10,7 +10,6 @@ defmodule TwitchDiscovery.Index.Base do
 
         if more?(dataset) do
           Logger.debug "MORE " <> dataset["_links"]["next"]
-
           request(dataset["_links"]["next"])
           |> get_next()
         else
