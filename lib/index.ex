@@ -2,6 +2,7 @@ defmodule TwitchDiscovery.Index do
   require Logger
 
   alias TwitchDiscovery.Index.Stream
+  alias TwitchDiscovery.Index.Game
 
   def redis_client() do
     :redis_client |> Process.whereis()
@@ -39,7 +40,22 @@ defmodule TwitchDiscovery.Index do
     Stream.request()
     |> Stream.get_next()
 
+    index_games()
+
     Logger.info "Finished indexing streams"
+    finish()
+  end
+
+  def index_games do
+    Logger.info "Index all live streams"
+
+    Game.request()
+    |> Game.get_next()
+
+    Logger.info "Finished indexing streams"
+  end
+
+  def finish do
     increment_mongo_index()
   end
 
@@ -51,4 +67,6 @@ defmodule TwitchDiscovery.Index do
 
     Mongo.delete_many(MongoPool, Stream.collection_name(current_index), %{})
   end
+
+
 end

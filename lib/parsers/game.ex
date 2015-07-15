@@ -3,13 +3,8 @@ defmodule TwitchDiscovery.Parser.Game do
   require Logger
   use Timex
 
-  def db_key(id) do
-    "games-" <> Integer.to_string(id)
-  end
-
-  def db_key(id, field) do
-    "games-" <> Integer.to_string(id) <> "-" <> field
-  end
+  def db_key(id), do: TwitchDiscovery.Index.Game.db_key(id)
+  def db_key(), do: TwitchDiscovery.Index.Game.db_key()
 
   def id(game) do
     game["game"]["_id"]
