@@ -7,6 +7,6 @@
             <div class="video-meta">
               <h4><a href="<%= @video["channel"]["url"] %>" title="<%= @video["title"] %>"><%= cutoff @video["title"] %></a></h4>
               <span class="name"><a href="<%= @video["url"] %>"><%= @video["channel"]["display_name"] %></a></span>
-              <span class="date">on <%= @video["created_date"] %></span>
+              <span class="date">on <%= format_time @video["recorded_at"] %></span>
             </div>
           </div>

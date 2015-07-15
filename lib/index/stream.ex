@@ -172,4 +172,14 @@ defmodule TwitchDiscovery.Index.Stream do
       _ -> %{"viewers" => -1}
     end
   end
+
+  def map_result(result) do
+    result = db_key(result["id"])
+    |> TwitchDiscovery.Index.redis_get()
+
+    case result do
+      :undefined -> nil
+      result -> result |> Poison.decode!()
+    end
+  end
 end

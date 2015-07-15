@@ -16,8 +16,6 @@ defmodule TwitchDiscovery.SearchController do
     games = RestTwitch.Games.top(%{"limit" => 20})
     streams = RestTwitch.Search.streams(params)
       |> Enum.map(fn (stream) ->
-        _ = TwitchDiscovery.Indexer.Stream.process(stream)
-          # |> IO.inspect
 
         for %{"channel" => channel} <- stream do
           case channel["url"] do

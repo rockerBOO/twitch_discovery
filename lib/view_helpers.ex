@@ -1,5 +1,7 @@
 defmodule TwitchDiscovery.View.Helpers do
- defmacro __using__(_) do
+  use Timex
+
+  defmacro __using__(_) do
     quote do
       def logged_in?() do
         TwitchDiscovery.Session.logged_in?()
@@ -15,6 +17,11 @@ defmodule TwitchDiscovery.View.Helpers do
         else
           "primary"
         end
+      end
+
+      def format_time(time) do
+        DateFormat.parse!(time, "{ISOz}")
+        |> DateFormat.format!("{ISOdate} {kitchen}")
       end
 
       def selected(option, selected) when is_integer(option) and is_binary(selected) do

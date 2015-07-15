@@ -3,6 +3,9 @@
 defmodule TwitchDiscovery.Index.Base do
   defmacro __using__(_) do
     quote do
+      use Timex
+      require Logger
+
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
       end
@@ -10,7 +13,6 @@ defmodule TwitchDiscovery.Index.Base do
         index
       end
 
-      require Logger
       def get_next(dataset) do
         dataset
         |> process()
@@ -44,25 +46,20 @@ defmodule TwitchDiscovery.Index.Base do
 
       def find(query, opts \\ []) do
         Mongo.find(MongoPool, collection_name(), query, opts)
-        |> Enum.map(fn (result) ->
-          result = db_key(result["id"])
-          |> TwitchDiscovery.Index.redis_get()
-
-          case result do
-            :undefined -> nil
-            result -> result |> Poison.decode!()
-          end
-        end)
+        |> Enum.to_list
+        |> Enum.map(&map_result(&1))
         |> Enum.reject(fn (result) ->
           nil == result
         end)
       end
 
+      def format_query(query, orderby \\ %{}) do
+        %{"$query" => query, "$orderby" => orderby}
+      end
+
       def params_to_query(params) do
-        %{
-          "$query" => parse_params_to_query(params),
-          "$orderby" => sorting(params)
-        }
+        parse_params_to_query(params)
+        |> format_query(sorting(params))
       end
     end
   end

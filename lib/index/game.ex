@@ -45,4 +45,6 @@ defmodule TwitchDiscovery.Index.Game do
   def sorting(params) do
     %{}
   end
+
+  def map_result(result), do: result
 end

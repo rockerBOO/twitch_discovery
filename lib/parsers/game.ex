@@ -26,11 +26,9 @@ defmodule TwitchDiscovery.Parser.Game do
   end
 
   def capture(game) do
-    id      = id(game)
-    meta    = meta(game)
-    metrics = metrics(game)
-    filters = filters(game)
-
-    %{id: id, meta: meta, metrics: metrics, filters: filters}
+    %{id: id(game),
+      meta: meta(game),
+      metrics: metrics(game),
+      filters: filters(game)}
   end
 end

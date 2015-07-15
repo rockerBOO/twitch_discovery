@@ -3,8 +3,12 @@ defmodule TwitchDiscovery.StreamController do
   import ExPrintf
   require Logger
 
-  def index(conn, params) do
-    games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
+  alias   TwitchDiscovery.Index.Stream
+  alias   TwitchDiscovery.Index.Game
+
+  def live_streams(conn, params) do
+    games = Game.format_query(%{}, %{"channel" => 1})
+    |> Game.find(limit: 24)
 
     defaults = %{"limit" => 24}
 
@@ -22,7 +26,9 @@ defmodule TwitchDiscovery.StreamController do
 
     defaults = %{"limit" => 24}
 
-    games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
+    games = Game.format_query(%{}, %{"channels" => 1})
+    |> Game.find(limit: 24)
+
     streams = RestTwitch.Users.streams(token.access_token, Map.merge(defaults, params))
       |> Map.fetch!("streams")
       |> Enum.map(fn (stream) ->
@@ -34,7 +40,8 @@ defmodule TwitchDiscovery.StreamController do
   end
 
   def summary(conn, params) do
-    games = RestTwitch.Games.top(%{"limit" => 20}, %{ttl: 3600})
+    games = Game.format_query(%{}, %{"channel" => 1})
+    |> Game.find(limit: 24)
 
     summary = RestTwitch.Streams.summary(params, %{ttl: 60})
 
@@ -47,39 +54,9 @@ defmodule TwitchDiscovery.StreamController do
   end
 
 
-  def index2(conn, params) do
-    index = TwitchDiscovery.Index.get_current_index()
-    # {:ok, mongo} = Mongo.Connection.start_link(database: "discovery")
-
-    collection = "streams-" <> index
-
-    Logger.debug "Querying: #{collection}"
-
-    query = %{
-      "$query" => TwitchDiscovery.BroadcastController.parse_params_to_query(params),
-      "$orderby" => TwitchDiscovery.BroadcastController.sorting(params)
-    }
-
-    IO.puts Poison.encode!(query)
-    IO.inspect query
-
-    streams = Mongo.find(MongoPool, collection, query, limit: 24)
-    |> Enum.to_list
-    |> Enum.map(fn (result) ->
-      key = TwitchDiscovery.Parser.Stream.db_key(result["id"])
-
-      IO.inspect key
-
-      result = key
-      |> TwitchDiscovery.Index.redis_get()
-
-      case result do
-        :undefined -> IO.inspect "no redis"; nil
-        result -> result |> Poison.decode!()
-      end
-    end)
-
-    # broadcasts = Enum.to_list results
+  def index(conn, params) do
+    streams = Stream.params_to_query(params)
+    |> Stream.find(limit: 24)
 
     render conn, "streams_filtered.html", streams: streams, params: params
   end

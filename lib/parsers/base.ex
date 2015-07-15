@@ -42,8 +42,6 @@ defmodule TwitchDiscovery.Parser.Base do
       end
 
       def mongo_save(data, id) do
-        IO.inspect data
-
         try do
           case Mongo.insert_one(MongoPool, get_processing_index() |> db_key(), data) do
             {:ok, _} -> :ok
