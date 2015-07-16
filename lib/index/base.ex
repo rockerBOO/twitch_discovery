@@ -74,14 +74,14 @@ defmodule TwitchDiscovery.Index.Base do
         try do
           case Mongo.insert_one(MongoPool, Index.get_processing_index() |> db_key(), data) do
             {:ok, _} -> :ok
-            {:error, error} -> Logger.error error
+            {:error, error} -> Logger.error error.message
           end
         rescue
           e in Mongo.Error -> e
         end
       end
 
-      def mongo_save_many([]), do: :ok
+      def mongo_save_many([]), do: []
 
       def mongo_save_many(documents) do
         try do

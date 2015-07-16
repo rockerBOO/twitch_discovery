@@ -14,10 +14,8 @@ defmodule TwitchDiscovery.Index.Game do
   def parse_filters(games) do
     games
     |> Map.fetch!("top")
-    |> Enum.each(fn (game) ->
-      spawn(fn ->
-        Game.process(game)
-      end)
+    |> Enum.map(fn (game) ->
+      Game.process(game)
     end)
   end
 
@@ -38,13 +36,7 @@ defmodule TwitchDiscovery.Index.Game do
     "games-" <> index
   end
 
-  def save(mongo_results, dataset) do
-    dataset
-    |> Map.fetch!("top")
-    |> Enum.each(fn (result) ->
-      redis_save(result, result["_id"])
-    end)
-
+  def save(mongo_results, _dataset) do
     mongo_save_many(mongo_results)
   end
 
