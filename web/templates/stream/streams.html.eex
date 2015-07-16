@@ -30,23 +30,23 @@
 
 
 
-        <%= if @streams == [] do %>
-          <div class="mui-panel">
-          <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
-          </div>
-        <% else %>
-          <div class="mui-panel">
-          <div class="mui-row">
-          <%= for stream <- @streams do %>
-            <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
-          <% end %>
-          </div>
-          </div>
-
-          <div class="mui-panel">
-            <%= render TwitchDiscovery.PageView, "pagination.html", conn: @conn, dataset: @streams %>
-          </div>
+    <%= if @streams == [] do %>
+      <div class="mui-panel">
+      <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
+      </div>
+    <% else %>
+      <div class="mui-panel">
+        <div class="mui-row">
+        <%= for stream <- @streams do %>
+          <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
         <% end %>
+        </div>
+      </div>
+
+      <div class="mui-panel">
+        <%= render TwitchDiscovery.PageView, "pagination.html", conn: @conn, dataset: @streams %>
+      </div>
+    <% end %>
 
 
     </div>
