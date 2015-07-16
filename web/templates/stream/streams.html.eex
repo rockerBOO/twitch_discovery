@@ -27,9 +27,6 @@
         <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button><% end %><!-- <button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button> -->
       </div>
 
-
-
-
     <%= if @streams == [] do %>
       <div class="mui-panel">
       <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
@@ -47,6 +44,4 @@
         <%= render TwitchDiscovery.PageView, "pagination.html", conn: @conn, dataset: @streams %>
       </div>
     <% end %>
-
-
     </div>
