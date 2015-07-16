@@ -37,13 +37,15 @@ defmodule TwitchDiscovery.Index do
   def index do
     Logger.info "Index all live streams"
 
-    Stream.request()
-    |> Stream.get_next()
+    spawn(fn ->
+      Stream.request()
+      |> Stream.get_next()
 
-    index_games()
+      index_games()
 
-    Logger.info "Finished indexing streams"
-    finish()
+      Logger.info "Finished indexing streams"
+      finish()
+    end)
   end
 
   def index_games do

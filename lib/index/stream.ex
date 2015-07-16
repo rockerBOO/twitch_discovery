@@ -159,6 +159,7 @@ defmodule TwitchDiscovery.Index.Stream do
       end
     end
 
+    IO. Poison.encode!(query)
     IO.inspect query
 
     query
