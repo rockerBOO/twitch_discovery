@@ -39,7 +39,7 @@
     </div>
     <div id="footer">
       <div class="mui-container">
-        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a>
+        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a> | <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | <span>Discovery is not affiliated with or sponsored by Twitch</span>
       </div>
     </div>
     <div id="preview" class="preview_off">

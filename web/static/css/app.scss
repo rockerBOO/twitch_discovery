@@ -42,6 +42,14 @@ $mui-btn-default-bg-color: mui-color('black-alpha-87');
 // import MUI SASS
 @import "bower_components/mui/src/sass/mui";
 
+body {
+	// background: url("http://subtlepatterns.com/patterns/dark_geometric.png");
+	// background: url("http://i.imgur.com/PIJWrEi.jpg");
+	// background: url("http://i.imgur.com/oavv3DC.jpg");
+	// background: url("http://i.imgur.com/S5bKt4s.jpg");
+	// background: url("http://i.imgur.com/jGIGWOA.jpg");
+	background: url("http://i.imgur.com/i3OA2PJ.jpg")
+}
 
 .mui-select-menu {
 	background-color: $mui-dropdown-bg-color;
@@ -354,6 +362,11 @@ body {
     width: 0;
     display: none;
   }
+
+  .preview {
+      opacity: 1;
+      visibility: visible;
+  }
 }
 
 /*33/33/33*/
@@ -371,6 +384,11 @@ body {
   #preview_meta {
     width: 0;
     display: none;
+  }
+
+  .preview {
+      opacity: 1;
+      visibility: visible;
   }
 }
 

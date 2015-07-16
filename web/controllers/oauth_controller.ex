@@ -44,6 +44,6 @@ defmodule TwitchDiscovery.OAuthController do
     conn
       |> put_session(:current_user, user)
       |> put_session(:access_token, token)
-      |> redirect(to: "/?auth=ok")
+      |> redirect(to: "/auth/confirmation")
   end
 end
