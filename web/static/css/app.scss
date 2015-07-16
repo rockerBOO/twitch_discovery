@@ -53,6 +53,7 @@ body {
 
 .mui-select-menu {
 	background-color: $mui-dropdown-bg-color;
+	top: 0 !important;
 
 	> div {
 	    &:hover {
