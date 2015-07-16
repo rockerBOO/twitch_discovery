@@ -1,0 +1,17 @@
+  <div class="mui-container">
+    <div class="mui-panel">
+      <h1>Welcome Back :D</h1>
+      <div>
+        <h2>We got you all setup! Oh ... its going to be sweeeeeeet!</h2>
+        <script type="text/javascript">
+        setTimeout('redirectTo()', 3000);
+
+        function redirectTo() {
+          window.location = "/"
+        }
+        </script>
+
+        <h3><a href="/">Redirecting...</a></h3>
+      </div>
+    </div>
+  </div>
