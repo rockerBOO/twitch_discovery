@@ -1,6 +1,7 @@
 defmodule TwitchDiscovery.Index.Broadcast do
   use TwitchDiscovery.Index.Base
   alias TwitchDiscovery.Index.Stream
+  alias TwitchDiscovery.Index
 
 
   def db_key(index) do
@@ -11,8 +12,12 @@ defmodule TwitchDiscovery.Index.Broadcast do
     "broadcasts-" <> Index.get_current_index()
   end
 
-  def process(dataset) do
-
+  def parse_filters(dataset) do
+    dataset
+    |> Map.fetch!("streams")
+    |> Enum.map(fn (stream) ->
+      Stream.process(stream)
+    end)
   end
 
   def data_length(dataset) do
@@ -36,6 +41,15 @@ defmodule TwitchDiscovery.Index.Broadcast do
     Stream.parse_params_to_query(params)
   end
 
+  def save(mongo_results, dataset) do
+    dataset
+    |> Map.fetch!("streams")
+    |> Enum.each(fn (result) ->
+      redis_save(result, result["_id"])
+    end)
+
+    mongo_save_many(mongo_results)
+  end
 
   def sorting(params) do
     Stream.sorting(params)

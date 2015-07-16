@@ -5,6 +5,7 @@ defmodule TwitchDiscovery.Index.Base do
     quote do
       use Timex
       require Logger
+      alias TwitchDiscovery.Index
 
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
@@ -15,7 +16,8 @@ defmodule TwitchDiscovery.Index.Base do
 
       def get_next(dataset) do
         dataset
-        |> process()
+        |> parse_filters()
+        |> save(dataset)
 
         if more?(dataset) do
           Logger.debug "MORE " <> dataset["_links"]["next"]
@@ -60,6 +62,33 @@ defmodule TwitchDiscovery.Index.Base do
       def params_to_query(params) do
         parse_params_to_query(params)
         |> format_query(sorting(params))
+      end
+
+      def redis_save(data, id) do
+        :redis_client
+        |> Process.whereis()
+        |> Exredis.query(["SETEX", db_key(id), 3600, Poison.encode!(data)])
+      end
+
+      def mongo_save(data, id) do
+        try do
+          case Mongo.insert_one(MongoPool, Index.get_processing_index() |> db_key(), data) do
+            {:ok, _} -> :ok
+            {:error, error} -> Logger.error error.message
+          end
+        rescue
+          e in Mongo.Error -> e
+        end
+      end
+
+      def mongo_save_many([]), do: []
+
+      def mongo_save_many(documents) do
+        try do
+          Mongo.insert_many(MongoPool, Index.get_processing_index() |> db_key(), documents, [ordered: false])
+        rescue
+          e in Mongo.Error -> Logger.error e.message
+        end
       end
     end
   end

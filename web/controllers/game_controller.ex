@@ -24,8 +24,6 @@ defmodule TwitchDiscovery.GameController do
   def autocomplete(conn, params) do
     suggestions = find_games(params["query"])
     |> Enum.filter(fn(game) ->
-      IO.puts "Name: #{game["game"]["name"]} Query: #{params["query"]}"
-
       game["game"]["name"] =~ params["query"]
     end)
     |> Enum.map(fn (match) ->

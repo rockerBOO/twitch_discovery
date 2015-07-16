@@ -11,13 +11,11 @@ defmodule TwitchDiscovery.Index.Game do
     "games-" <> Index.get_current_index()
   end
 
-  def process(games) do
+  def parse_filters(games) do
     games
     |> Map.fetch!("top")
-    |> Enum.each(fn (game) ->
-      spawn(fn ->
-        Game.process(game)
-      end)
+    |> Enum.map(fn (game) ->
+      Game.process(game)
     end)
   end
 
@@ -36,6 +34,10 @@ defmodule TwitchDiscovery.Index.Game do
 
   def collection_name(index) do
     "games-" <> index
+  end
+
+  def save(mongo_results, _dataset) do
+    mongo_save_many(mongo_results)
   end
 
   def parse_params_to_query(_params) do

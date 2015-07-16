@@ -11,14 +11,11 @@ defmodule TwitchDiscovery.Index.Stream do
     "streams-" <> Index.get_current_index()
   end
 
-  def process(dataset) do
+  def parse_filters(dataset) do
     dataset
     |> Map.fetch!("streams")
-    |> Enum.each(fn (stream) ->
-      spawn(fn ->
-        Stream.process(stream)
-        Broadcast.process(stream)
-      end)
+    |> Enum.map(fn (stream) ->
+      Stream.process(stream)
     end)
   end
 
@@ -37,6 +34,16 @@ defmodule TwitchDiscovery.Index.Stream do
 
   def collection_name(index) do
     "streams-" <> index
+  end
+
+  def save(mongo_results, dataset) do
+    dataset
+    |> Map.fetch!("streams")
+    |> Enum.each(fn (result) ->
+      redis_save(result, result["_id"])
+    end)
+
+    mongo_save_many(mongo_results)
   end
 
   def parse_params_to_query(params) do
@@ -159,6 +166,7 @@ defmodule TwitchDiscovery.Index.Stream do
       end
     end
 
+    IO.puts Poison.encode!(query)
     IO.inspect query
 
     query
