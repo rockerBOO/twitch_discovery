@@ -24,6 +24,10 @@ defmodule TwitchDiscovery.OAuthController do
     save(conn, token)
   end
 
+  def confirmation(conn, _params) do
+    render conn, "authentication_confirmation.html"
+  end
+
   def error(conn, error, message) do
     IO.puts "#{error} !!! #{message}"
 
