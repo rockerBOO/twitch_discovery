@@ -27,6 +27,8 @@ defmodule TwitchDiscovery.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
+    get "/privacy", PageController, :privacy
+    get "/terms", PageController, :terms
 
     get "/broadcasts", BroadcastController, :index
 

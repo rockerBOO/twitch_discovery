@@ -1,0 +1,14 @@
+  <div class="mui-container">
+    <div class="mui-panel">
+      <h1>Privacy Policy</h1>
+      <div>
+        <p>We are deeply concerned with your data and take appropriate steps to anonomoize any private information before it is stored.</p>
+
+        <p>We store Twitch information up to 24 hours to process for relvant information.</p>
+
+        <p>Visitors to the site may have request information logged, and may be tracked internally. This information is done in a without storing any identifiable user information.</p>
+
+        <p>This is just a guideline and is subject to change in the future.</p>
+      </div>
+    </div>
+  </div>

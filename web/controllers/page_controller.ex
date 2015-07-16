@@ -10,6 +10,14 @@ defmodule TwitchDiscovery.PageController do
     render conn, "about.html"
   end
 
+  def privacy(conn, _params) do
+    render conn, "privacy_policy.html"
+  end
+
+  def terms(conn, _params) do
+    render conn, "terms_of_use.html"
+  end
+
   def auth(conn, _params) do
     Twitch.authorize_url!
   end

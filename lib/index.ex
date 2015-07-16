@@ -66,6 +66,7 @@ defmodule TwitchDiscovery.Index do
     set_index(processing_index)
 
     Mongo.delete_many(MongoPool, Stream.collection_name(current_index), %{})
+    Mongo.delete_many(MongoPool, Game.collection_name(current_index), %{})
   end
 
 
