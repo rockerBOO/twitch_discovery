@@ -65,15 +65,15 @@ defmodule TwitchDiscovery.Index.StreamTest do
   end
 
   test "parse started at to timestamp" do
-    assert Stream.parse_started_at_to_timestamp("m5") == %{mins: 5}
+    assert Stream.parse_started_at_to_offset("m5") == {:mins, 5}
 
-    assert Stream.parse_started_at_to_timestamp("h5") == %{hours: 5}
+    assert Stream.parse_started_at_to_offset("h5") == {:hours, 5}
 
-    assert Stream.parse_started_at_to_timestamp("h24") == %{hours: 24}
+    assert Stream.parse_started_at_to_offset("h24") == {:hours, 24}
 
-    assert Stream.parse_started_at_to_timestamp("m32") == %{mins: 32}
+    assert Stream.parse_started_at_to_offset("m32") == {:mins, 32}
 
-    assert Stream.parse_started_at_to_timestamp("Just now!") == %{mins: 5}
+    assert Stream.parse_started_at_to_offset("Just now!") == {:mins, 5}
   end
 
   test "sorting" do
