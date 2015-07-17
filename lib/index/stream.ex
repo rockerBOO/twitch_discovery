@@ -11,16 +11,47 @@ defmodule TwitchDiscovery.Index.Stream do
     "streams-" <> Index.get_current_index()
   end
 
+  def process(%{"streams" => []}), do: finish_indexing()
+  def process(resultset) when is_map(resultset) do
+    resultset
+    |> Map.fetch!("streams")
+    |> save_to_redis()
+
+    resultset
+    |> Map.fetch!("streams")
+    |> parse_filters()
+    |> save_to_mongo()
+
+    spawn(fn ->
+      request(resultset["_links"]["next"])
+      |> process()
+    end)
+  end
+
+  def finish_indexing() do
+    current_index = Index.get_current_index()
+
+    # Streams take the longest, so let them finish it
+    Index.finish()
+
+    Logger.info "Finished indexing streams"
+
+    Mongo.delete_many(
+      MongoPool,
+      current_index |> collection_name(),
+      %{}
+    )
+  end
+
   def parse_filters(dataset) do
     dataset
-    |> Map.fetch!("streams")
     |> Enum.map(fn (stream) ->
       Stream.process(stream)
     end)
   end
 
-  def data_length(dataset) do
-    length(dataset["streams"])
+  def data_length(resultset) do
+    length(resultset["streams"])
   end
 
   def initial_url do
@@ -36,41 +67,97 @@ defmodule TwitchDiscovery.Index.Stream do
     "streams-" <> index
   end
 
-  def save(mongo_results, dataset) do
-    dataset
-    |> Map.fetch!("streams")
-    |> Enum.each(fn (result) ->
-      redis_save(result, result["_id"])
-    end)
-
-    mongo_save_many(mongo_results)
-  end
-
-  def parse_params_to_query(params) do
-    mature = case params["mature"] do
+  def parse_mature(mature) do
+    case mature do
       "yes" -> true
       "no"  -> false
       "all" -> nil
       _     -> nil
     end
+  end
 
-    fps = case params["fps"] do
-      "30"  -> [28, 30]
-      "60"  -> [58, 60]
-      "All" -> []
+  def parse_fps("30"), do: [28, 30]
+  def parse_fps("60"), do: [58, 60]
+  def parse_fps("All"), do: []
+  def parse_fps(fps) do
+    case fps do
+      fps when is_integer(fps) ->
+               [fps-2, fps]
+
+      fps when is_bitstring(fps) ->
+        case Integer.parse(fps) do
+          {int, _} -> [int-2, int]
+          :error -> []
+        end
       _     -> []
     end
+  end
+
+  def parse_viewers(nil), do: nil
+  def parse_viewers("Any"), do: nil
+  def parse_viewers(viewers) do
+    case viewers do
+      x when x > 0 and is_bitstring(x) ->
+        {int, _} = Integer.parse(x)
+        int
+      x when x > 0 -> x
+      _            -> 0
+    end
+  end
+
+  def parse_game(""), do: nil
+  def parse_game(nil), do: nil
+  def parse_game(game) do
+    game
+  end
+
+  def parse_started_at_to_offset(<<"m", min::binary>>) do
+    {:mins, string_to_integer(min)}
+  end
+
+  def parse_started_at_to_offset(<<"h", hours::binary>>) do
+    {:hours, string_to_integer(hours)}
+  end
+
+  def parse_started_at_to_offset("Just now!"), do: {:mins, 5}
+  def parse_started_at_to_offset(_), do: nil
+
+  def parse_started_at(uptime) do
+    datetime = case parse_started_at_to_offset(uptime) do
+      {:mins, mins} -> Date.now |> Date.subtract(Time.to_timestamp(mins, :mins))
+      {:hours, hours} -> Date.now |> Date.subtract(Time.to_timestamp(hours, :hours))
+      nil -> nil
+    end
+
+    if datetime == nil do
+      nil
+    else
+      {:ok, min_uptime} = DateFormat.format(datetime, "{s-epoch}")
+      {min_uptime, _} = Integer.parse(min_uptime)
+
+      min_uptime
+    end
+  end
+
+  def string_to_integer(string) do
+    case Integer.parse(string) do
+      {int, _} -> int
+      :error -> nil
+    end
+  end
+
+  def parse_params_to_query(params) do
+    mature     = params["mature"]     |> parse_mature()
+    fps        = params["fps"]        |> parse_fps()
+    viewers    = params["viewers"]    |> parse_viewers()
+    game       = params["game"]       |> parse_game()
+    started_at = params["started_at"] |> parse_started_at()
 
     query = %{}
-
-    IO.puts "mature"
-    IO.inspect mature
 
     if mature == true or mature == false do
       query = Map.put(query, "mature", mature)
     end
-
-    IO.inspect query
 
     if fps != [] do
       fps_query = case fps do
@@ -80,94 +167,22 @@ defmodule TwitchDiscovery.Index.Stream do
       query = Map.put(query, "fps", fps_query)
     end
 
-    IO.inspect query
-
-    if params["game"] != "" and params["game"] != nil do
+    if game != nil do
       query = Map.put(query, "game", params["game"])
     end
 
-    IO.inspect query
-
-    case params["viewers"] do
-      nil -> 0
-      x when x > 0 ->
-        viewers = case Integer.parse(x) do
-          {viewers, _} -> viewers
-          :error -> nil
-        end
-
-        if viewers != nil do
-          query = Map.put(query, "viewers", %{"$lt" => viewers})
-        end
-      _ -> :ok
+    if viewers != nil do
+      query = Map.put(query, "viewers", %{"$lt" => viewers})
     end
 
-    if params["uptime"] do
-      date_now = Date.now
-
-      timestamp = case params["uptime"] do
-        <<"m", min::binary>> ->
-          {mins, _} = Integer.parse(min)
-          %{mins: mins}
-        <<"h", hour::binary>> ->
-          {hours, _} = Integer.parse(hour)
-          %{hours: hours}
-        "Just now!" -> date_now |> Date.shift(mins: 5)
-        _ -> %{}
-      end
-
-      datetime = case timestamp do
-        %{mins: mins} -> date_now |> Date.subtract(Time.to_timestamp(mins, :mins))
-        %{hours: hours} -> date_now |> Date.subtract(Time.to_timestamp(hours, :hours))
-        %{} -> nil
-      end
-
-      if datetime do
-        # GET THE SECONDS OUT
-        {:ok, min_uptime} = DateFormat.format(datetime, "{s-epoch}")
-        {min_uptime, _} = Integer.parse(min_uptime)
-
-        query = case min_uptime do
-          0 -> query
-          uptime -> Map.put(query, "started_at", %{"$lt" => uptime})
-        end
-      end
-    end
-
-    if params["started_at"] do
-      date_now = Date.now
-
-      timestamp = case params["started_at"] do
-        <<"m", min::binary>> ->
-          {mins, _} = Integer.parse(min)
-          %{mins: mins}
-        <<"h", hour::binary>> ->
-          {hours, _} = Integer.parse(hour)
-          %{hours: hours}
-        "Just now!" -> date_now |> Date.shift(mins: 5)
-        _ -> %{}
-      end
-
-      datetime = case timestamp do
-        %{mins: mins} -> date_now |> Date.subtract(Time.to_timestamp(mins, :mins))
-        %{hours: hours} -> date_now |> Date.subtract(Time.to_timestamp(hours, :hours))
-        %{} -> nil
-      end
-
-      if datetime do
-        # GET THE SECONDS OUT
-        {:ok, min_uptime} = DateFormat.format(datetime, "{s-epoch}")
-        {min_uptime, _} = Integer.parse(min_uptime)
-
-        query = case min_uptime do
-          0 -> query
-          uptime -> Map.put(query, "started_at", %{"$lt" => uptime})
-        end
+    if started_at != nil do
+      query = case started_at do
+        0 -> query
+        started_at -> Map.put(query, "started_at", %{"$lt" => started_at})
       end
     end
 
     IO.puts Poison.encode!(query)
-    IO.inspect query
 
     query
   end
@@ -175,19 +190,9 @@ defmodule TwitchDiscovery.Index.Stream do
   def sorting(params) do
     case params do
       %{"started_at" => "All"} -> %{"viewers" => -1}
-      %{"uptime" => _} -> %{"started_at" => -1}
-      %{"started_at" => _} -> %{"started_at" => -1}
-      _ -> %{"viewers" => -1}
-    end
-  end
-
-  def map_result(result) do
-    result = db_key(result["id"])
-    |> TwitchDiscovery.Index.redis_get()
-
-    case result do
-      :undefined -> nil
-      result -> result |> Poison.decode!()
+      %{"uptime" => _}         -> %{"started_at" => -1}
+      %{"started_at" => _}     -> %{"started_at" => -1}
+      _                        -> %{"viewers" => -1}
     end
   end
 end

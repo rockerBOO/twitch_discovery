@@ -5,7 +5,7 @@
           <div class="filter_block">
             <div class="name">Game</div>
             <div class="mui-form-group input-field broadcast-game-search">
-                <input type="text" placeholder="Programming" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>">
+                <input type="text" placeholder="Minecraft" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>">
             </div>
           </div>
 

@@ -5,6 +5,7 @@ defmodule TwitchDiscovery.StreamController do
 
   alias   TwitchDiscovery.Index.Stream
   alias   TwitchDiscovery.Index.Game
+  alias   TwitchDiscovery.Index
 
   def live_streams(conn, params) do
     games = Game.format_query(%{}, %{"channel" => 1})
@@ -55,6 +56,8 @@ defmodule TwitchDiscovery.StreamController do
 
 
   def index(conn, params) do
+    IO.puts "Current Index: #{Index.get_current_index()}"
+
     streams = Stream.params_to_query(params)
     |> Stream.find(limit: 24)
 
