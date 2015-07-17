@@ -37,22 +37,21 @@ defmodule TwitchDiscovery.Index do
   def index do
     Logger.info "Index all live streams"
 
-    Stream.request()
-    |> Stream.get_next()
+    spawn(fn ->
+      Stream.request()
+      |> Stream.process()
+    end)
 
     index_games()
-
-    Logger.info "Finished indexing streams"
-    finish()
   end
 
   def index_games do
-    Logger.info "Index all live streams"
+    Logger.info "Index all games"
 
-    Game.request()
-    |> Game.get_next()
-
-    Logger.info "Finished indexing streams"
+    spawn(fn ->
+      Game.request()
+      |> Game.process()
+    end)
   end
 
   def finish do
@@ -64,10 +63,5 @@ defmodule TwitchDiscovery.Index do
     processing_index = get_processing_index()
 
     set_index(processing_index)
-
-    Mongo.delete_many(MongoPool, Stream.collection_name(current_index), %{})
-    Mongo.delete_many(MongoPool, Game.collection_name(current_index), %{})
   end
-
-
 end

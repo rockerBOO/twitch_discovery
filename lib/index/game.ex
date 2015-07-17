@@ -11,9 +11,29 @@ defmodule TwitchDiscovery.Index.Game do
     "games-" <> Index.get_current_index()
   end
 
+  def process(%{"top" => []}), do: finish_indexing()
+  def process(resultset) when is_map(resultset) do
+    resultset
+    |> Map.fetch!("top")
+    |> parse_filters()
+    |> save_to_mongo()
+
+    request(resultset["_links"]["next"])
+    |> process()
+  end
+
+  def finish_indexing() do
+    Logger.info "Finished indexing games"
+
+    Mongo.delete_many(
+      MongoPool,
+      Index.get_current_index() |> collection_name(),
+      %{}
+    )
+  end
+
   def parse_filters(games) do
     games
-    |> Map.fetch!("top")
     |> Enum.map(fn (game) ->
       Game.process(game)
     end)
@@ -36,8 +56,8 @@ defmodule TwitchDiscovery.Index.Game do
     "games-" <> index
   end
 
-  def save(mongo_results, _dataset) do
-    mongo_save_many(mongo_results)
+  def redis_save_many(results) do
+
   end
 
   def parse_params_to_query(_params) do
