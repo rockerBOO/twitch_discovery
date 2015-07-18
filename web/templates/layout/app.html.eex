@@ -5,20 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- load MUI -->
-    <!-- <link href="//cdn.muicss.com/mui-0.1.14/css/mui.min.css" rel="stylesheet" type="text/css" /> -->
-    <script src="//cdn.muicss.com/mui-0.1.14/js/mui.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link rel="icon" type="image/png" href="<%= static_path(@conn, "/images/favicon.png") %>" />
+    <style type="text/css">
+    body {
+      background-color: #111;
+    }
+    </style>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
   </head>
   <body>
     <div class="app-bar mui-appbar">
       <div class="mui-container">
         <!-- <i class="fa fa-bars"></i> -->
-       <a href="/"><img src="http://elirc.rockerboo.net/assets/images/discovery.svg" style="width: 225px" /></a>
+       <a href="/"><img src="<%= static_path(@conn, "/images/discovery.svg") %>" style="width: 225px" /></a>
       </div>
     </div>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
@@ -29,9 +29,9 @@
           <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>
           <button class="mui-btn mui-btn-<%= "about" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/about';">About</button>
           <%= if logged_in?(@conn) == false do %>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="/images/twitch.svg" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
           <% else %>
-          <button class="mui-btn mui-btn-primary"><img src="/images/twitch.svg" style="border: 0; width: 18px; margin-top: -1px;"> <%= current_user(@conn) |> Map.fetch!("display_name") %></button>
+          <button class="mui-btn mui-btn-primary"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> <%= current_user(@conn) |> Map.fetch!("display_name") %></button>
           <% end %>
       </div>
     <div class="inner">
@@ -45,7 +45,7 @@
     <div id="preview" class="preview_off">
       <div id="preview_bar">
         <h2 id="preview_title"></h2>
-        <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="clearPreview();">Close</button></div>
+        <div id="preview_close"><button class="mui-btn mui-btn-default" onclick="Player.clearPreview();">Close</button></div>
       </div>
       <div style="clear:both;"><span></span></div>
       <div id="preview_media">
@@ -59,45 +59,48 @@
         </div>
       </div>
     </div>
-    <script src="<%= static_path(@conn, "/js/functions.js") %>"></script>
- <script src="<%= static_path(@conn, "/js/autocomplete.js") %>"></script>
-      <script type="text/javascript">
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script type="text/javascript">
+    var PlayerClass = require('web/static/js/functions')
+    var Player = new PlayerClass();
 
-      window.onload = function () {
-        $("a.preview").click(function(event) {
-            event.preventDefault()
+    console.log(Player)
 
-            channel       = event.currentTarget.getAttribute("data-channel")
-            title         = event.currentTarget.getAttribute("data-title")
-            display_name  = event.currentTarget.getAttribute("data-display-name")
+    window.onload = function () {
+      $("a.preview").click(function(event) {
+        event.preventDefault()
 
-            console.log(event)
-            console.log(channel)
+        channel       = event.currentTarget.getAttribute("data-channel")
+        title         = event.currentTarget.getAttribute("data-title")
+        display_name  = event.currentTarget.getAttribute("data-display-name")
 
-            clearPreview()
+        console.log(event)
+        console.log(channel)
 
-            twitchPlayer(channel)
-            twitchChat(channel)
-            twitchMeta({channel: channel, title: title, display_name: display_name})
+        Player.clearPreview()
 
-            document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
-        });
+        Player.twitchPlayer(channel)
+        Player.twitchChat(channel)
+        Player.twitchMeta({channel: channel, title: title, display_name: display_name})
 
-        $("#search-fps-toggle").click(function (event) {
-            $("#search-fps-options").toggleClass("hide-options")
-        })
+        document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
+      });
 
-        $("#search-mature-toggle").click(function (event) {
-            $("#search-mature-options").toggleClass("hide-options")
-        })
+      $("#search-fps-toggle").click(function (event) {
+        $("#search-fps-options").toggleClass("hide-options")
+      })
 
-        $('#games-search-input').autocomplete({
-          serviceUrl: '/games/autocomplete',
-          width: 'rekt',
-          onSelect: function () { $("#filter_form").submit() }
-        });
-      }
+      $("#search-mature-toggle").click(function (event) {
+        $("#search-mature-options").toggleClass("hide-options")
+      })
 
+      $('#games-search-input').autocomplete({
+        serviceUrl: '/games/autocomplete',
+        width: 'rekt',
+        onSelect: function () { $("#filter_form").submit() }
+      });
+    }
     </script>
   </body>
 </html>

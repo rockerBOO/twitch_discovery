@@ -6,6 +6,27 @@ defmodule TwitchDiscovery.Index.StreamTest do
 
   end
 
+  test "fail to get results from twitch, continue" do
+    json = """
+    {"streams":[],"_total":18357,"_links":{"self":"https://api.twitch.tv/kraken/streams?limit=1&offset=7900","next":"https://api.twitch.tv/kraken/streams?limit=1&offset=7901","prev":"https://api.twitch.tv/kraken/streams?limit=1&offset=7899","featured":"https://api.twitch.tv/kraken/streams/featured","summary":"https://api.twitch.tv/kraken/streams/summary","followed":"https://api.twitch.tv/kraken/streams/followed"}}
+    """
+    assert false == Poison.decode!(json)
+    |> Stream.is_last?()
+
+    json = """
+    {"streams":[],"_total":7902,"_links":{"self":"https://api.twitch.tv/kraken/streams?limit=1&offset=7900","next":"https://api.twitch.tv/kraken/streams?limit=1&offset=7901","prev":"https://api.twitch.tv/kraken/streams?limit=1&offset=7899","featured":"https://api.twitch.tv/kraken/streams/featured","summary":"https://api.twitch.tv/kraken/streams/summary","followed":"https://api.twitch.tv/kraken/streams/followed"}}
+    """
+
+    assert false == Poison.decode!(json)
+    |> Stream.is_last?()
+
+    json = """
+    {"streams":[],"_total":7850,"_links":{"self":"https://api.twitch.tv/kraken/streams?limit=1&offset=7900","next":"https://api.twitch.tv/kraken/streams?limit=1&offset=7901","prev":"https://api.twitch.tv/kraken/streams?limit=1&offset=7899","featured":"https://api.twitch.tv/kraken/streams/featured","summary":"https://api.twitch.tv/kraken/streams/summary","followed":"https://api.twitch.tv/kraken/streams/followed"}}
+    """
+
+    assert true == Poison.decode!(json)
+    |> Stream.is_last?()
+  end
 
   test "parse_mature" do
     assert Stream.parse_mature("yes") == true

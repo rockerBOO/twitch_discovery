@@ -65,7 +65,17 @@ defmodule TwitchDiscovery.Index.Base do
         |> format_query(sorting(params))
       end
 
+      def is_last?(resultset) do
+        total = resultset["_total"]
 
+        [{"limit", limit}, {"offset", offset}] =
+          URI.parse(resultset["_links"]["self"])
+          |> Map.fetch!(:query)
+          |> URI.query_decoder
+          |> Enum.to_list
+
+        String.to_integer(offset) + String.to_integer(limit) > total
+      end
 
       def redis_save_one(data, id) do
         :redis_client
