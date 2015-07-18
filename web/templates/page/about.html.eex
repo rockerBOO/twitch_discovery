@@ -1,8 +1,21 @@
   <div class="mui-container">
     <div class="mui-panel">
       <h1>About</h1>
-      <div class="mui-divider"></div>
-      <p>gunnaren: where's the about page?</p>
+      <p>Discovery is a tool find new streams on Twitch.
+
+      <p>The tool was made after hearing time after time about having a hard time finding people to streams and people wanting to find new and interesting streamers. If you are a game category that has a lot of streamers running, it can be hard to grow.
+
+      <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Some REALLY good discussion and suggestions regarding <a href="https://twitter.com/Twitch">@Twitch</a> Discovery in the <a href="https://twitter.com/hashtag/JackassPodcast?src=hash">#JackassPodcast</a> right now&#10;&#10;<a href="http://t.co/lzbfAj6O0t">http://t.co/lzbfAj6O0t</a></p>&mdash; Jacklifear (@Jacklifear) <a href="https://twitter.com/Jacklifear/status/615048100244287488">June 28, 2015</a></blockquote>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <p>
+        Goals:
+        <ul>
+          <li>Make each stream in equal footing</li>
+          <li>Finding newer, rising streams or streamers on Twitch.</li>
+          <li>Developing streamer-based discovery networks</li>
+        </ul>
+      </p>
 
       <p><a href="https://github.com/rockerBOO/twitch_discovery">Github</a>
       </p>

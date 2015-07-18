@@ -11,7 +11,19 @@ defmodule TwitchDiscovery.Index.Stream do
     "streams-" <> Index.get_current_index()
   end
 
-  def process(%{"streams" => []}), do: finish_indexing()
+  # Handling finished results and errors due to empty results
+  def process(%{"streams" => []} = resultset) do
+    if is_last?(resultset) do
+      finish_indexing()
+    else
+      Logger.info "Processing failed to get results, and not at the end."
+      spawn(fn ->
+        request(resultset["_links"]["next"])
+        |> process()
+      end)
+    end
+  end
+
   def process(resultset) when is_map(resultset) do
     resultset
     |> Map.fetch!("streams")

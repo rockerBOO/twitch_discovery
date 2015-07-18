@@ -11,80 +11,80 @@
 
 
 // customize MUI variables
-$mui-primary-color:       mui-color('deep-purple', '500');
-$mui-primary-color-dark:  mui-color('deep-purple', '700');
-$mui-primary-color-light: mui-color('deep-purple', '100');
+$mui-primary-color:                     mui-color('deep-purple', '500');
+$mui-primary-color-dark:                mui-color('deep-purple', '700');
+$mui-primary-color-light:               mui-color('deep-purple', '100');
 
-$mui-accent-color:        mui-color('indigo', '500');
-$mui-accent-color-dark:   mui-color('indigo', '700');
-$mui-accent-color-light:  mui-color('indigo', '100');
+$mui-accent-color:                      mui-color('indigo', '500');
+$mui-accent-color-dark:                 mui-color('indigo', '700');
+$mui-accent-color-light:                mui-color('indigo', '100');
 
-$mui-hr-color:            mui-color('white-alpha-12');
-$mui-divider-color:       mui-color('white-alpha-12');
+$mui-hr-color:                          mui-color('white-alpha-12');
+$mui-divider-color:                     mui-color('white-alpha-12');
 
-$mui-body-bg-color:       mui-color('black-alpha-87');
+$mui-body-bg-color:                     mui-color('black-alpha-87');
 
-$mui-base-font-family:    Roboto, Helvetica, Calibri, Arial, sans;
-$mui-base-font-color:     mui-color('grey', '400');
-$mui-base-font-size:      16px;
+$mui-base-font-family:                  Roboto, Helvetica, Calibri, Arial, sans;
+$mui-base-font-color:                   mui-color('grey', '400');
+$mui-base-font-size:                    16px;
 
-$mui-panel-bg-color:      mui-color('black-alpha-87');
+$mui-panel-bg-color:                    mui-color('black-alpha-87');
 
-$mui-input-placeholder-color: mui-color('white-alpha-12');
+$mui-input-placeholder-color:           mui-color('white-alpha-12');
 
-$mui-dropdown-bg-color:   mui-color('black-alpha-87');
-$mui-dropdown-link-font-color-disabled:     mui-color('grey', '200');
-$mui-dropdown-link-bg-color-hover:  mui-color('deep-purple', 'A700');
+$mui-dropdown-bg-color:                 mui-color('black-alpha-87');
+$mui-dropdown-link-font-color-disabled: mui-color('grey', '200');
+$mui-dropdown-link-bg-color-hover:      mui-color('deep-purple', 'A700');
 $mui-dropdown-link-bg-color-active:     mui-color('deep-purple', 'A700');
 
-$mui-btn-default-bg-color: mui-color('black-alpha-87');
+$mui-btn-default-bg-color:              mui-color('black-alpha-87');
 
 // import MUI SASS
 @import "bower_components/mui/src/sass/mui";
 
 body {
-	// background: url("http://subtlepatterns.com/patterns/dark_geometric.png");
-	// background: url("http://i.imgur.com/PIJWrEi.jpg");
-	// background: url("http://i.imgur.com/oavv3DC.jpg");
-	// background: url("http://i.imgur.com/S5bKt4s.jpg");
-	// background: url("http://i.imgur.com/jGIGWOA.jpg");
-	background: url("http://i.imgur.com/i3OA2PJ.jpg")
+  // background: url("http://subtlepatterns.com/patterns/dark_geometric.png");
+  // background: url("http://i.imgur.com/PIJWrEi.jpg");
+  // background: url("http://i.imgur.com/oavv3DC.jpg");
+  // background: url("http://i.imgur.com/S5bKt4s.jpg");
+  // background: url("http://i.imgur.com/jGIGWOA.jpg");
+  background: url("http://i.imgur.com/i3OA2PJ.jpg")
 }
 
 .mui-select-menu {
-	background-color: $mui-dropdown-bg-color;
-	top: 0 !important;
+  background-color: $mui-dropdown-bg-color;
+  top: 0 !important;
 
-	> div {
-	    &:hover {
-	      background-color: $mui-dropdown-link-bg-color-hover;
-	    }
+  > div {
+    &:hover {
+      background-color: $mui-dropdown-link-bg-color-hover;
+    }
 
-	    &[selected] {
-	      background-color: $mui-dropdown-link-bg-color-active;
-	    }
-	}
+    &[selected] {
+      background-color: $mui-dropdown-link-bg-color-active;
+    }
+  }
 }
 
 #games-search {
-    float: left;
+  float: left;
 }
 
 // Hackalis (Blasted Jesus Edition)
 .games-search-input {
-    width: 0;
-    opacity: 0;
-    transition: all .4s;
+  width: 0;
+  opacity: 0;
+  transition: all .4s;
 }
 
 #games-search > form > div {
-    padding-top: 9px;
+  padding-top: 9px;
 }
 
 .games-search-input.games-search-on   {
-    width: 250px;
-    opacity: 1;
-    margin-left: 10px;
+  width: 250px;
+  opacity: 1;
+  margin-left: 10px;
 }
 
 
@@ -94,35 +94,31 @@ body {
 
 .stream-image:hover .preview,
 .broadcast-image:hover .preview {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 
 .preview {
-    /* Move the preview to the left corner */
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  /* Move the preview to the left corner */
+  position: absolute;
+  bottom: 0;
+  right: 0;
 
-    /* Styling */
-    padding: 9px;
-    cursor: pointer;
-    background-color: $mui-panel-bg-color;
+  /* Styling */
+  padding: 9px;
+  cursor: pointer;
+  background-color: $mui-panel-bg-color;
 
-    /* Animation */
-    visibility: none;
-    opacity: 0;
-    transition: opacity .4s, visibilty .4s;
+  /* Animation */
+  visibility: none;
+  opacity: 0;
+  transition: opacity .4s, visibilty .4s;
 }
 
 
 
-#preview_bar {
-  height: 50px;
-  max-height: 50px;
-  background-color: $mui-primary-color;
-}
+
 
 .mui-panel {
   background-color: #111;
@@ -141,20 +137,8 @@ body {
   margin-top: 0;
 }
 
-
-
 #footer {
   margin-bottom: 300px;
-}
-
-#preview_video_meta {
-  float: left;
-  display: block;
-}
-
-#preview_video_meta .views, #preview_video_meta .length  {
-  font-size: 18px;
-  padding-right: 10px;
 }
 
 .stream-block h4 a,
@@ -210,241 +194,41 @@ body {
   }
 }
 
-#preview {
-  /*height: calc(21vw/21vh*150);*/
-  height: 30vh;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 50px;
-  width: 100%;
-  background: #000;
-  color: #fff;
-}
-
-.preview_off {
-
- display: none;
-}
-
-#preview_media {
-  background: #000;
-    height: 100%;
-}
-
-#preview_video {
-  float: left;
-  width: 33.33%;
-  min-width: 33.33%;
-  display: block;
-  height: 100%;
-}
-
-#preview_chat {
-  float: left;
-  width: 33.33%;
-  height: 100%;
-  display: block;
-}
-
-#preview_chat iframe, #preview_video iframe, #preview_chat img, #preview_video img  {
-  width: 100%;
-}
-
-#preview_chat iframe, #preview_chat img, #preview_video iframe {
-  height: 100%;
-}
-
-#preview_meta {
-  float: left;
-  /*width: 33.33vw;*/
-  height: 100%;
-  width: 0;
-  padding: 10px;
-}
-
-#preview_meta h3 {
-  margin: 0;
-  margin-top: 9px;
-  line-height: 1.6;
-}
-
-#preview_title {
-  float: left;
-  font-size: 1.2em;
-  line-height: 1.1em;
-  margin: 15px;
-  padding: 0;
-  max-height: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-#preview_title a {
-  color: #fff;
-}
-
-#preview_close {
-  position: absolute;
-  right: 0;
-  background: transparent;
-  padding-right: 10px;
-}
-
-#preview_meta_button_container {
-  float: right;
-  padding-left: 10px;
-  padding-bottom: 10px;
-}
-
-@media all and (max-width: 550px) {
-  #preview {
-    height: calc(500/10vh*1.6)px;
-  }
-
-  #preview_video {
-    width: 100vw;
-  }
-
-  #preview_video iframe {
-    width: 100%;
-  }
-
-  #preview_meta {
-    display: none;
-  }
-
-  #preview_chat {
-    display: none;
-  }
-
-  .preview {
-      opacity: 1;
-      visibility: visible;
-  }
-}
-
-/*50/50/0
-@media all and (min-width: 550px) and (max-width: 650px) {
-  #preview_video {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_chat {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_meta {
-    width: 0;
-    display: none;
-  }
-
-  .preview {
-      opacity: 1;
-      visibility: visible;
-  }
-}
-
-/*33/66/0*/
-@media all and (min-width: 550px) and (max-width: 830px) {
-  #preview_video {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_chat {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_meta {
-    width: 0;
-    display: none;
-  }
-
-  .preview {
-      opacity: 1;
-      visibility: visible;
-  }
-}
-
-/*33/33/33*/
-@media all and (min-width: 830px) and (max-width: 950px) {
-  #preview_video {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_chat {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_meta {
-    width: 0;
-    display: none;
-  }
-
-  .preview {
-      opacity: 1;
-      visibility: visible;
-  }
-}
-
-/*33/33/33*/
-@media all and (min-width: 950px) {
-  #preview_video {
-    width: 33.33%;
-    display: block;
-  }
-
-  #preview_chat {
-    width: 33.33%;
-    display: block;
-  }
-
-  #preview_meta {
-    width: 33.33%;
-    display: block;
-  }
-}
 
 #pagination {
 
 }
 
 #pagination_previous {
-    float: left;
+  float: left;
 }
 
 #pagination_next {
-    float: right;
+  float: right;
 }
 
 .mui-dropdown-menu {
-	overflow: auto;
-	max-height: 90vh;
+  overflow: auto;
+  max-height: 90vh;
 }
 
 .autocomplete-suggestions {
-	border: 1px solid rgba(0, 0, 0, 0.87);
-	background: #111;
-	cursor: default;
-	overflow: auto;
+  border: 1px solid rgba(0, 0, 0, 0.87);
+  background: #111;
+  cursor: default;
+  overflow: auto;
 }
 
 .autocomplete-suggestion {
-	padding: 10px 5px;
-	font-size: 16px;
-	white-space: nowrap;
-	overflow: hidden;
+  padding: 10px 5px;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .autocomplete-selected {
-	background: rgba(0, 0, 0, 0.87);
+  background: rgba(0, 0, 0, 0.87);
 }
 .autocomplete-suggestions strong {
-	font-weight: normal;
-	color: #673AB7;
+  font-weight: normal;
+  color: #673AB7;
 }

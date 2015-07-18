@@ -1,5 +1,7 @@
+function Player() {
+}
 
-function playerContainer(channel) {
+Player.prototype.playerContainer = function (channel) {
   var container = document.createElement('iframe')
   container.setAttribute("id", "twitch_player")
   container.setAttribute("type", "text/html")
@@ -9,7 +11,7 @@ function playerContainer(channel) {
   return container;
 }
 
-function chatContainer(channel) {
+Player.prototype.chatContainer = function (channel) {
   var container = document.createElement('iframe')
   container.setAttribute("id", "chat_embed")
   container.setAttribute("type", "text/html")
@@ -20,23 +22,23 @@ function chatContainer(channel) {
   return container;
 }
 
-function twitchPlayer(channel) {
-    container = playerContainer(channel)
+Player.prototype.twitchPlayer = function (channel) {
+  var container = this.playerContainer(channel)
 
-    var player = document.getElementById("preview_video")
+  var player = document.getElementById("preview_video")
 
-    player.appendChild(container)
+  player.appendChild(container)
 }
 
-function twitchChat(channel) {
-  container = chatContainer(channel)
+Player.prototype.twitchChat = function (channel) {
+  var container = this.chatContainer(channel)
 
   var chat = document.getElementById("preview_chat")
 
   chat.appendChild(container)
 }
 
-function twitchMeta(meta) {
+Player.prototype.twitchMeta = function (meta) {
   var container = document.createElement('div');
 
   container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
@@ -50,11 +52,13 @@ function twitchMeta(meta) {
   metaNode.appendChild(container)
 }
 
-function clearPreview() {
+Player.prototype.clearPreview = function() {
   document.getElementById("channel_meta").innerHTML = ""
   document.getElementById("preview_chat").innerHTML = ""
-  video = document.getElementById("preview_video")
+  var video = document.getElementById("preview_video")
 
   video.innerHTML = ""
   video.parentNode.parentNode.classList.add("preview_off")
 }
+
+module.exports = Player;
