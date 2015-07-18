@@ -12,7 +12,7 @@
     }
     </style>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
   </head>
   <body>
     <div class="app-bar mui-appbar">
@@ -63,7 +63,7 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script type="text/javascript">
     var PlayerClass = require('web/static/js/functions')
-    var Player = new PlayerClass();
+    var Player      = new PlayerClass()
 
     console.log(Player)
 
