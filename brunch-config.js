@@ -14,7 +14,7 @@ exports.config = {
       // https://github.com/brunch/brunch/tree/master/docs#concatenation
       order: {
         before: [
-          'web/static/vendor/js/jquery-1.11.3.js',
+          'web/static/vendor/js/jquery.1.11.3.js',
           'web/static/vendor/js/autocomplete.js',
         ]
       }
