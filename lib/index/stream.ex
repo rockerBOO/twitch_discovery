@@ -79,6 +79,17 @@ defmodule TwitchDiscovery.Index.Stream do
     "streams-" <> index
   end
 
+  def parse_language(language) do
+    json = """
+    {"en":"English","zh":"中文","ja":"日本語","ko":"한국어","es":"Español","fr":"Français","de":"Deutsch","it":"Italiano","pt":"Português","sv":"Svenska","no":"Norsk","da":"Dansk","nl":"Nederlands","fi":"Suomi","pl":"Polski","ru":"Русский","tr":"Türkçe","cs":"Čeština","sk":"Slovenčina","hu":"Magyar","ar":"العربية","bg":"Български","th":"ภาษาไทย","vi":"Tiếng Việt","other":"Other"}
+    """
+
+    case Poison.decode!(json) |> Map.fetch(language) do
+      :error -> Logger.info "Could not find the language. #{language}"
+      {:ok, _} -> language
+    end
+  end
+
   def parse_mature(mature) do
     case mature do
       "yes" -> true
@@ -164,6 +175,7 @@ defmodule TwitchDiscovery.Index.Stream do
     viewers    = params["viewers"]    |> parse_viewers()
     game       = params["game"]       |> parse_game()
     started_at = params["started_at"] |> parse_started_at()
+    language   = params["language"] |> parse_language()
 
     query = %{}
 
@@ -185,6 +197,10 @@ defmodule TwitchDiscovery.Index.Stream do
 
     if viewers != nil do
       query = Map.put(query, "viewers", %{"$lt" => viewers})
+    end
+
+    if language != nil do
+      query = Map.put(query, "language", language)
     end
 
     if started_at != nil do
