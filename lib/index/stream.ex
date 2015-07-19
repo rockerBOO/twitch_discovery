@@ -85,7 +85,7 @@ defmodule TwitchDiscovery.Index.Stream do
     """
 
     case Poison.decode!(json) |> Map.fetch(language) do
-      :error -> Logger.info "Could not find the language. #{language}"
+      :error -> Logger.info "Could not find the language. #{language}"; nil
       {:ok, _} -> language
     end
   end
