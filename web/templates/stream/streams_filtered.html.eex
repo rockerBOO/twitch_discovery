@@ -12,7 +12,7 @@
           <div class="filter_block">
             <div class="name"> Viewers</div>
             <div class="mui-select input-field">
-              <select name="viewers">
+              <select name="viewers" autocomplete="off">
                 <% viewers = @params["viewers"] %>
                 <option<%= "Any" |> selected(viewers) |> raw %>>Any</option>
                 <option<%= 1000 |> selected(viewers) |> raw %>>1000</option>
@@ -41,7 +41,7 @@
           <div class="filter_block">
             <div class="name">FPS</div>
             <div id="search-fps-options" class="mui-select options input-field">
-              <select name="fps">
+              <select name="fps" autocomplete="off">
                 <option<%= "All" |> selected(@params["fps"]) |> raw %>>All</option>
                 <option<%= 60 |> selected(@params["fps"]) |> raw %>>60</option>
                 <option<%= 30 |> selected(@params["fps"]) |> raw %>>30</option>
@@ -52,7 +52,7 @@
           <div class="filter_block">
             <div class="name">Started At</div>
             <div class="mui-select input-field">
-              <select name="started_at">
+              <select name="started_at" autocomplete="off">
                 <option>All</option>
                 <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
                 <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15mins ago</option>
@@ -75,33 +75,33 @@
 
           <div class="filter_block">
             <div class="name">Language</div>
-            <div class="mui-select input-field">
-              <select name="language">
-                <option value="any">Any</option>
-                <option value="en">English</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="ko">한국어</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="it">Italiano</option>
-                <option value="pt">Português</option>
-                <option value="sv">Svenska</option>
-                <option value="no">Norsk</option>
-                <option value="da">Dansk</option>
-                <option value="nl">Nederlands</option>
-                <option value="fi">Suomi</option>
-                <option value="pl">Polski</option>
-                <option value="ru">Русский</option>
-                <option value="tr">Türkçe</option>
-                <option value="cs">Čeština</option>
-                <option value="sk">Slovenčina</option>
-                <option value="hu">Magyar</option>
-                <option value="ar">العربية</option>
-                <option value="bg">Български</option>
-                <option value="th">ภาษาไทย</option>
-                <option value="vi">Tiếng Việt</option>
+            <div class="mui-select input-field options">
+              <select name="language" autocomplete="off">
+                <option<%= "any" |> selected(@params["language"]) |> raw %> value="any">Any</option>
+                <option<%= "en" |> selected(@params["language"]) |> raw %> value="en">English</option>
+                <option<%= "zh" |> selected(@params["language"]) |> raw %> value="zh">中文</option>
+                <option<%= "ja" |> selected(@params["language"]) |> raw %> value="ja">日本語</option>
+                <option<%= "ko" |> selected(@params["language"]) |> raw %> value="ko">한국어</option>
+                <option<%= "es" |> selected(@params["language"]) |> raw %> value="es">Español</option>
+                <option<%= "fr" |> selected(@params["language"]) |> raw %> value="fr">Français</option>
+                <option<%= "de" |> selected(@params["language"]) |> raw %> value="de">Deutsch</option>
+                <option<%= "it" |> selected(@params["language"]) |> raw %> value="it">Italiano</option>
+                <option<%= "pt" |> selected(@params["language"]) |> raw %> value="pt">Português</option>
+                <option<%= "sv" |> selected(@params["language"]) |> raw %> value="sv">Svenska</option>
+                <option<%= "no" |> selected(@params["language"]) |> raw %> value="no">Norsk</option>
+                <option<%= "da" |> selected(@params["language"]) |> raw %> value="da">Dansk</option>
+                <option<%= "nl" |> selected(@params["language"]) |> raw %> value="nl">Nederlands</option>
+                <option<%= "fi" |> selected(@params["language"]) |> raw %> value="fi">Suomi</option>
+                <option<%= "pl" |> selected(@params["language"]) |> raw %> value="pl">Polski</option>
+                <option<%= "ru" |> selected(@params["language"]) |> raw %> value="ru">Русский</option>
+                <option<%= "tr" |> selected(@params["language"]) |> raw %> value="tr">Türkçe</option>
+                <option<%= "cs" |> selected(@params["language"]) |> raw %> value="cs">Čeština</option>
+                <option<%= "sk" |> selected(@params["language"]) |> raw %> value="sk">Slovenčina</option>
+                <option<%= "hu" |> selected(@params["language"]) |> raw %> value="hu">Magyar</option>
+                <option<%= "ar" |> selected(@params["language"]) |> raw %> value="ar">العربية</option>
+                <option<%= "bg" |> selected(@params["language"]) |> raw %> value="bg">Български</option>
+                <option<%= "th" |> selected(@params["language"]) |> raw %> value="th">ภาษาไทย</option>
+                <option<%= "vi" |> selected(@params["language"]) |> raw %> value="vi">Tiếng Việt</option>
               </select>
             </div>
           </div>
