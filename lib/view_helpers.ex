@@ -35,7 +35,7 @@ defmodule TwitchDiscovery.View.Helpers do
 
       def selected(option, selected) do
         if option == selected do
-          " selected"
+          " selected=\"selected\""
         else
           ""
         end
