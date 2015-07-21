@@ -87,11 +87,6 @@ body {
   margin-left: 10px;
 }
 
-
-.stream-image,.broadcast-image {
-  position: relative;
-}
-
 .stream-image:hover .preview,
 .broadcast-image:hover .preview {
   opacity: 1;
@@ -115,10 +110,12 @@ body {
   opacity: 0;
   transition: opacity .4s, visibilty .4s;
 }
-
-
-
-
+#preview_bar {
+	background-color: $mui-primary-color;
+}
+.stream-image,.broadcast-image {
+  position: relative;
+}
 
 .mui-panel {
   background-color: #111;
