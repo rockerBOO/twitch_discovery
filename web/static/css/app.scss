@@ -93,22 +93,16 @@ body {
   visibility: visible;
 }
 
+#preview_bar {
+  background-color: $mui-primary-color;
+}
+
+.stream-image,.broadcast-image {
+  position: relative;
+}
 
 .preview {
-  /* Move the preview to the left corner */
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  /* Styling */
-  padding: 9px;
-  cursor: pointer;
   background-color: $mui-panel-bg-color;
-
-  /* Animation */
-  visibility: none;
-  opacity: 0;
-  transition: opacity .4s, visibilty .4s;
 }
 
 .mui-panel {
