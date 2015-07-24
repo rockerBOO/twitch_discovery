@@ -85,8 +85,8 @@ defmodule TwitchDiscovery.Index.Stream do
     """
 
     case Poison.decode!(json) |> Map.fetch(language) do
-      :error -> Logger.info "Could not find the language. #{language}"; nil
       {:ok, _} -> language
+      :error   -> nil
     end
   end
 
@@ -114,6 +114,13 @@ defmodule TwitchDiscovery.Index.Stream do
         end
       _     -> []
     end
+  end
+
+  def parse_viewers(min, max) do
+    min = parse_viewers(min)
+    max = parse_viewers(max)
+
+    [min, max]
   end
 
   def parse_viewers(nil), do: nil
@@ -172,10 +179,11 @@ defmodule TwitchDiscovery.Index.Stream do
   def parse_params_to_query(params) do
     mature     = params["mature"]     |> parse_mature()
     fps        = params["fps"]        |> parse_fps()
-    viewers    = params["viewers"]    |> parse_viewers()
     game       = params["game"]       |> parse_game()
     started_at = params["started_at"] |> parse_started_at()
-    language   = params["language"] |> parse_language()
+    language   = params["language"]   |> parse_language()
+
+    [viewers_min, viewers_max] = parse_viewers(params["viewers_min"], params["viewers_max"])
 
     query = %{}
 
@@ -195,8 +203,8 @@ defmodule TwitchDiscovery.Index.Stream do
       query = Map.put(query, "game", params["game"])
     end
 
-    if viewers != nil do
-      query = Map.put(query, "viewers", %{"$lt" => viewers})
+    if viewers_min != nil && viewers_max != nil do
+      query = Map.put(query, "viewers", %{"$lt" => viewers_max, "$gt" => viewers_min})
     end
 
     if language != nil do
