@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 function Player() {}
-=======
-function Player() {
-}
->>>>>>> WETGDKLFD
 
 Player.prototype.playerContainer = function (channel) {
   var container = document.createElement('iframe')
