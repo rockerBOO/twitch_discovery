@@ -1,14 +1,14 @@
 #preview {
-  /*height: calc(21vw/21vh*150);*/
-  height: calc(20vw + 14px);
+  height: calc(18.75vw + 30px);
   position: fixed;
   bottom: 0;
   left: 0;
-  margin-bottom: 50px;
   width: 100%;
   background: #000;
   color: #fff;
   min-height: 25vh;
+  max-height: 50vh;
+  margin-bottom: 3em;
 }
 
 .preview_off {
@@ -19,13 +19,12 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 9px;
+  padding: .3em;
   cursor: pointer;
   visibility: none;
   opacity: 0;
   transition: opacity .4s, visibilty .4s;
 }
-
 
 #preview_video_meta {
   float: left;
@@ -34,14 +33,13 @@
 
 #preview_video_meta .views, #preview_video_meta .length  {
   font-size: 18px;
-  padding-right: 10px;
+  padding-right: .3em;
 }
 
 #preview_bar {
-  height: 50px;
-  max-height: 50px;
+  height: 3em;
+  max-height: 3em;
 }
-
 
 #preview_media {
   background: #000;
@@ -73,15 +71,14 @@
 
 #preview_meta {
   float: left;
-  /*width: 33.33vw;*/
   height: 100%;
   width: 0;
-  padding: 10px;
+  padding: .3em;
 }
 
 #preview_meta h3 {
   margin: 0;
-  margin-top: 9px;
+  margin-top: .3em;
   line-height: 1.6;
 }
 
@@ -89,9 +86,9 @@
   float: left;
   font-size: 1.2em;
   line-height: 1.1em;
-  margin: 15px;
+  margin: .6em;
   padding: 0;
-  max-height: 50px;
+  max-height: 3em;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -104,24 +101,22 @@
   position: absolute;
   right: 0;
   background: transparent;
-  padding-right: 10px;
+  padding-right: .3em;
 }
 
 #preview_meta_button_container {
   float: right;
-  padding-left: 10px;
-  padding-bottom: 10px;
+  padding-left: .3em;
+  padding-bottom: .3em;
 }
 
-@media all and (max-width: 550px) {
+@media all and (max-width: 675px) {
   #preview {
-    height: calc(57vw + 18px);
+    height: calc(56.25vw + 30px);
   }
-  #preview_media {
-  }
+
   #preview_video {
     width: 100%;
-
   }
 
   #preview_video iframe {
@@ -137,13 +132,17 @@
   }
 
   .preview {
-      opacity: 1;
-      visibility: visible;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
 /*33/66/0*/
-@media all and (min-width: 550px) and (max-width: 950px) {
+@media all and (min-width: 675px) and (max-width: 1050px) {
+  #preview {
+    height: calc(28.125vw + 30px);
+  }
+
   #preview_video {
     width: 50%;
     display: block;
@@ -159,18 +158,14 @@
     display: none;
   }
 
-  #preview {
-    height: calc((57vw + 45px) /2 );
-  }
-
   .preview {
-      opacity: 1;
-      visibility: visible;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
 /*33/33/33*/
-@media all and (min-width: 950px) {
+@media all and (min-width: 1050px) {
   #preview_video {
     width: 33.33%;
     display: block;
