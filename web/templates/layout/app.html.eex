@@ -11,8 +11,10 @@
       background-color: #111;
     }
     </style>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
   </head>
   <body>
     <div class="app-bar mui-appbar">
@@ -39,7 +41,7 @@
     </div>
     <div id="footer">
       <div class="mui-container">
-        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a> | <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | <span>Discovery is not affiliated with or sponsored by Twitch</span>
+        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a> | <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | Background: <a href="http://lodyas.com/carlos-aguilar/">Carlos Aguilar</a>  CC BY-SA 3.0 | <span>Discovery is not affiliated with or sponsored by Twitch</span>
       </div>
     </div>
     <div id="preview" class="preview_off">
@@ -59,47 +61,14 @@
         </div>
       </div>
     </div>
-    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script type="text/javascript">
-    var PlayerClass = require('web/static/js/functions')
+    var PlayerClass = require('web/static/js/player')
     var Player      = new PlayerClass()
 
-    console.log(Player)
-
     window.onload = function () {
-      $("a.preview").click(function(event) {
-        event.preventDefault()
-
-        channel       = event.currentTarget.getAttribute("data-channel")
-        title         = event.currentTarget.getAttribute("data-title")
-        display_name  = event.currentTarget.getAttribute("data-display-name")
-
-        console.log(event)
-        console.log(channel)
-
-        Player.clearPreview()
-
-        Player.twitchPlayer(channel)
-        Player.twitchChat(channel)
-        Player.twitchMeta({channel: channel, title: title, display_name: display_name})
-
-        document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
-      });
-
-      $("#search-fps-toggle").click(function (event) {
-        $("#search-fps-options").toggleClass("hide-options")
-      })
-
-      $("#search-mature-toggle").click(function (event) {
-        $("#search-mature-options").toggleClass("hide-options")
-      })
-
-      $('#games-search-input').autocomplete({
-        serviceUrl: '/games/autocomplete',
-        width: 'rekt',
-        onSelect: function () { $("#filter_form").submit() }
-      });
+      require('web/static/js/onload')
     }
     </script>
   </body>

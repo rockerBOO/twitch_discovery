@@ -19,9 +19,26 @@ defmodule TwitchDiscovery.View.Helpers do
         end
       end
 
+      def default_val(value, default) do
+        case value do
+          nil -> default
+          _   -> value
+        end
+      end
+
       def format_time(time) do
         DateFormat.parse!(time, "{ISOz}")
         |> DateFormat.format!("{ISOdate} {kitchen}")
+      end
+
+      def checked_opts(option, check) do
+        checked = checked(option, check)
+
+        if checked != "" do
+          [checked: checked]
+        else
+          []
+        end
       end
 
       def selected(option, selected) when is_integer(option) and is_binary(selected) do

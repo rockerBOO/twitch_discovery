@@ -1,0 +1,36 @@
+.noUi-connect {
+	background-color: #673AB7;
+}
+
+.noUi-handle {
+  background-color: #010101;
+  box-shadow: none;
+  border: none;
+}
+
+.noUi-background {
+  background-color: #010101;
+  box-shadow: none;
+  border: none;
+}
+
+.noUi-handle::before, .noUi-handle::after {
+  background-color: #111;
+  height: 25px;
+}
+
+.noUi-base {
+  height: 27px;
+}
+
+.noUi-horizontal .noUi-handle {
+  height: 37px;
+}
+
+.noUi-target {
+  height: 27px;
+}
+
+.noUi-origin {
+  height: 27px;
+}

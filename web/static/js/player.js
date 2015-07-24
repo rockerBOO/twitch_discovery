@@ -1,5 +1,4 @@
-function Player() {
-}
+function Player() {}
 
 Player.prototype.playerContainer = function (channel) {
   var container = document.createElement('iframe')
@@ -48,7 +47,7 @@ Player.prototype.twitchMeta = function (meta) {
   var followButton = document.getElementById("preview_follow_button")
   var metaNode = document.getElementById("channel_meta")
 
-  followButton.setAttribute("onclick", "window.location = \"/follow/" + channel + "\"")
+  followButton.setAttribute("onclick", "window.location = \"/follow/" + meta.channel + "\"")
   metaNode.appendChild(container)
 }
 

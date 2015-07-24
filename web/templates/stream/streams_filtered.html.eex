@@ -5,36 +5,25 @@
           <div class="filter_block">
             <div class="name">Game</div>
             <div class="mui-form-group input-field broadcast-game-search">
-                <input type="text" placeholder="Minecraft" name="game" id="games-search-input" class="mui-form-control  mui-empty mui-dirty" value="<%= @params["game"] %>">
+              <%= text_input(:streams, :game, [
+                    placeholder: "Minecraft",
+                    id: "games-search-input",
+                    class: "mui-form-control mui-empty mui-dirty",
+                    name: "game",
+                    value: @params["game"]]) %>
             </div>
           </div>
 
-          <div class="filter_block">
-            <div class="name"> Viewers</div>
+          <div class="filter_block" style="width: 200px;">
+            <div class="name" ><span class="meta">
+              <span id="viewers_min_show"></span> to <span id="viewers_max_show"></span></span>
+              <span style="float: left;">Viewers </span></div>
             <div class="mui-select input-field">
-              <select name="viewers" autocomplete="off">
-                <% viewers = @params["viewers"] %>
-                <option<%= "Any" |> selected(viewers) |> raw %>>Any</option>
-                <option<%= 1000 |> selected(viewers) |> raw %>>1000</option>
-                <option<%= 750 |> selected(viewers) |> raw %>>750</option>
-                <option<%= 500 |> selected(viewers) |> raw %>>500</option>
-                <option<%= 250 |> selected(viewers) |> raw %>>250</option>
-                <option<%= 200 |> selected(viewers) |> raw %>>200</option>
-                <option<%= 150 |> selected(viewers) |> raw %>>150</option>
-                <option<%= 125 |> selected(viewers) |> raw %>>125</option>
-                <option<%= 100 |> selected(viewers) |> raw %>>100</option>
-                <option<%= 75 |> selected(viewers) |> raw %>>75</option>
-                <option<%= 50 |> selected(viewers) |> raw %>>50</option>
-                <option<%= 40 |> selected(viewers) |> raw %>>40</option>
-                <option<%= 35 |> selected(viewers) |> raw %>>35</option>
-                <option<%= 30 |> selected(viewers) |> raw %>>30</option>
-                <option<%= 25 |> selected(viewers) |> raw %>>25</option>
-                <option<%= 20 |> selected(viewers) |> raw %>>20</option>
-                <option<%= 15 |> selected(viewers) |> raw %>>15</option>
-                <option<%= 10 |> selected(viewers) |> raw %>>10</option>
-                <option<%= 5 |> selected(viewers) |> raw %>>5</option>
-                <option<%= 0 |> selected(viewers) |> raw %>>0</option>
-              </select>
+              <div id="range"></div>
+
+              <input type="number" id="viewers_min" name="viewers_min" style="display: none;">
+              <input type="number" id="viewers_max" name="viewers_max" style="display: none;">
+
             </div>
           </div>
 
@@ -110,16 +99,19 @@
             <div class="name"><a href="javascript:;" id="search-mature-toggle">Mature</a></div>
             <div id="search-mature-options"  class="input-field options <%= if @params["mature"] == nil, do: "hide-options" %>">
               <label>
-                <input type="radio" name="mature" value="no"<%= "no" |> checked(@params["mature"]) |> raw %> />
+                <% mature_opts = "no" |> checked_opts(@params["mature"]) %>
+                <%= radio_button(:streams, :mature, "no", Keyword.put(mature_opts, :name, "mature")) %>
                 No
               </label>
               <label>
-                <input type="radio" name="mature" value="yes"<%= "yes" |> checked(@params["mature"]) |> raw %> />
+              <% mature_opts = "yes" |> checked_opts(@params["mature"]) %>
+              <%= radio_button(:streams, :mature, "yes", Keyword.put(mature_opts, :name, "mature")) %>
                 Yes
               </label>
               <label>
-                <input type="radio" name="mature" value="all"<%= "all" |> checked(@params["mature"]) |> raw %> />
-                 All
+              <% mature_opts = "all" |> checked_opts(@params["mature"]) %>
+              <%= radio_button(:streams, :mature, "all", Keyword.put(mature_opts, :name, "mature")) %>
+                All
               </label>
             </div>
           </div>
@@ -144,3 +136,49 @@
       </div>
     <% end %>
     </div>
+
+<script type="text/javascript">
+    var slider = document.getElementById('range');
+
+    noUiSlider.create(slider, {
+      start: [ <%= default_val @params["viewers_min"], 0 %>, <%= default_val @params["viewers_max"], 1000 %> ],
+      range: {
+        'min': [     0 ],
+        '33%': [  25, 5 ],
+        '66%': [  100, 25 ],
+        '90%': [  250, 250 ],
+        'max': [ 1000 ]
+      },
+      step: 1,
+      connect: true, // Display a colored bar between the handles
+      orientation: 'horizontal', // Orient the slider vertically
+      behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+    });
+
+    var viewers_min = document.getElementById('viewers_min');
+    var viewers_max = document.getElementById('viewers_max');
+
+    var viewers_min_show = document.getElementById('viewers_min_show');
+    var viewers_max_show = document.getElementById('viewers_max_show');
+
+    // When the input changes, set the slider value
+    viewers_min.addEventListener('change', function(){
+      slider.noUiSlider.set([null, this.value]);
+    });
+
+    viewers_max.addEventListener('change', function(){
+      slider.noUiSlider.set([null, this.value]);
+    });
+
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function(values, handle) {
+      if (handle == 1) {
+        viewers_max.value = values[handle];
+        viewers_max_show.innerHTML = parseInt(values[handle]);
+      } else {
+        viewers_min.value = values[handle];
+        viewers_min_show.innerHTML = parseInt(values[handle]);
+      }
+    });
+</script>

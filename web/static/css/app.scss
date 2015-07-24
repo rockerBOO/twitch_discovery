@@ -48,7 +48,7 @@ body {
   // background: url("http://i.imgur.com/oavv3DC.jpg");
   // background: url("http://i.imgur.com/S5bKt4s.jpg");
   // background: url("http://i.imgur.com/jGIGWOA.jpg");
-  background: url("http://i.imgur.com/i3OA2PJ.jpg")
+  background: url("http://i.imgur.com/fbX9liw.png")
 }
 
 .mui-select-menu {
@@ -109,12 +109,6 @@ body {
   visibility: none;
   opacity: 0;
   transition: opacity .4s, visibilty .4s;
-}
-#preview_bar {
-	background-color: $mui-primary-color;
-}
-.stream-image,.broadcast-image {
-  position: relative;
 }
 
 .mui-panel {
