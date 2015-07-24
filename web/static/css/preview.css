@@ -1,7 +1,6 @@
-
 #preview {
   /*height: calc(21vw/21vh*150);*/
-  height: 30vh;
+  height: calc(20vw + 14px);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -9,6 +8,7 @@
   width: 100%;
   background: #000;
   color: #fff;
+  min-height: 25vh;
 }
 
 .preview_off {
@@ -28,7 +28,6 @@
 #preview_bar {
   height: 50px;
   max-height: 50px;
-  background-color: $mui-primary-color;
 }
 
 
@@ -104,11 +103,13 @@
 
 @media all and (max-width: 550px) {
   #preview {
-    height: calc(500/10vh*1.6)px;
+    height: calc(57vw + 18px);
   }
-
+  #preview_media {
+  }
   #preview_video {
-    width: 100vw;
+    width: 100%;
+
   }
 
   #preview_video iframe {
@@ -130,7 +131,7 @@
 }
 
 /*33/66/0*/
-@media all and (min-width: 550px) and (max-width: 830px) {
+@media all and (min-width: 550px) and (max-width: 950px) {
   #preview_video {
     width: 50%;
     display: block;
@@ -146,27 +147,8 @@
     display: none;
   }
 
-  .preview {
-      opacity: 1;
-      visibility: visible;
-  }
-}
-
-/*33/33/33*/
-@media all and (min-width: 830px) and (max-width: 950px) {
-  #preview_video {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_chat {
-    width: 50%;
-    display: block;
-  }
-
-  #preview_meta {
-    width: 0;
-    display: none;
+  #preview {
+    height: calc((57vw + 45px) /2 );
   }
 
   .preview {
