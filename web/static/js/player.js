@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 function Player() {}
+=======
+function Player() {
+}
+>>>>>>> WETGDKLFD
 
 Player.prototype.playerContainer = function (channel) {
   var container = document.createElement('iframe')
@@ -48,7 +53,6 @@ Player.prototype.twitchMeta = function (meta) {
   var metaNode = document.getElementById("channel_meta")
 
   followButton.setAttribute("onclick", "window.location = \"/follow/" + meta.channel + "\"")
-  metaNode.appendChild(container)
 }
 
 Player.prototype.clearPreview = function() {
