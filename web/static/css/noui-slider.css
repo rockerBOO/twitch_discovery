@@ -3,9 +3,17 @@
 }
 
 .noUi-handle {
-  background-color: #010101;
-  box-shadow: none;
+  background-color: #120C28;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(49,30,102, 0.75);
+  -moz-box-shadow:    0px 0px 5px 0px rgba(49,30,102, 0.75);
+  box-shadow:         0px 0px 5px 0px rgba(49,30,102, 0.75);
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(49,30,102, 1.25);
+  -moz-box-shadow:    0px 0px 5px 0px rgba(49,30,102, 1.25);
+  box-shadow:         0px 0px 5px 0px rgba(49,30,102, 0.75);
   border: none;
+
+  cursor: pointer;
 }
 
 .noUi-background {
@@ -15,7 +23,7 @@
 }
 
 .noUi-handle::before, .noUi-handle::after {
-  background-color: #111;
+  background-color: #311E66;
   height: 25px;
 }
 
