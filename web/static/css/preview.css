@@ -15,6 +15,18 @@
   display: none;
 }
 
+.preview {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 9px;
+  cursor: pointer;
+  visibility: none;
+  opacity: 0;
+  transition: opacity .4s, visibilty .4s;
+}
+
+
 #preview_video_meta {
   float: left;
   display: block;
