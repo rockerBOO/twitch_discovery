@@ -1,4 +1,7 @@
+
 $("a.preview").click(function(event) {
+  "use strict";
+
   event.preventDefault()
 
   var channel       = event.currentTarget.getAttribute("data-channel")
@@ -23,7 +26,7 @@ $("#search-mature-toggle").click(function (event) {
 })
 
 $("#games-search-input").autocomplete({
-  serviceUrl: '/games/autocomplete',
-  width: 'rekt',
+  serviceUrl: "/games/autocomplete",
+  width: "rekt",
   onSelect: function () { $("#filter_form").submit() }
 });

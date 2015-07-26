@@ -1,7 +1,7 @@
 function Player() {}
 
 Player.prototype.playerContainer = function (channel) {
-  var container = document.createElement('iframe')
+  var container = document.createElement("iframe")
   container.setAttribute("id", "twitch_player")
   container.setAttribute("type", "text/html")
   container.setAttribute("src", "http://www.twitch.tv/" + channel + "/embed")
@@ -11,7 +11,7 @@ Player.prototype.playerContainer = function (channel) {
 }
 
 Player.prototype.chatContainer = function (channel) {
-  var container = document.createElement('iframe')
+  var container = document.createElement("iframe")
   container.setAttribute("id", "chat_embed")
   container.setAttribute("type", "text/html")
   container.setAttribute("src", "http://www.twitch.tv/" + channel + "/chat")
@@ -38,7 +38,7 @@ Player.prototype.twitchChat = function (channel) {
 }
 
 Player.prototype.twitchMeta = function (meta) {
-  var container = document.createElement('div');
+  var container = document.createElement("div");
 
   container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
 
