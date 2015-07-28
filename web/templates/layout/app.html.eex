@@ -33,6 +33,7 @@
           <%= if logged_in?(@conn) == false do %>
           <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
           <% else %>
+          <style type="text/css">.preview_logged_in { display: true; } </style>
           <button class="mui-btn mui-btn-primary"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> <%= current_user(@conn) |> Map.fetch!("display_name") %></button>
           <% end %>
       </div>
@@ -54,10 +55,30 @@
         <div id="preview_video"></div>
         <div id="preview_chat"></div>
         <div id="preview_meta">
-          <div id="preview_meta_button_container">
-            <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow(this);">Follow</button>
-          </div>
-          <div id="channel_meta"></div>
+          <style type="text/css" id="preview_meta_background_style"></style>
+          <div id="preview_game_background">
+            <div id="preview_meta_button_container">
+              <div class="preview_logged_in">
+                <button id="preview_follow_button" class="mui-btn mui-btn-primary" onclick="follow(this);">Follow</button>
+              </div>
+            </div>
+            <div id="preview_channel_meta">
+              <img id="preview_twitch_icon" class="twitch_glich" src="<%= static_path(@conn, "/images/twitch.svg") %>">
+              <h3 id="preview_channel_name"></h3>
+              <h4 id="preview_game"></h4>
+              <div id="preview_metrics">
+                <span class="preview_metric_block">
+                  <span id="preview_viewers"></span> Viewers
+                </span>
+                <span class="preview_metric_block">
+                  <span id="preview_views"></span> Views
+                </span>
+                <span class="preview_metric_block">
+                  <span id="preview_followers"></span> Followers
+                </span>
+              </div>
+            </div>
+          </div
         </div>
       </div>
     </div>

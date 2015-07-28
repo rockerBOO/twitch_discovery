@@ -7,6 +7,9 @@ Player.prototype.playerContainer = function (channel) {
   container.setAttribute("src", "http://www.twitch.tv/" + channel + "/embed")
   container.setAttribute("frameborder", "0")
 
+  // var container = document.createElement("img")
+  // container.setAttribute("src", "http://i.imgur.com/7wmmqX2.gif")
+
   return container;
 }
 
@@ -18,42 +21,118 @@ Player.prototype.chatContainer = function (channel) {
   container.setAttribute("frameborder", "0")
   container.setAttribute("scrolling", "no")
 
+  // var container = document.createElement("img")
+  // container.setAttribute("src", "http://i.imgur.com/7wmmqX2.gif")
+
   return container;
 }
 
 Player.prototype.twitchPlayer = function (channel) {
-  var container = this.playerContainer(channel)
-
-  var player = document.getElementById("preview_video")
-
-  player.appendChild(container)
+  document.getElementById("preview_video")
+  .appendChild(this.playerContainer(channel))
 }
 
 Player.prototype.twitchChat = function (channel) {
-  var container = this.chatContainer(channel)
-
-  var chat = document.getElementById("preview_chat")
-
-  chat.appendChild(container)
+  document.getElementById("preview_chat")
+  .appendChild(this.chatContainer(channel))
 }
 
 Player.prototype.twitchMeta = function (meta) {
-  var container = document.createElement("div");
+  console.log(meta)
 
-  container.innerHTML = "<h3><img src=\"/images/twitch.svg\" style=\"width: 24px; margin-top: -1px;\"> <a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.display_name + "</a></h3>";
+  this.setChannelName(meta)
+  this.setTitle(meta)
+  this.setGame(meta)
+  this.setFollowers(meta)
+  this.setViewers(meta)
+  this.setViews(meta)
+  this.setMetaBackground(meta)
+}
 
-  document.getElementById("preview_title").innerHTML = "<a href=\"http://www.twitch.tv/" + meta.channel + "\">" + meta.title + "</a>"
+Player.prototype.setMetaBackground = function(meta) {
+  document.getElementById("preview_meta_background_style")
+  .innerHTML = "#preview_meta { "+
+  "background-image: url('http://static-cdn.jtvnw.net/ttv-boxart/" + meta.game + "-272x380.jpg');" +
+  " }";
+}
 
-  var followButton = document.getElementById("preview_follow_button")
-  var metaNode = document.getElementById("channel_meta")
+Player.prototype.setTitle = function(meta) {
+  var a = document.createElement("a")
+  a.setAttribute("href", "http://www.twitch.tv/" + meta.channel)
 
-  followButton.setAttribute("onclick", "window.location = \"/follow/" + meta.channel + "\"")
-  metaNode.appendChild(container)
+  a.innerHTML = meta.title
+
+  document.getElementById("preview_title")
+  .appendChild(a)
+}
+
+Player.prototype.setChannelName = function(meta) {
+  var a = this.channelLinkContainer(meta.channel)
+
+  a.innerHTML = meta.display_name
+
+  document.getElementById("preview_channel_name")
+  .appendChild(a)
+}
+
+Player.prototype.setGame = function(meta) {
+  var a = document.createElement("a")
+  a.setAttribute("href", "/streams?game=" + meta.game)
+  a.innerHTML = meta.game
+
+  document.getElementById("preview_game")
+  .appendChild(a)
+}
+
+Player.prototype.setPreviewFollower = function(channel) {
+  document.getElementById("preview_follow_button")
+  .setAttribute("onclick", "window.location = \"/follow/" + channel + "\"")
+}
+
+Player.prototype.setPreviewTitle = function(meta) {
+  var a = this.channelLinkContainer(meta.channel)
+
+  a.innerHTML = meta.title
+
+  document.getElementById("preview_title")
+  .appendChild(a)
+}
+
+Player.prototype.setFollowers = function(meta) {
+  document.getElementById("preview_followers")
+  .innerHTML = meta.followers
+}
+
+Player.prototype.setViewers = function(meta) {
+  document.getElementById("preview_viewers")
+  .innerHTML = meta.viewers
+}
+
+Player.prototype.setViews = function(meta) {
+  document.getElementById("preview_views")
+  .innerHTML = meta.views
+}
+
+Player.prototype.channelLinkContainer = function(channel) {
+  var a = document.createElement("a")
+  a.setAttribute("href", "http://www.twitch.tv/" + channel)
+
+  return a
+}
+
+Player.prototype.reset_preview = function(reset_list) {
+  reset_list.forEach(function (element) {
+    document.getElementById(element)
+    .innerHTML = ""
+  })
 }
 
 Player.prototype.clearPreview = function() {
-  document.getElementById("channel_meta").innerHTML = ""
-  document.getElementById("preview_chat").innerHTML = ""
+  var reset_list =
+    ["preview_channel_name", "preview_game",
+     "preview_title", "preview_chat"]
+  this.reset_preview(reset_list)
+
   var video = document.getElementById("preview_video")
 
   video.innerHTML = ""
