@@ -75,7 +75,11 @@ body {
 }
 
 .preview_metric_block {
-  background: rgba(100, 65, 165, .7);
+  background: rgba(100, 65, 165, .3);
+}
+
+#preview_channel_name, #preview_game {
+  background: rgba(0, 0, 0, .5);
 }
 
 .stream-block h4 a,

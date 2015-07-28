@@ -64,8 +64,10 @@
             </div>
             <div id="preview_channel_meta">
               <img id="preview_twitch_icon" class="twitch_glich" src="<%= static_path(@conn, "/images/twitch.svg") %>">
-              <h3 id="preview_channel_name"></h3>
-              <h4 id="preview_game"></h4>
+              <h3>
+                <span id="preview_channel_name"></span>
+              </h3>
+              <h4><span id="preview_game"></span></h4>
               <div id="preview_metrics">
                 <span class="preview_metric_block">
                   <span id="preview_viewers"></span> Viewers
