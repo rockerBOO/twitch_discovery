@@ -132,8 +132,9 @@
 }
 
 #preview_channel_name {
-  padding: .1em .3em .1em .3em;
-  font-size: 32px;
+  padding: .1em .1em .1em .1em;
+  font-size: 1.5em;
+  font-weight: 300;
 }
 
 #preview_game {
@@ -141,7 +142,7 @@
 }
 
 #preview_twitch_icon {
-  width: 24px;
+  width: 2em;
   float: left;
   margin-right: .5em;
 }
