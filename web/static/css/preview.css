@@ -119,14 +119,25 @@
 .preview_metric_block {
   padding: .3em;
   margin-right: .6em;
+  margin-bottom: .9em;
+  display: inline-block;
 }
 
 #preview_channel_name {
-  margin: 0;
+  margin: 0 -.3em 0 0;
 }
 
 #preview_game {
   font-size: 1.2em;
+}
+
+#preview_channel_name {
+  padding: .1em .3em .1em .3em;
+  font-size: 32px;
+}
+
+#preview_game {
+  padding: .1em .3em .1em .3em;
 }
 
 #preview_twitch_icon {
