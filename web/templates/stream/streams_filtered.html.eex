@@ -14,10 +14,14 @@
             </div>
           </div>
 
-          <div class="filter_block" style="width: 200px;">
-            <div class="name" ><span class="meta">
-              <span id="viewers_min_show"></span> to <span id="viewers_max_show"></span></span>
-              <span style="float: left;">Viewers </span></div>
+          <div id="viewers" class="filter_block">
+            <div class="name">
+              <span class="meta">
+                <span id="viewers_min_show"></span> to
+                <span id="viewers_max_show"></span>
+              </span>
+              <span style="float: left;">Viewers </span>
+            </div>
             <div class="mui-select input-field">
               <div id="range"></div>
 

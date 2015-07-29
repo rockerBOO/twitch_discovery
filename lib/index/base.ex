@@ -34,9 +34,13 @@ defmodule TwitchDiscovery.Index.Base do
       end
 
       def find(query, opts \\ []) do
-        Mongo.find(MongoPool, collection_name(), query, opts)
-        |> Enum.to_list
-        |> filter_results()
+        try do
+          Mongo.find(MongoPool, collection_name(), query, opts)
+          |> Enum.to_list
+          |> filter_results()
+        rescue
+          e in Mongo.Error -> Logger.error e.message
+        end
       end
 
       def filter_results(results) do
@@ -100,7 +104,7 @@ defmodule TwitchDiscovery.Index.Base do
             {:error, error} -> Logger.error error.message
           end
         rescue
-          e in Mongo.Error -> e
+          e in Mongo.Error -> Logger.error e.message
         end
       end
 
@@ -116,6 +120,8 @@ defmodule TwitchDiscovery.Index.Base do
           e in Mongo.Error -> Logger.error e.message
         end
       end
+
+      defoverridable Module.definitions_in(__MODULE__)
     end
   end
 end

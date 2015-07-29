@@ -3,7 +3,6 @@ defmodule TwitchDiscovery.Index.Game do
   use TwitchDiscovery.Index.Base
 
   def db_key(index) do
-    IO.inspect index
     "games-" <> index_to_string(index)
   end
 
@@ -54,6 +53,10 @@ defmodule TwitchDiscovery.Index.Game do
 
   def collection_name(index) do
     "games-" <> index
+  end
+
+  def map_result(result) do
+    result
   end
 
   def redis_save_many(results) do
