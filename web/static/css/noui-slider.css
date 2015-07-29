@@ -42,3 +42,17 @@
 .noUi-origin {
   height: 27px;
 }
+
+.name {
+  width: 100%;
+}
+
+#range {
+  padding-top: .2em;
+}
+
+#viewers {
+  width: 200px;
+  margin-left: 1em;
+  margin-right: 1em;
+}

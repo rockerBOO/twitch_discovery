@@ -9,6 +9,7 @@
   min-height: 25vh;
   max-height: 50vh;
   margin-bottom: 3em;
+  z-index: 2;
 }
 
 .preview_off {
