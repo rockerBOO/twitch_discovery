@@ -59,6 +59,10 @@ body {
 .video-block h4,
 .broadcast-block h4 {
   font-size: 1.3em;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stream-block .stream_meta,
@@ -86,6 +90,20 @@ body {
 .video-block .video-image,
 .broadcast-block .broadcast-image {
   width: 100%;
+}
+
+.video-image {
+  position: relative;
+  height: 156px;
+  overflow: hidden;
+}
+
+.video-image a img {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(28px,320px,190px,0px);
+  top: -28px;
+  bottom: -28px;
 }
 
 .inner {

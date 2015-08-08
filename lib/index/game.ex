@@ -2,15 +2,39 @@ defmodule TwitchDiscovery.Index.Game do
 	alias TwitchDiscovery.Parser.Game
   use TwitchDiscovery.Index.Base
 
+  @name "games"
+
   def db_key(index) do
-    "games-" <> index_to_string(index)
+    db_key(@name, index)
   end
 
   def db_key() do
-    "games-" <> Index.get_current_index()
+    db_key(@name)
   end
 
-  def process(%{"top" => []}), do: finish_indexing()
+  def collection_name(index),
+  do: collection_name(@name, index)
+
+  def get_current_index do
+    get_current_index(@name)
+  end
+
+  def get_processing_index, do: get_processing_index(@name)
+  def set_index(index), do: set_index(@name, index)
+
+  # def db_key(index) do
+  #   "games-" <> index_to_string(index)
+  # end
+
+  # def db_key() do
+  #   "games-" <> get_current_index()
+  # end
+
+  # def get_current_index, do: get_current_index("game")
+  # def get_processing_index, do: get_processing_index("game")
+  # def set_index(index), do: set_index("game", index)
+
+  def process(%{"top" => []}), do: finish_indexing
   def process(resultset) when is_map(resultset) do
     resultset
     |> Map.fetch!("top")
@@ -21,16 +45,6 @@ defmodule TwitchDiscovery.Index.Game do
     |> process()
   end
 
-  def finish_indexing() do
-    Logger.info "Finished indexing games"
-
-    Mongo.delete_many(
-      MongoPool,
-      Index.get_current_index() |> collection_name(),
-      %{}
-    )
-  end
-
   def parse_filters(games) do
     games
     |> Enum.map(fn (game) ->
@@ -38,38 +52,30 @@ defmodule TwitchDiscovery.Index.Game do
     end)
   end
 
-  def data_length(dataset) do
-    length(dataset["top"])
-  end
+  def data_length(dataset),
+    do: length(dataset["top"])
 
-  def initial_url do
-    "/games/top?limit=100"
-  end
+  def initial_url,
+    do: "/games/top?limit=100"
 
-  def collection_name() do
-    TwitchDiscovery.Index.get_current_index()
-    |> collection_name()
-  end
+  # def collection_name(),
+  #   do: get_current_index() |> collection_name()
 
-  def collection_name(index) do
-    "games-" <> index
-  end
+  # def collection_name(index),
+  #   do: "#{@name}-#{index}"
 
-  def map_result(result) do
-    result
-  end
+  def map_result(result),
+    do: result
 
   def redis_save_many(results) do
 
   end
 
-  def parse_params_to_query(_params) do
-    %{}
-  end
+  def parse_params_to_query(_params), do: %{}
 
-  def sorting(params) do
-    %{}
-  end
+  def sorting(params),
+    do: %{}
 
-  def map_result(result), do: result
+  def map_result(result),
+    do: result
 end

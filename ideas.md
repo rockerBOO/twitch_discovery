@@ -16,7 +16,6 @@ Ideas
 * top videos on twitch [X]
 * find by game [X]
 
-
 * tag streams
 * schedules
 * timezone support
@@ -30,3 +29,6 @@ Ideas
 * followed channels
 * followed streams
 * videos
+
+* Subscribed but not following (notify)
+* Search all followed channels

@@ -2,14 +2,40 @@ defmodule TwitchDiscovery.Index.Stream do
   use TwitchDiscovery.Index.Base
   alias TwitchDiscovery.Parser.Stream
   alias TwitchDiscovery.Parser.Broadcast
+  alias TwitchDiscovery.Index.Game
+
+  @name "streams"
 
   def db_key(index) do
-    "streams-" <> index_to_string(index)
+    db_key(@name, index)
   end
 
   def db_key() do
-    "streams-" <> Index.get_current_index()
+    db_key(@name)
   end
+
+  def collection_name(index),
+  do: collection_name(@name, index)
+
+  def get_current_index do
+    get_current_index(@name)
+  end
+
+  def get_processing_index, do: get_processing_index(@name)
+  def set_index(index), do: set_index(@name, index)
+
+
+  # def db_key(index) do
+  #   "streams-" <> index_to_string(index)
+  # end
+
+  # def db_key() do
+  #   "streams-" <> get_current_index()
+  # end
+
+  # def get_current_index(), do: get_current_index("stream")
+  # def get_processing_index(), do: get_processing_index("stream")
+  # def set_index(index), do: set_index("stream", index)
 
   # Handling finished results and errors due to empty results
   def process(%{"streams" => []} = resultset) do
@@ -40,20 +66,10 @@ defmodule TwitchDiscovery.Index.Stream do
     end)
   end
 
-  def finish_indexing() do
-    current_index = Index.get_current_index()
-
-    # Streams take the longest, so let them finish it
-    Index.finish()
-
-    Logger.info "Finished indexing streams"
-
-    Mongo.delete_many(
-      MongoPool,
-      current_index |> collection_name(),
-      %{}
-    )
+  def map_result(result) do
+    map_result(result, "id")
   end
+
 
   def parse_filters(dataset) do
     dataset
@@ -70,14 +86,13 @@ defmodule TwitchDiscovery.Index.Stream do
     "/streams?limit=100"
   end
 
-  def collection_name() do
-    TwitchDiscovery.Index.get_current_index()
-    |> collection_name()
-  end
+  # def collection_name() do
+  #   get_current_index("stream") |> collection_name()
+  # end
 
-  def collection_name(index) do
-    "streams-" <> index
-  end
+  # def collection_name(index) do
+  #   "streams-" <> index
+  # end
 
   def parse_language(language) do
     json = """

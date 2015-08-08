@@ -1,0 +1,1 @@
+<button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Streams</button> <button class="mui-btn mui-btn-primary" onclick="window.location = '/videos/following';">Videos</button>

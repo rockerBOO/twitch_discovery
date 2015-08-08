@@ -2,10 +2,6 @@
       <div class="mui-panel">
         <h1>Channel</h1>
 
-        <form action="/channel">
-          <div class="mui-form-group">
-            <input type="text" class="mui-form-control mui-empty mui-dirty" name="channel" value="" placeholder="manvsgame" autofocus>
-          </div>
-        </form>
+
       </div>
     </div>

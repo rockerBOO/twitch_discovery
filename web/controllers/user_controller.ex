@@ -1,7 +1,10 @@
 defmodule TwitchDiscovery.UserController do
   use TwitchDiscovery.Web, :controller
 
-  def index(conn, _params) do
+
+  def index(conn, params) do
+
+
     render conn, "index.html"
   end
 
@@ -24,7 +27,7 @@ defmodule TwitchDiscovery.UserController do
     case follows do
       %{"created_at" => _} -> json conn, %{status: "ok"}
       # value -> json conn, %{status: "ok", result: value}
-      _ ->json conn, %{status: "error"}
+      _ -> json conn, %{status: "error"}
     end
   end
 end
