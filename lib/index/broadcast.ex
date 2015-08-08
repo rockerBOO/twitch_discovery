@@ -3,13 +3,25 @@ defmodule TwitchDiscovery.Index.Broadcast do
   alias TwitchDiscovery.Index.Stream
   alias TwitchDiscovery.Index
 
+  @name "broadcasts"
+
   def db_key(index) do
-    "broadcasts-" <> index_to_string(index)
+    db_key(@name, index)
   end
 
   def db_key() do
-    "broadcasts-" <> Index.get_current_index()
+    db_key(@name)
   end
+
+  def collection_name(index),
+  do: collection_name(@name, index)
+
+  def get_current_index do
+    get_current_index(@name)
+  end
+
+  def get_processing_index, do: get_processing_index(@name)
+  def set_index(index), do: set_index(@name, index)
 
   def parse_filters(dataset) do
     dataset
@@ -19,30 +31,24 @@ defmodule TwitchDiscovery.Index.Broadcast do
     end)
   end
 
-  def data_length(dataset) do
-    length(dataset["streams"])
-  end
+  def data_length(dataset),
+    do: length(dataset["streams"])
 
-  def initial_url do
-    "/streams?limit=100"
-  end
+  def initial_url,
+    do: "/streams?limit=100"
 
-  def collection_name() do
-    TwitchDiscovery.Index.get_current_index()
-    |> collection_name()
-  end
+  def collection_name,
+    do: get_current_index() |> collection_name()
 
-  def collection_name(index) do
-    "streams-" <> index
-  end
+  def collection_name(index),
+    do: "streams-" <> index
 
-  def parse_params_to_query(params) do
-    Stream.parse_params_to_query(params)
-  end
+  def parse_params_to_query(params),
+    do: Stream.parse_params_to_query(params)
 
-  def sorting(params) do
-    Stream.sorting(params)
-  end
+  def sorting(params),
+    do: Stream.sorting(params)
 
-  def map_result(result), do: Stream.map_result(result)
+  def map_result(result),
+    do: Stream.map_result(result)
 end

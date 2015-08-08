@@ -1,30 +1,9 @@
     <div class="mui-container">
       <div class="mui-panel">
         <h1>Streams</h1>
-        <div class="mui-dropdown" style="float: left">
-          <button class="mui-btn mui-btn-primary" data-mui-toggle="dropdown">
-            Games
-            <span class="mui-caret"></span>
-          </button>
-          <ul class="mui-dropdown-menu">
-          <li><a href="/streams">All</a></li>
-          <%= for game <- @games do %>
-          <li><a href="/streams?game=<%= URI.encode game["game"]["name"] %>"><%= game["game"]["name"] %></a></li>
-          <%= end %>
-          </ul>
-        </div>
-        &nbsp;
-        <div style="margin-left: 9px; float: left;">
-          <!-- <img style="width: 20px" src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"> -->
-          <button class="mui-btn mui-btn-primary"  onclick="$('#games-search-input').toggleClass('games-search-on'); $('#games-search-input').focus();"><i class="fa fa-search"></i></button>
-        </div>
-        <div id="games-search">
-          <form action="/streams" id="filter_form" class="mui-form-inline games-search-on">
-            <div class="mui-form-group"><input type="text" placeholder="Programming" id="games-search-input" name="game" class="games-search-input mui-form-control  mui-empty mui-dirty"></div>
-          </form>
-        </div>
         <%= if logged_in?(@conn) do %>
-        <button class="mui-btn mui-btn-primary" onclick="window.location = '/streams/following';">Following</button><% end %><!-- <button class="mui-btn mui-btn-default" onclick="window.location = '/streams/summary';">Stats</button> -->
+        <%= render TwitchDiscovery.UserView, "user_nav.html", conn: @conn %>
+        <% end %>
       </div>
 
     <%= if @streams == [] do %>

@@ -7,12 +7,81 @@ defmodule TwitchDiscovery.Index.Base do
       require Logger
       alias TwitchDiscovery.Index
 
+      def db_key(name, index) do
+        "#{name}-" <> index_to_string(index)
+      end
+
+      def db_key(name) do
+        "#{name}-" <> get_current_index()
+      end
+
+      def collection_name(), do: get_current_index() |> collection_name()
+
+      def collection_name(name, index), do: "#{name}-#{index}"
+
+      def get_current_index(type) do
+        case redis_get(type <> "_index") do
+          :undefined -> 0
+          index -> index
+        end
+      end
+
+      def get_processing_index(type) do
+        case redis_get(type <> "_index") do
+          "2" -> 0
+          "1" -> 2
+          "0" -> 1
+          :undefined -> 1
+        end
+      end
+
+
+
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
       end
 
       def index_to_string(index) do
         index
+      end
+
+      def set_index(type, id) do
+        IO.puts "set_index '#{type}_index' " <> Integer.to_string(id)
+
+        redis_client() |> Exredis.query(["SET", type <> "_index", id])
+      end
+
+      def finish_indexing do
+        Logger.info "Finished indexing games"
+
+        current_index = get_current_index()
+
+        finish()
+
+        Mongo.delete_many(
+          MongoPool,
+          current_index |> collection_name(),
+          %{}
+        )
+      end
+
+      def finish() do
+        increment_index()
+      end
+
+      def increment_index() do
+        current_index = get_current_index()
+        processing_index = get_processing_index()
+
+        set_index(processing_index)
+      end
+
+      def redis_client() do
+        :redis_client |> Process.whereis()
+      end
+
+      def redis_get(key) do
+        redis_client() |> Exredis.query(["GET", key])
       end
 
       def request(), do: initial_url() |> request()
@@ -50,9 +119,8 @@ defmodule TwitchDiscovery.Index.Base do
         end)
       end
 
-      def map_result(result) do
-        cached_result = db_key(result["id"])
-        |> TwitchDiscovery.Index.redis_get()
+      def map_result(result, unique_field) do
+        cached_result = db_key(result[unique_field]) |> redis_get()
 
         case cached_result do
           :undefined -> nil
@@ -99,7 +167,7 @@ defmodule TwitchDiscovery.Index.Base do
 
       def mongo_save(data, id) do
         try do
-          case Mongo.insert_one(MongoPool, Index.get_processing_index() |> db_key(), data) do
+          case Mongo.insert_one(MongoPool, get_processing_index() |> db_key(), data) do
             {:ok, _} -> :ok
             {:error, error} -> Logger.error error.message
           end
@@ -115,7 +183,7 @@ defmodule TwitchDiscovery.Index.Base do
       def mongo_save_many([]), do: :ok
       def mongo_save_many(documents) do
         try do
-          Mongo.insert_many(MongoPool, Index.get_processing_index() |> db_key(), documents, [ordered: false])
+          Mongo.insert_many(MongoPool, get_processing_index() |> db_key(), documents, [ordered: false])
         rescue
           e in Mongo.Error -> Logger.error e.message
         end

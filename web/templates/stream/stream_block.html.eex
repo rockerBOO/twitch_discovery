@@ -19,7 +19,7 @@
             </div>
 
             <div class="stream_meta">
-              <h4><a href="<%= @stream["channel"]["url"] %>" title="<%= @stream["channel"]["status"] %>"><%= cutoff @stream["channel"]["status"] %></a></h4>
+              <h4><a href="<%= @stream["channel"]["url"] %>" title="<%= @stream["channel"]["status"] %>"><%= @stream["channel"]["status"] %></a></h4>
               <span class="views"><%= number_format @stream["viewers"] %> viewers</span>
               <span class="name">on <a href="<%= @stream["channel"]["url"] %>"><%= @stream["channel"]["display_name"] %></a></span>
             </div>

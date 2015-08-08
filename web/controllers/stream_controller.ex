@@ -27,17 +27,10 @@ defmodule TwitchDiscovery.StreamController do
 
     defaults = %{"limit" => 24}
 
-    games = Game.format_query(%{}, %{"channels" => 1})
-    |> Game.find(limit: 24)
-
     streams = RestTwitch.Users.streams(token.access_token, Map.merge(defaults, params))
       |> Map.fetch!("streams")
-      |> Enum.map(fn (stream) ->
-        TwitchDiscovery.Indexer.Stream.process(stream)
-        stream
-      end)
 
-    render conn, "streams.html", streams: streams, games: games
+    render conn, "streams.html", streams: streams
   end
 
   def summary(conn, params) do
@@ -56,7 +49,7 @@ defmodule TwitchDiscovery.StreamController do
 
 
   def index(conn, params) do
-    IO.puts "Current Index: #{Index.get_current_index()}"
+    IO.puts "Current Index: #{Stream.get_current_index("stream")}"
 
     streams = Stream.params_to_query(params)
     |> Stream.find(limit: 24)

@@ -18,6 +18,10 @@ defmodule TwitchDiscovery.Router do
 
     resources "/_videos", VideoController
 
+    get "/user", UserController, :index
+
+    get "/channel", ChannelController, :index
+
     get "/auth/twitch/callback", OAuthController, :callback
     get "/auth/twitch", OAuthController, :auth
     get "/auth/confirmation", OAuthController, :confirmation
@@ -34,7 +38,6 @@ defmodule TwitchDiscovery.Router do
 
     get "/channels", ChannelController, :index
     get "/channel/:channel", ChannelController, :channel
-    get "/channel", ChannelController, :lookup
 
     get "/games/autocomplete", GameController, :autocomplete
 
