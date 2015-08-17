@@ -12,17 +12,15 @@ defmodule TwitchDiscovery.ChannelController do
   end
 
   def lookup(conn, %{"channel" => channel} = params) do
-
     redirect conn, to: "/channel/" <> channel
   end
 
   def lookup(conn, params) do
-
     render conn, "lookup.html"
   end
 
   def lookup_channel(channel) do
     RestTwitch.Follows.channels(channel)
-      |> Map.fetch!("follows")
+    |> Map.fetch!("follows")
   end
 end

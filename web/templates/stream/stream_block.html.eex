@@ -13,8 +13,7 @@
                   data-viewers="<%= number_format @stream["viewers"] %>"
                   data-followers="<%= number_format @stream["channel"]["followers"] %>"
                   data-views="<%= number_format @stream["channel"]["views"] %>"
-                ><i class="fa fa-eye"></i>
-   Preview</a>
+                ><i class="fa fa-eye"></i>Preview</a>
               </div>
             </div>
 

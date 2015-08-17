@@ -7,19 +7,21 @@ defmodule TwitchDiscovery.StreamController do
   alias   TwitchDiscovery.Index.Game
   alias   TwitchDiscovery.Index
 
+  def streams(params) do
+    streams = Stream.params_to_query(params)
+    |> Stream.find(limit: 24)
+  end
+
+  def streams_json(conn, params) do
+    IO.inspect params
+
+    render conn, streams: streams(params)
+  end
+
   def live_streams(conn, params) do
-    games = Game.format_query(%{}, %{"channel" => 1})
-    |> Game.find(limit: 24)
+    streams = streams(params)
 
-    defaults = %{"limit" => 24}
-
-    streams = RestTwitch.Streams.live(Map.merge(defaults, params), %{ttl: 60})
-      |> Map.fetch!("streams")
-      |> Enum.map(fn (stream) ->
-        stream
-      end)
-
-    render conn, "streams.html", streams: streams, games: games
+    render conn, "streams.html", streams: streams
   end
 
   def following(conn, params) do
@@ -28,21 +30,15 @@ defmodule TwitchDiscovery.StreamController do
     defaults = %{"limit" => 24}
 
     streams = RestTwitch.Users.streams(token.access_token, Map.merge(defaults, params))
-      |> Map.fetch!("streams")
+    |> Map.fetch!("streams")
 
     render conn, "streams.html", streams: streams
   end
 
   def summary(conn, params) do
-    games = Game.format_query(%{}, %{"channel" => 1})
-    |> Game.find(limit: 24)
-
     summary = RestTwitch.Streams.summary(params, %{ttl: 60})
 
-    # IO.inspect summary
-
     render conn, "summary.html",
-      games: games,
       viewers: summary["viewers"],
       channels: summary["channels"]
   end

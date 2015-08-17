@@ -119,6 +119,10 @@
               </label>
             </div>
           </div>
+<!--
+          <div class="filter_block">
+            <a href="/api/streams?<%= @conn.query_string %>">API</a>
+          </div> -->
 
           <div style="float: right;">
             <button type="submit" class="mui-btn mui-btn-primary mui-btn-raised">Find!</button>
@@ -132,7 +136,7 @@
       </div>
     <% else %>
       <div class="mui-panel">
-        <div class="mui-row">
+        <div class="mui-row" id="stream-blocks">
         <%= for stream <- @streams do %>
           <%= render TwitchDiscovery.StreamView, "stream_block.html", stream: stream %>
         <% end %>
