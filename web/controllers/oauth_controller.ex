@@ -39,11 +39,11 @@ defmodule TwitchDiscovery.OAuthController do
 
     # Request the user's data with the access token
     user = RestTwitch.Request.get_token_body!("/user", token.access_token)
-      |> Poison.decode!()
+    |> Poison.decode!()
 
     conn
-      |> put_session(:current_user, user)
-      |> put_session(:access_token, token)
-      |> redirect(to: "/auth/confirmation")
+    |> put_session(:current_user, user)
+    |> put_session(:access_token, token)
+    |> redirect(to: "/auth/confirmation")
   end
 end

@@ -53,10 +53,10 @@ defmodule TwitchDiscovery.Index.Game do
   end
 
   def data_length(dataset),
-    do: length(dataset["top"])
+  do: length(dataset["top"])
 
   def initial_url,
-    do: "/games/top?limit=100"
+  do: "/games/top?limit=100"
 
   # def collection_name(),
   #   do: get_current_index() |> collection_name()
@@ -65,7 +65,7 @@ defmodule TwitchDiscovery.Index.Game do
   #   do: "#{@name}-#{index}"
 
   def map_result(result),
-    do: result
+  do: result
 
   def redis_save_many(results) do
 
@@ -74,8 +74,8 @@ defmodule TwitchDiscovery.Index.Game do
   def parse_params_to_query(_params), do: %{}
 
   def sorting(params),
-    do: %{}
+  do: %{}
 
   def map_result(result),
-    do: result
+  do: result
 end

@@ -2,10 +2,10 @@
           <div class="stream-block mui-col-md-4">
             <div class="stream-image">
               <a href="<%= @stream["channel"]["url"] %>">
-                <img src="<%= @stream["preview"]["large"] %>">
+                <img src="<%= @stream["preview"]["large"] %>" onerror="imgError(this);">
               </a>
               <div>
-                <a class="preview" href="javascript:;"
+                <a  onclick="activatePreview(this);" class="preview" href="javascript:;"
                   data-channel="<%= @stream["channel"]["name"] %>"
                   data-title="<%= @stream["channel"]["status"] %>"
                   data-display-name="<%= @stream["channel"]["display_name"] %>"
@@ -13,8 +13,7 @@
                   data-viewers="<%= number_format @stream["viewers"] %>"
                   data-followers="<%= number_format @stream["channel"]["followers"] %>"
                   data-views="<%= number_format @stream["channel"]["views"] %>"
-                ><i class="fa fa-eye"></i>
-   Preview</a>
+                ><i class="fa fa-eye"></i> Preview</a>
               </div>
             </div>
 

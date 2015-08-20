@@ -36,13 +36,6 @@ defmodule TwitchDiscovery.Index.Broadcast do
 
   def initial_url,
     do: "/streams?limit=100"
-
-  def collection_name,
-    do: get_current_index() |> collection_name()
-
-  def collection_name(index),
-    do: "streams-" <> index
-
   def parse_params_to_query(params),
     do: Stream.parse_params_to_query(params)
 

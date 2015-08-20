@@ -1,10 +1,7 @@
 defmodule TwitchDiscovery.UserController do
   use TwitchDiscovery.Web, :controller
 
-
   def index(conn, params) do
-
-
     render conn, "index.html"
   end
 
@@ -13,7 +10,7 @@ defmodule TwitchDiscovery.UserController do
     token = get_session(conn, :access_token)
 
     result = RestTwitch.Follows.follow(token.access_token, user["name"], channel)
-      |> RestTwitch.Follows.get_list("channel")
+    |> RestTwitch.Follows.get_list("channel")
 
     json conn, %{status: "ok"}
   end
@@ -21,8 +18,6 @@ defmodule TwitchDiscovery.UserController do
   def follows(conn, %{"channel" => channel}) do
     user  = get_session(conn, :current_user)
     follows = RestTwitch.Follows.follows(user["name"], channel)
-
-    IO.inspect follows
 
     case follows do
       %{"created_at" => _} -> json conn, %{status: "ok"}

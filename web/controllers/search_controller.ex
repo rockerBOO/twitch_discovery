@@ -15,19 +15,16 @@ defmodule TwitchDiscovery.SearchController do
   def streams(conn, %{"q" => query} = params) do
     games = RestTwitch.Games.top(%{"limit" => 20})
     streams = RestTwitch.Search.streams(params)
-      |> Enum.map(fn (stream) ->
-
-        for %{"channel" => channel} <- stream do
-          case channel["url"] do
-            status -> status
-            nil -> Map.put(channel, "url", "http://www.twitch.tv/" <> channel["name"])
-          end
+    |> Enum.map(fn (stream) ->
+      for %{"channel" => channel} <- stream do
+        case channel["url"] do
+          status -> status
+          nil -> Map.put(channel, "url", "http://www.twitch.tv/" <> channel["name"])
         end
+      end
 
-        stream
-        end)
-
-    # IO.inspect streams
+      stream
+    end)
 
     render conn, "streams.html", search: query, streams: streams, games: games
   end

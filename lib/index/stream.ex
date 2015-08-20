@@ -14,6 +14,8 @@ defmodule TwitchDiscovery.Index.Stream do
     db_key(@name)
   end
 
+  def collection_name(), do: get_current_index() |> collection_name()
+
   def collection_name(index),
   do: collection_name(@name, index)
 
@@ -23,19 +25,6 @@ defmodule TwitchDiscovery.Index.Stream do
 
   def get_processing_index, do: get_processing_index(@name)
   def set_index(index), do: set_index(@name, index)
-
-
-  # def db_key(index) do
-  #   "streams-" <> index_to_string(index)
-  # end
-
-  # def db_key() do
-  #   "streams-" <> get_current_index()
-  # end
-
-  # def get_current_index(), do: get_current_index("stream")
-  # def get_processing_index(), do: get_processing_index("stream")
-  # def set_index(index), do: set_index("stream", index)
 
   # Handling finished results and errors due to empty results
   def process(%{"streams" => []} = resultset) do
@@ -70,10 +59,10 @@ defmodule TwitchDiscovery.Index.Stream do
     map_result(result, "id")
   end
 
-
   def parse_filters(dataset) do
     dataset
     |> Enum.map(fn (stream) ->
+      # TwitchDiscovery.Metric.Channel.save(stream["channel"]["name"], "viewers", stream["viewers"])
       Stream.process(stream)
     end)
   end
@@ -85,14 +74,6 @@ defmodule TwitchDiscovery.Index.Stream do
   def initial_url do
     "/streams?limit=100"
   end
-
-  # def collection_name() do
-  #   get_current_index("stream") |> collection_name()
-  # end
-
-  # def collection_name(index) do
-  #   "streams-" <> index
-  # end
 
   def parse_language(language) do
     json = """
@@ -246,4 +227,5 @@ defmodule TwitchDiscovery.Index.Stream do
       _                        -> %{"viewers" => -1}
     end
   end
+
 end
