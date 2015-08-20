@@ -9,12 +9,25 @@
     <style type="text/css">
     body {
       background-color: #111;
+      background-image: url("<%= static_path(@conn, "/images/bg.png") %>");
+    }
+
+    .stream-image {
+      background-image: url("<%= static_path(@conn, "/images/default-stream-image.png") %>");
+      background-clip: content-box;
     }
     </style>
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+    <script type="text/javascript">
+    function imgError(image) {
+        image.onerror = "";
+        image.src = "<%= static_path(@conn, "/images/default-stream-image.png") %>";
+        return true;
+    }
+    </script>
   </head>
   <body>
     <div class="app-bar mui-appbar">
@@ -88,6 +101,32 @@
     <script type="text/javascript">
     var PlayerClass = require('web/static/js/player')
     var Player      = new PlayerClass()
+
+    function activatePreview(element) {
+      var channel       = element.getAttribute("data-channel")
+      var title         = element.getAttribute("data-title")
+      var display_name  = element.getAttribute("data-display-name")
+      var game          = element.getAttribute("data-game")
+      var followers     = element.getAttribute("data-followers")
+      var viewers       = element.getAttribute("data-viewers")
+      var views         = element.getAttribute("data-views")
+
+      Player.clearPreview()
+
+      Player.twitchPlayer(channel)
+      Player.twitchChat(channel)
+      Player.twitchMeta({
+        channel: channel,
+        title: title,
+        display_name: display_name,
+        game: game,
+        viewers: viewers,
+        followers: followers,
+        views: views
+      })
+
+      document.getElementById("preview_video").parentNode.parentNode.classList.remove("preview_off")
+    }
 
     window.onload = function () {
       require('web/static/js/onload')
