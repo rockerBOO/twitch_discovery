@@ -1,6 +1,6 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h1>Search > Streams</h1>
+        <h1 id="title">Search > Streams</h1>
         <form action="/search/streams">
           <div class="mui-form-group">
             <input type="text" name="q" class="mui-form-control"  value="<%= @search %>" />

@@ -19,6 +19,8 @@ Ideas
 * tag streams
 * schedules
 * timezone support
+* find by number of views (buffalowave)
+* find by number of followers (buffalowave)
 
 ### Search
 * channels
