@@ -1,0 +1,108 @@
+
+.filter_block .name {
+  font: 700 italic 22px Roboto, Calibri, Helvetica, sans-serif;
+  padding-bottom: .1em;
+  margin-top: .3em;
+  border-bottom: 2px solid #111;
+}
+
+#filter_form .input-field {
+  font-size: 1.2em;
+}
+
+#filter_form .mui-select {
+  font-size: 1.3em;
+}
+
+.input-field label {
+  font-weight: normal;
+}
+
+.input-field {
+  // margin-top: .7em;
+}
+
+.input-field input,
+.input-field select,
+.input-field option {
+  margin-top: .5em;
+  margin-bottom: .5em;
+  font: 700 italic 18px Roboto, sans-serif;
+}
+
+// Placeholder colors, do not group
+::-webkit-input-placeholder {
+   color: #333;
+}
+
+::-moz-placeholder {
+   color: #333;
+}
+
+:-ms-input-placeholder {
+   color: #333;
+}
+
+.hide-options {
+  width: 0;
+  display: none;
+  visibility: none;
+}
+
+.options {
+  opacity: 100;
+  transition: opacity .4s, visibilty .4s;
+}
+
+.filter_block {
+  min-width: 100px;
+  height: 75px;
+  /*background: #000;*/
+  margin-right: 10px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.meta {
+  margin-top: 5px;
+  font-size: .7em;
+  font-weight: normal;
+}
+
+.name {
+  width: 100%;
+}
+
+// SELECTORS
+
+.radio_button {
+  padding: 10px;
+  float: left;
+  background: #010101;
+  font: 700 italic 18px Roboto, sans-serif;
+  color: #fff;
+  cursor: pointer;
+
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+input[type="radio"]:checked + span {
+  background-color: #5E35B1;
+}
+
+input[type="radio"] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
+

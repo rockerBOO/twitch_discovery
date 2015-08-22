@@ -22,48 +22,53 @@
                 <span id="viewers_min_show"></span> to
                 <span id="viewers_max_show"></span>
               </span>
-              <span style="float: left;">Viewers </span>
+              <span>Viewers </span>
             </div>
-            <div class="mui-select input-field">
+            <div>
               <div id="range"></div>
-
               <input type="number" id="viewers_min" name="viewers_min" style="display: none;">
               <input type="number" id="viewers_max" name="viewers_max" style="display: none;">
-
             </div>
           </div>
 
           <div class="filter_block">
             <div class="name">FPS</div>
             <div id="search-fps-options" class="mui-select options input-field">
-              <select name="fps" autocomplete="off">
-                <option<%= "All" |> selected(@params["fps"]) |> raw %>>All</option>
-                <option<%= 60 |> selected(@params["fps"]) |> raw %>>60</option>
-                <option<%= 30 |> selected(@params["fps"]) |> raw %>>30</option>
-              </select>
+              <div class="radio_block">
+                <label>
+                  <% fps_opts = "30" |> checked_opts(@params["fps"]) %>
+                  <%= radio_button(:streams, :fps, "30", Keyword.put(fps_opts, :name, "fps")) %>
+                  <span class="radio_button noselect">30</span>
+                </label>
+                <label>
+                  <% fps_opts = "60" |> checked_opts(@params["fps"]) %>
+                  <%= radio_button(:streams, :fps, "60", Keyword.put(fps_opts, :name, "fps")) %>
+                  <span class="radio_button noselect">60</span>
+                </label>
+              </div>
             </div>
           </div>
 
           <div class="filter_block">
-            <div class="name">Started At</div>
+            <div class="name">Uptime</div>
             <div class="mui-select input-field">
               <select name="started_at" autocomplete="off">
                 <option>All</option>
                 <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
-                <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15mins ago</option>
-                <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins ago</option>
-                <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins ago</option>
-                <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour ago</option>
-                <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours ago</option>
-                <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours ago</option>
-                <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours ago</option>
-                <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours ago</option>
-                <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours ago</option>
-                <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours ago</option>
-                <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours ago</option>
-                <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours ago</option>
-                <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours ago</option>
-                <option value="h30"<%= "h30" |> selected(@params["started_at"]) |> raw %>>30 hours ago</option>
+                <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15 mins</option>
+                <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins</option>
+                <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins</option>
+                <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour</option>
+                <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours</option>
+                <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours</option>
+                <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours</option>
+                <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours</option>
+                <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours</option>
+                <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours</option>
+                <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours</option>
+                <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours</option>
+                <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours</option>
+                <option value="h30"<%= "h30" |> selected(@params["started_at"]) |> raw %>>30 hours</option>
               </select>
             </div>
           </div>
@@ -102,29 +107,23 @@
           </div>
 
           <div class="filter_block">
-            <div class="name"><a href="javascript:;" id="search-mature-toggle">Mature</a></div>
-            <div id="search-mature-options"  class="input-field options <%= if @params["mature"] == nil, do: "hide-options" %>">
-              <label>
-                <% mature_opts = "no" |> checked_opts(@params["mature"]) %>
-                <%= radio_button(:streams, :mature, "no", Keyword.put(mature_opts, :name, "mature")) %>
-                No
-              </label>
-              <label>
-              <% mature_opts = "yes" |> checked_opts(@params["mature"]) %>
-              <%= radio_button(:streams, :mature, "yes", Keyword.put(mature_opts, :name, "mature")) %>
-                Yes
-              </label>
-              <label>
-              <% mature_opts = "all" |> checked_opts(@params["mature"]) %>
-              <%= radio_button(:streams, :mature, "all", Keyword.put(mature_opts, :name, "mature")) %>
-                All
-              </label>
+            <div class="name">Mature</div>
+            <div id="search-mature-options" class="input-field options">
+              <div class="radio_block">
+                <label>
+                  <% mature_opts = "yes" |> checked_opts(@params["mature"]) %>
+                  <%= radio_button(:streams, :mature, "yes", Keyword.put(mature_opts, :name, "mature")) %>
+                  <span class="radio_button noselect">Yes</span>
+                </label>
+                <label>
+                  <!-- <input type="radio" name="mature" value="no"></input> -->
+                  <% mature_opts = "no" |> checked_opts(@params["mature"]) %>
+                  <%= radio_button(:streams, :mature, "no", Keyword.put(mature_opts, :name, "mature")) %>
+                  <span class="radio_button noselect">No</span>
+                </label>
+              </div>
             </div>
           </div>
-<!--
-          <div class="filter_block">
-            <a href="/api/streams?<%= @conn.query_string %>">API</a>
-          </div> -->
 
           <div style="float: right;">
             <button type="submit" class="mui-btn mui-btn-primary mui-btn-raised">Find!</button>

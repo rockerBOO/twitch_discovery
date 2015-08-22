@@ -32,3 +32,22 @@ $("#filter_form").submit(function (event) {
 
   Filter.getStreams()
 });
+
+$("input[type=radio]").click(function (event) {
+  var element = $(event.currentTarget)
+
+  if (this.hasAttribute("data-radio-checked")) {
+    console.log("removing checked")
+    element.prop('checked', false)
+
+    $(".radio_block input").removeAttr("data-radio-checked")
+
+    Filter.getStreams()
+  } else {
+    console.log("setting as checked")
+    $(".radio_block input").removeAttr("data-radio-checked")
+
+    element.prop("checked", true);
+    this.setAttribute("data-radio-checked", true)
+  }
+});
