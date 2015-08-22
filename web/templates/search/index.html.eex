@@ -1,6 +1,6 @@
     <div class="mui-container">
       <div class="mui-panel">
-        <h1>Search</h1>
+        <h1 id="title">Search</h1>
 
         <form action="/search/streams">
           <div class="mui-form-group">
