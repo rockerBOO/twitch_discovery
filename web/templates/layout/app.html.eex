@@ -30,12 +30,12 @@
     </script>
   </head>
   <body>
-    <div class="app-bar mui-appbar">
+    <header>
       <div class="mui-container">
         <!-- <i class="fa fa-bars"></i> -->
-       <a href="/"><img src="<%= static_path(@conn, "/images/discovery.svg") %>" style="width: 225px" /></a>
+       <a href="/"><img src="<%= static_path(@conn, "/images/discovery.svg") %>" style="width: 225px" alt="Discovery" /></a>
       </div>
-    </div>
+    </header>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
           <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
 <!--           <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button> -->
