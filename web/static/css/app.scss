@@ -2,26 +2,6 @@
   overflow: hidden;
 }
 
-#games-search {
-  float: left;
-}
-
-// Hackalis (Blasted Jesus Edition)
-.games-search-input {
-  width: 0;
-  opacity: 0;
-  transition: all .4s;
-}
-
-#games-search > form > div {
-  padding-top: 9px;
-}
-
-.games-search-input.games-search-on   {
-  width: 250px;
-  opacity: 1;
-  margin-left: 10px;
-}
 
 .stream-image:hover .preview,
 .broadcast-image:hover .preview {
@@ -33,12 +13,13 @@
   position: relative;
 }
 
-// .mui-panel {
-//   background-color: #111;
-// }
-
-body {
-  /*font-family: Roboto, Helvetica, Calibri, Arial, sans;*/
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 h1#title {
@@ -46,7 +27,6 @@ h1#title {
   margin-bottom: .3em;
   font: 100 italic 36px Roboto, Calibri, Helvetica, sans-serif;
 }
-
 
 .fa-bars {
   font-size: 32px;
@@ -57,9 +37,7 @@ h1#title {
   margin-top: 0;
 }
 
-#footer {
-  margin-bottom: 300px;
-}
+
 
 .stream-block h4,
 .channel-block h4,
@@ -89,12 +67,12 @@ h1#title {
 .video-block img,
 .broadcast-block img  {
   width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 993px) {
@@ -111,9 +89,9 @@ h1#title {
 .video-block .video-image,
 .broadcast-block .broadcast-image {
   width: 100%;
-    padding-top: 56.25%; /* defines aspect ratio */
-    position: relative;
-    overflow: hidden;
+  padding-top: 56.25%; /* defines aspect ratio */
+  position: relative;
+  overflow: hidden;
 }
 
 .video-image {

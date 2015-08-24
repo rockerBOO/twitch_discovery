@@ -52,11 +52,42 @@
     <div class="inner">
       <%= @inner %>
     </div>
-    <div id="footer">
-      <div class="mui-container">
-        Built on <a href="http://elixir-lang.org/">Elixir</a> &amp; <a href="http://www.phoenixframework.org/">Phoenix</a> | <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a> | Background: <a href="http://lodyas.com/carlos-aguilar/">Carlos Aguilar</a>  CC BY-SA 3.0 | <span>Discovery is not affiliated with or sponsored by Twitch</span>
-      </div>
+    <div class="mui-container">
+      <footer>
+        <div id="footer_blocks">
+          <div class="block">
+            <h3>About</h3>
+            Built on
+            <ul>
+              <li><a href="http://elixir-lang.org/">Elixir</a></li>
+              <li><a href="http://www.phoenixframework.org/">Phoenix</a></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h3>Help</h3>
+            <ul>
+              <li><a href="/terms">Terms</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h3>Credits</h3>
+            <strong><a href="http://lodyas.com/carlos-aguilar/">Carlos Aguilar</a></strong> <br>
+            Background <em>CC BY-SA 3.0</em>
+          </div>
+          <div>
+            <h3>Share</h3>
+            <h4>Let your others know about us!</h4>
+            <a href="http://twitter.com/home?status=Find%20new%20Twitch%20streams%20on%20Discovery%20http://discovery.rockerboo.net/%20%23discovery"><img src="/images/twitter.svg"></a> <a href="https://www.reddit.com/submit?url=http://discovery.rockerboo.net"><img src="/images/reddit.svg"></a>
+          </div>
+        </div>
+        <div id="disclaimer">
+          Twitch is a trademark or registered trademark of Twitch Interactive, Inc. in the U.S. and/or other countries. "Discovery" is not operated by, sponsored by, or affiliated with Twitch Interactive, Inc. in any way.
+        </div>
+      </footer>
     </div>
+
+
     <div id="preview" class="preview_off">
       <div id="preview_bar">
         <h2 id="preview_title"></h2>
