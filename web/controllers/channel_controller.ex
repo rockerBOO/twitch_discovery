@@ -6,9 +6,11 @@ defmodule TwitchDiscovery.ChannelController do
   end
 
   def channel(conn, %{"channel" => channel} = params) do
-    channel = RestTwitch.Channels.get(channel)
+    channel_details = RestTwitch.Channels.get(channel)
 
-    render conn, "channel.html", channel: channel
+    videos = RestTwitch.Channels.videos(channel, %{limit: 9}) |> Map.fetch!("videos")
+
+    render conn, "channel.html", channel: channel_details, videos: videos
   end
 
   def lookup(conn, %{"channel" => channel} = params) do

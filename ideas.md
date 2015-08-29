@@ -6,15 +6,15 @@ Ideas
 
 ### Discovery Starting Points
 * # of followers/# of channel views
-* find by language
-* mature streams
-* follower of followers for streamers
+[X] find by language
+[X] mature streams
+[X] follower of followers for streamers
 * subset by teams
 * find new videos of streamers
 * Get videos per channel
 
-* top videos on twitch [X]
-* find by game [X]
+[X] top videos on twitch [X]
+[X] find by game [X]
 
 * tag streams
 * schedules

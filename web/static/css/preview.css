@@ -87,13 +87,14 @@
 
 #preview_title {
   float: left;
-  font-size: 1.2em;
+  font-size: 1.3em;
   line-height: 1.1em;
   margin: .6em;
   padding: 0;
   max-height: 3em;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: 100;
 }
 
 #preview_title a {

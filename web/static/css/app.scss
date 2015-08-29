@@ -22,22 +22,16 @@
   user-select: none;
 }
 
-h1#title {
-  margin: 0;
-  margin-bottom: .3em;
-  font: 100 italic 36px Roboto, Calibri, Helvetica, sans-serif;
-}
-
 .fa-bars {
   font-size: 32px;
   margin: 7px;
 }
 
 .mui-panel h1:first-of-type {
-  margin-top: 0;
+  margin: 0;
+  margin-bottom: .3em;
+  font: 100 italic 36px Roboto, Calibri, Helvetica, sans-serif;
 }
-
-
 
 .stream-block h4,
 .channel-block h4,
@@ -68,11 +62,7 @@ h1#title {
 .broadcast-block img  {
   width: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 @media screen and (max-width: 993px) {
@@ -89,23 +79,13 @@ h1#title {
 .video-block .video-image,
 .broadcast-block .broadcast-image {
   width: 100%;
-  padding-top: 56.25%; /* defines aspect ratio */
+  padding-bottom: 56.25%; /* defines aspect ratio */
   position: relative;
-  overflow: hidden;
-}
-
-.video-image {
-  position: relative;
-  height: 156px;
   overflow: hidden;
 }
 
 .video-image a img {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(28px,320px,190px,0px);
-  top: -28px;
-  bottom: -28px;
+  margin-top: -9.5%;
 }
 
 .inner {
