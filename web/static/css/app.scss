@@ -1,7 +1,10 @@
+* {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+}
+
 .mui-container {
   overflow: hidden;
 }
-
 
 .stream-image:hover .preview,
 .broadcast-image:hover .preview {
@@ -30,7 +33,9 @@
 .mui-panel h1:first-of-type {
   margin: 0;
   margin-bottom: .3em;
-  font: 100 italic 36px Roboto, Calibri, Helvetica, sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 36px;
 }
 
 .stream-block h4,
@@ -62,7 +67,6 @@
 .broadcast-block img  {
   width: 100%;
   position: absolute;
-  // overflow: hidden;
 }
 
 @media screen and (max-width: 993px) {

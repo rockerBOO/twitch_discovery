@@ -1,6 +1,16 @@
 
+.filter_block {
+  min-width: 100px;
+  height: 75px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  float: left;
+}
+
 .filter_block .name {
-  font: 700 italic 22px Roboto, Calibri, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 22px;
   padding-bottom: .1em;
   margin-top: .3em;
   border-bottom: 2px solid #111;
@@ -23,7 +33,9 @@
 .input-field option {
   margin-top: .5em;
   margin-bottom: .5em;
-  font: 700 italic 18px Roboto, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 18px;
 }
 
 // Placeholder colors, do not group
@@ -50,38 +62,31 @@
   transition: opacity .4s, visibilty .4s;
 }
 
-.filter_block {
-  min-width: 100px;
-  height: 75px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  float: left;
-}
-
 .meta {
   margin-top: 5px;
   font-size: .7em;
   font-weight: normal;
 }
 
-.name {
-  width: 100%;
-}
-
 // SELECTORS
-
 .radio_button {
   padding: 10px;
   float: left;
-  font: 700 italic 18px Roboto, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 18px;
   color: #fff;
   cursor: pointer;
 }
 
-input[type="radio"] {
+.filter_block input[type="radio"] {
    position: absolute;
    top: -9999px;
    left: -9999px;
+}
+
+input[type="radio"]:checked + span {
+  background: #6441A5;
 }
 
 #games-search {

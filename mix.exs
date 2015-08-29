@@ -31,10 +31,10 @@ defmodule TwitchDiscovery.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.14"},
-     {:phoenix_ecto, "~> 0.5"},
+    [{:phoenix, "~> 1.0"},
+     {:phoenix_ecto, "~> 1.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 1.1"},
+     {:phoenix_html, "~> 2.1.2"},
      {:exredis, ">= 0.1.1"},
      {:number, "~> 0.3.4"},
      {:quantum, ">= 1.2.4"},
@@ -43,8 +43,8 @@ defmodule TwitchDiscovery.Mixfile do
      {:rest_twitch, github: "rockerBOO/rest_twitch"},
      # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
      {:httpoison, "~> 0.7"},
-     {:timex, "~> 0.16.1"},
-     {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:timex, "~> 0.16"},
+     {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:exrm, "~> 0.15.3", only: :dev},
      {:exprof, ">= 0.2.0", only: :dev},
      # {:beaker, ">= 0.0.3"},
