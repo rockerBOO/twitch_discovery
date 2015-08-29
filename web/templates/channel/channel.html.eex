@@ -3,11 +3,11 @@
 
       <%= if @channel["profile_banner"] != nil do %>
       <style type="text/css">
-      .app-bar {
+      header {
         background-color: #000;
       }
 
-      .app-bar .mui-container {
+      header .mui-container {
         background: url("<%= @channel["profile_banner"] %>");
         background-repeat: no-repeat;
         background-size: auto 480px;
@@ -17,7 +17,7 @@
       <% end %>
       <%= if @channel["profile_banner_background_color"] != "null" do %>
       <style type="text/css">
-      .app-bar {
+      header {
         background-color: <%= @channel["profile_banner_background_color"] %>;
       }
       </style>
@@ -39,6 +39,18 @@
         <li>video_banner: <a href="<%= @channel["profile_banner"] %>"><%= @channel["profile_banner"] %></a></li>
         <li>API: <a href="https://api.twitch.tv/kraken/channels/<%= @channel["name"] %>">/channels/<%= @channel["name"] %></a></li>
       </ul>
+
+      <div class="mui-panel">
+        <div class="mui-row">
+          <%= if @videos == [] do %>
+            :D
+          <% else %>
+            <%= for video <- @videos do %>
+              <%= render TwitchDiscovery.VideoView, "video_block.html", video: video %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 <!--

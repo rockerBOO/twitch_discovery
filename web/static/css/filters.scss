@@ -73,14 +73,9 @@
 .radio_button {
   padding: 10px;
   float: left;
-  background: #010101;
   font: 700 italic 18px Roboto, sans-serif;
   color: #fff;
   cursor: pointer;
-}
-
-input[type="radio"]:checked + span {
-  background-color: #5E35B1;
 }
 
 input[type="radio"] {
