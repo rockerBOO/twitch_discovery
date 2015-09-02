@@ -64,7 +64,7 @@ function getQueryParam(param) {
 function offset(direction, limit) {
   var offset = getQueryParam("offset")
 
-  if (offset == null) {
+  if (offset == null || offset == "null") {
     offset = 0;
   }
 
