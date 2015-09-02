@@ -6,16 +6,6 @@
   overflow: hidden;
 }
 
-.stream-image:hover .preview,
-.broadcast-image:hover .preview {
-  opacity: 1;
-  visibility: visible;
-}
-
-.stream-image,.broadcast-image {
-  position: relative;
-}
-
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -23,11 +13,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.fa-bars {
-  font-size: 32px;
-  margin: 7px;
 }
 
 .mui-panel h1:first-of-type {
@@ -38,69 +23,67 @@
   font-size: 36px;
 }
 
-.stream-block h4,
-.channel-block h4,
-.video-block h4,
-.broadcast-block h4 {
-  font-size: 1.3em;
-  font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+// HEADER
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+#logo {
+  height: 3em;
 }
 
-.stream-block .stream_meta,
-.channel-block .channel-meta,
-.video-block .video-meta,
-.broadcast-block .broadcast-meta  {
-  height: 6.5em;
+
+#auth {
+  height: 3em;
+  float: right;
 }
 
-.stream-block, .channel-block, .broadcast-block  {
-  margin-bottom: 10px;
-  /*height: 300px;*/
-}
-
-.stream-block img,
-.channel-block img,
-.video-block img,
-.broadcast-block img  {
-  width: 100%;
-  position: absolute;
-}
-
-@media screen and (max-width: 993px) {
-  .stream-block img,
-  .channel-block img,
-  .video-block img,
-  .broadcast-block img {
-    height: auto;
-  }
-}
-
-.stream-block .stream-image,
-.channel-block .channel-image,
-.video-block .video-image,
-.broadcast-block .broadcast-image {
-  width: 100%;
-  padding-bottom: 56.25%; /* defines aspect ratio */
+.auth_button_container {
+  // padding-top: 10%;
   position: relative;
-  overflow: hidden;
-}
-
-.video-image a img {
-  margin-top: -9.5%;
-}
-
-.inner {
-  margin-bottom: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @media all and (max-width: 400px) {
-  .stream-block img {
-    width: calc(100vw - 75px);
+  #logo {
+    height: 2em;
+  }
+
+  #auth {
+    height: 2em;
   }
 }
+
+@media all and (min-width: 768px) {
+  #logo {
+    height: 4em;
+  }
+
+  #auth {
+    height: 4em;
+  }
+}
+
+.mui-tabs {
+  margin-bottom: .3em;
+}
+
+.mui-tabs li {
+  background: rgba(#170020, .8);
+  border-bottom: .1em solid #400058;
+}
+
+.mui-tabs li a {
+  cursor: pointer;
+}
+
+.mui-tabs-justified li:hover {
+  background: rgba(#36185e, 0.7);
+  transition: background-color .3s ease-in;
+}
+
+
+// PAGINATION
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 #pagination {
 
@@ -117,26 +100,4 @@
 .mui-dropdown-menu {
   overflow: auto;
   max-height: 90vh;
-}
-
-.autocomplete-suggestions {
-  border: 1px solid rgba(0, 0, 0, 0.87);
-  background: #111;
-  cursor: default;
-  overflow: auto;
-}
-
-.autocomplete-suggestion {
-  padding: 10px 5px;
-  font-size: 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-}
-.autocomplete-selected {
-  background: rgba(0, 0, 0, 0.87);
-}
-.autocomplete-suggestions strong {
-  font-weight: normal;
-  color: #673AB7;
 }

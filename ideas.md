@@ -10,10 +10,7 @@ Ideas
 [X] mature streams
 [X] follower of followers for streamers
 * subset by teams
-* find new videos of streamers
-* Get videos per channel
 
-[X] top videos on twitch [X]
 [X] find by game [X]
 
 * tag streams
@@ -21,6 +18,12 @@ Ideas
 * timezone support
 * find by number of views (buffalowave)
 * find by number of followers (buffalowave)
+
+#### Video
+
+[X] top videos on twitch [X]
+* find new videos of streamers
+* Get videos per channel
 
 ### Search
 * channels
@@ -34,3 +37,9 @@ Ideas
 
 * Subscribed but not following (notify)
 * Search all followed channels
+
+### Tabs
+Game (multiple?)
+Viewers/Followers/Views
+Tags, Language
+Time/Schedule

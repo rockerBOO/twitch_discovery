@@ -21,7 +21,7 @@ defmodule TwitchDiscovery.StreamController do
   def live_streams(conn, params) do
     streams = streams(params)
 
-    render conn, "streams.html", streams: streams
+    render conn, "streams.html", streams: streams, page_title: "Livestreams - Discovery"
   end
 
   def following(conn, params) do
@@ -43,13 +43,12 @@ defmodule TwitchDiscovery.StreamController do
       channels: summary["channels"]
   end
 
-
   def index(conn, params) do
     IO.puts "Current Index: #{Stream.get_current_index("stream")}"
 
     streams = Stream.params_to_query(params)
     |> Stream.find(limit: 24)
 
-    render conn, "streams_filtered.html", streams: streams, params: params
+    render conn, "streams_filtered.html", streams: streams, params: params, page_title: "Livestreams - Discovery"
   end
 end

@@ -1,0 +1,74 @@
+.stream-block h4,
+.channel-block h4,
+.video-block h4,
+.broadcast-block h4 {
+  font-size: 1.3em;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stream-block .stream_meta,
+.channel-block .channel-meta,
+.video-block .video-meta,
+.broadcast-block .broadcast-meta  {
+  height: 6.5em;
+}
+
+.stream-block, .channel-block, .broadcast-block  {
+  margin-bottom: 10px;
+  /*height: 300px;*/
+}
+
+.stream-block img,
+.channel-block img,
+.video-block img,
+.broadcast-block img  {
+  width: 100%;
+  position: absolute;
+}
+
+@media screen and (max-width: 993px) {
+  .stream-block img,
+  .channel-block img,
+  .video-block img,
+  .broadcast-block img {
+    height: auto;
+  }
+}
+
+.stream-block .stream-image,
+.channel-block .channel-image,
+.video-block .video-image,
+.broadcast-block .broadcast-image {
+  width: 100%;
+  padding-bottom: 56.25%; /* defines aspect ratio */
+  position: relative;
+  overflow: hidden;
+}
+
+.video-image a img {
+  margin-top: -9.5%;
+}
+
+.inner {
+  margin-bottom: 20px;
+}
+
+@media all and (max-width: 400px) {
+  .stream-block img {
+    width: calc(100vw - 75px);
+  }
+}
+
+
+.stream-image:hover .preview,
+.broadcast-image:hover .preview {
+  opacity: 1;
+  visibility: visible;
+}
+
+.stream-image,.broadcast-image {
+  position: relative;
+}

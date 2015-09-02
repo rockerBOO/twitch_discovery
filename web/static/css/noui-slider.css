@@ -48,11 +48,11 @@
 }
 
 #range {
-  padding-top: 1em;
+  margin-top: 1em;
 }
 
-#viewers {
-  width: 13em;
+#viewers, #views, #followers {
+  width: 14em;
   margin-left: 1.6em;
   margin-right: 1.6em;
 }

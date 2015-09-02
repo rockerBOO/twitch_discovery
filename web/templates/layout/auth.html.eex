@@ -1,0 +1,8 @@
+		    <div class="auth_button_container">
+          <%= if logged_in?(@conn) == false do %>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
+          <% else %>
+          <button class="mui-btn mui-btn-primary" onclick="window.location = '/user';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> <%= current_user(@conn) |> Map.fetch!("display_name") %></button>
+          <style type="text/css">.preview_logged_in { display: true; } </style>
+          <% end %>
+        </div>

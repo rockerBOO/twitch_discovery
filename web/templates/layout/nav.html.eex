@@ -1,0 +1,12 @@
+        <div class="mui-container">
+<!-- <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
+          <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>
+ -->
+          <nav>
+            <ul class="mui-tabs mui-tabs-justified">
+              <li><a href="/streams">Streams</a></li>
+              <li><a href="/search"><i class="fa fa-search"></i>
+   Search</a></li>
+            </ul>
+          </nav>
+      </div>

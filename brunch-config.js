@@ -24,6 +24,12 @@ exports.config = {
        'css/app.css': /^(web\/static\/css)/,
        'css/vendor.css': /^(web\/static\/vendor\/css)/
       },
+      order: {
+        before: [
+          'web/static/css/mui_colors.scss',
+          'web/static/css/app.scss',
+        ]
+      },
     },
     templates: {
       joinTo: 'js/app.js'

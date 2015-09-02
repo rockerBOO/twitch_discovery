@@ -33,6 +33,15 @@ $("#filter_form").submit(function (event) {
   Filter.getStreams()
 });
 
+$("#languages ul li a").click(function (event) {
+  console.log("Setting language")
+
+  var lang = $(this).attr("data-lang")
+  $("#language-input").val(lang)
+
+  Filter.getStreams()
+})
+
 $("input[type=radio]").click(function (event) {
   var element = $(event.currentTarget)
 

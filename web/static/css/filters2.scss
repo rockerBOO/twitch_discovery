@@ -1,0 +1,49 @@
+#filter_meta {
+  color: rgba(white, .3);
+}
+
+#filter_meta span {
+  border-bottom: 1px rgba(white, .3) dotted;
+}
+
+#filter_box {
+  // padding: .6em;
+  margin-top: .6em;
+  background: #000;
+}
+
+#filter_options {
+  padding: .6em;
+}
+
+#filter_options .mui-tab-pane {
+  // height: 8.5em;
+}
+
+#filter_tabs ul li {
+  padding: .3em;
+}
+
+#filter_tabs ul li a {
+  padding: .3em;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.options ul {
+  margin: 0;
+  padding: 0;
+}
+
+.options ul li {
+  display: inline-block;
+  padding: .6em;
+}
+
+.options ul li a {
+  cursor: pointer;
+}
+
+i {
+  vertical-align: text-top;
+}

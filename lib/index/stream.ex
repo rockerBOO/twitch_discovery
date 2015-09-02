@@ -116,7 +116,7 @@ defmodule TwitchDiscovery.Index.Stream do
     min = parse_viewers(min)
     max = parse_viewers(max)
 
-    [min, max]
+    {min, max}
   end
 
   def parse_viewers(nil), do: nil
@@ -179,7 +179,7 @@ defmodule TwitchDiscovery.Index.Stream do
     started_at = params["started_at"] |> parse_started_at()
     language   = params["language"]   |> parse_language()
 
-    [viewers_min, viewers_max] = parse_viewers(params["viewers_min"], params["viewers_max"])
+    {viewers_min, viewers_max} = parse_viewers(params["vmin"] , params["vmax"])
 
     query = %{}
 

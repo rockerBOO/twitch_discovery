@@ -1,0 +1,11 @@
+    <style type="text/css">
+    body {
+      background-color: #111;
+      background-image: url("<%= static_path(@conn, "/images/bg.png") %>");
+    }
+
+    .stream-image {
+      background-image: url("<%= static_path(@conn, "/images/default-stream-image.png") %>");
+      background-clip: content-box;
+    }
+    </style>
