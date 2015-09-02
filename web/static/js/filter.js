@@ -38,8 +38,7 @@ Filter.prototype.getStreams = function () {
     })
 
     $("#stream-blocks").html(items.join(""))
-    history.pushState(params, "Streams - Discovery", "/streams?"+params+"&offset="+getQueryParam('offset'));
-
+    history.pushState(params, "Streams - Discovery", "/streams?"+params+"&offset="+query_offset());
 
     console.log("Updating next stream url", "/streams?"+params+"&offset="+offset("next", 24))
     console.log("Updating previous stream url", "/streams?"+params+"&offset="+offset("previous", 24))
@@ -61,12 +60,18 @@ function getQueryParam(param) {
   return result
 }
 
-function offset(direction, limit) {
+function query_offset() {
   var offset = getQueryParam("offset")
 
   if (offset == null || offset == "null") {
     offset = 0;
   }
+
+  return offset;
+}
+
+function offset(direction, limit) {
+  var offset = query_offset()
 
   if (direction == "previous") {
     return parseInt(offset) - limit;
