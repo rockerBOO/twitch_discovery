@@ -38,8 +38,37 @@ Filter.prototype.getStreams = function () {
     })
 
     $("#stream-blocks").html(items.join(""))
-    history.pushState(params, "Streams - Discovery", "/streams?"+params);
+    history.pushState(params, "Streams - Discovery", "/streams?"+params+"&offset="+getQueryParam('offset'));
+
+
+    console.log("Updating next stream url", "/streams?"+params+"&offset="+offset("next", 24))
+    console.log("Updating previous stream url", "/streams?"+params+"&offset="+offset("previous", 24))
+
+    $("#pagination_next").attr("data-next", "/streams?"+params+"&offset="+offset("next", 24))
+    $("#pagination_previous").attr("data-previous", "/streams?"+params+"&offset="+offset("previous", 24))
   })
+}
+
+function getQueryParam(param) {
+  var result = null;
+
+  location.search.substr(1)
+    .split("&")
+    .some(function(item) { // returns first occurence and stops
+      return item.split("=")[0] == param && (result = item.split("=")[1])
+    })
+
+  return result
+}
+
+function offset(direction, limit) {
+  var offset = getQueryParam("offset")
+
+  if (direction == "previous") {
+    return parseInt(offset) - limit;
+  }
+
+  return parseInt(offset) + limit;
 }
 
 module.exports = Filter;
