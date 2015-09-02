@@ -141,6 +141,10 @@
         <% end %>
         </div>
       </div>
+
+      <div class="mui-panel">
+        <%= render TwitchDiscovery.PageView, "pagination.html", conn: @conn, streams: @streams, params: @params, limit: @limit %>
+      </div>
     <% end %>
     </div>
 

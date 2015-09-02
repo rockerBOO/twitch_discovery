@@ -1,18 +1,33 @@
 <div id="pagination">
-  <div id="pagination_previous">
-    <!-- -->
-    <%= if is_first?(@conn) do %>
-      First :D
+  <%
+  {offset, params} = Map.pop(@params, "offset", 0)
+
+  if false == is_integer(offset) do
+    {offset, _} = Integer.parse(offset)
+  end
+  %>
+
+  <div class="previous">
+    <script type="text/javascript">
+    function goto(location) {
+      window.location = location
+    }
+    </script>
+    <%= if offset == 0 do %>
+
     <% else %>
-      <a href="/streams">Previous</a>
+    <button id="pagination_previous"
+      class="mui-btn mui-btn-primary mui-btn-raised"
+      data-previous="/streams?<%= URI.encode_query(params) %>&amp;offset=<%= offset-@limit %>"
+      onclick="goto(this.getAttribute('data-previous'))">
+        <i class="fa fa-chevron-left"></i> &nbsp; Previous
+      </button>
     <% end %>
   </div>
-  <div id="pagination_next">
-    <%= if is_first?(@conn) do %>
-      <a href="/streams?limit=24&amp;offset=24">Next</a>
-    <% else %>
-      <a href="/streams?limit=24&amp;offset=24">Next</a>
-    <% end %>
-
+  <div class="next">
+    <button id="pagination_next"
+    class="mui-btn mui-btn-primary mui-btn-raised"
+    data-next="/streams?<%= URI.encode_query(params) %>&amp;offset=<%= offset+@limit %>"
+    onclick="goto(this.getAttribute('data-next'))"> Next &nbsp; <i class="fa fa-chevron-right"></i></button>
   </div>
 </div>
