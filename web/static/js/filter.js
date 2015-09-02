@@ -64,6 +64,10 @@ function getQueryParam(param) {
 function offset(direction, limit) {
   var offset = getQueryParam("offset")
 
+  if (offset == null) {
+    offset = 0;
+  }
+
   if (direction == "previous") {
     return parseInt(offset) - limit;
   }
