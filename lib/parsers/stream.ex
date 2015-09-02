@@ -6,7 +6,6 @@ defmodule TwitchDiscovery.Parser.Stream do
   def db_key(id), do: TwitchDiscovery.Index.Stream.db_key(id)
   def db_key(), do: TwitchDiscovery.Index.Stream.db_key()
 
-
   def id(stream) do
     stream["_id"]
   end
@@ -35,9 +34,13 @@ defmodule TwitchDiscovery.Parser.Stream do
 
   # viewers = {stream, [{184729423947, 3283}, {184729423947, 3283}]} # "viewers"
   def metrics(stream) do
-    viewers = stream["viewers"]
+    viewers   = stream["viewers"]
+    views     = stream["channel"]["views"]
+    followers = stream["channel"]["followers"]
 
-    [{"viewers", viewers}]
+    [{"viewers", viewers},
+     {"views", views},
+     {"followers", followers}]
   end
 
   def capture(stream) do

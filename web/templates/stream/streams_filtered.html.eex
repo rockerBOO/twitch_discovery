@@ -1,73 +1,9 @@
-
-<script type="text/javascript">
-// function x_filter_slider(type, start_min, start_max, range) {
-//   console.log(type, start_min, start_max)
-
-//   console.log(type + '_range')
-
-//   var slider = document.getElementById(type + '_range');
-
-//   console.log(slider)
-
-//   var default_range = {
-//     'min': [ 0 ],
-//     '33%': [ 25, 5 ],
-//     '66%': [ 100, 25 ],
-//     '90%': [ 250, 250 ],
-//     'max': [ 1000 ]
-//   }
-
-//   var range = range ? range : default_range
-
-//   noUiSlider.create(slider, {
-//     start: [start_min, start_max],
-//     range: range,
-//     step: 1,
-//     connect: true, // Display a colored bar between the handles
-//     orientation: 'horizontal', // Orient the slider vertically
-//     behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-//   });
-
-//   var min = document.getElementById(type + '_min');
-//   var max = document.getElementById(type + '_max');
-
-//   var min_show = document.getElementById(type + '_min_show');
-//   var max_show = document.getElementById(type + '_max_show');
-
-//   // When the input changes, set the slider value
-//   min.addEventListener('change', function(){
-//     slider.noUiSlider.set([null, this.value]);
-//   });
-
-//   max.addEventListener('change', function(){
-//     slider.noUiSlider.set([null, this.value]);
-//   });
-
-//   // When the slider value changes, update the input and span
-//   slider.noUiSlider.on('update', function(values, handle) {
-//     if (handle == 1) {
-//       max.value = values[handle];
-//       max_show.innerHTML = parseInt(values[handle]);
-//     } else {
-//       min.value = values[handle];
-//       min_show.innerHTML = parseInt(values[handle]);
-//     }
-//   });
-
-//   slider.noUiSlider.on('change', function(){
-//     var filter = require('web/static/js/filter')
-//     var Filter = new filter()
-
-//     Filter.getStreams();
-//   });
-// }
-</script>
     <div class="mui-container">
       <div class="mui-panel">
         <h1 id="title">Streams</h1>
 
         <div id="filter_meta">
-          Streams between <span>0-100</span> whos language is <span>English</span> and has been streaming for <span>8 hours</span>.
+          <!-- Streams between <span>0-100</span> whos language is <span>English</span> and has been streaming for <span>8 hours</span>. -->
         </div>
         <div id="filter_box">
           <div id="filter_tabs">
@@ -120,8 +56,8 @@
                   <input type="number" id="viewers_min" name="vmin" style="display: none;">
                   <input type="number" id="viewers_max" name="vmax" style="display: none;">
                   <script type="text/javascript">
-                    var filter_viewers_min = <%= default_val @params["viewer_min"], 0 %>
-                    var filter_viewers_max = <%= default_val @params["viewer_max"], 1000 %>
+                    var filter_viewers_min = <%= default_val @params["vmin"], 0 %>
+                    var filter_viewers_max = <%= default_val @params["vmax"], 1000 %>
                     var filter_viewers_range = {
                       'min': [ 0 ],
                       '33%': [ 25, 5 ],
@@ -146,13 +82,13 @@
                   <input type="number" id="views_min" name="vsmin" style="display: none;">
                   <input type="number" id="views_max" name="vsmax" style="display: none;">
                   <script type="text/javascript">
-                    var filter_views_min = <%= default_val @params["views_min"], 0 %>
-                    var filter_views_max = <%= default_val @params["views_max"], 50000000 %>
+                    var filter_views_min = <%= default_val @params["vsmin"], 0 %>
+                    var filter_views_max = <%= default_val @params["vsmax"], 50000000 %>
                     var filter_views_range = {
                       'min': [ 0, 250 ],
                       '33%': [ 2000, 1000 ],
                       '66%': [ 100000, 5000 ],
-                      'max': [ 50000000 ]
+                      'max': [ 5000000 ]
                     }
                   </script>
                 </div>
@@ -171,8 +107,8 @@
                   <input type="number" id="followers_min" name="fmin" style="display: none;">
                   <input type="number" id="followers_max" name="fmax" style="display: none;">
                   <script type="text/javascript">
-                    var filter_followers_min = <%= default_val @params["followers_min"], 0 %>
-                    var filter_followers_max = <%= default_val @params["followers_min"], 100000 %>
+                    var filter_followers_min = <%= default_val @params["fmin"], 0 %>
+                    var filter_followers_max = <%= default_val @params["fmax"], 100000 %>
                     var filter_followers_range = {
                       'min': [ 0, 10 ],
                       '33%': [ 250, 50 ],
@@ -187,29 +123,29 @@
             <div class="mui-tab-pane" id="pane-justified-3">
               <div class="input-field options" id="languages">
                 <ul>
-                  <li><a data-lang="en">English</a></li>
-                  <li><a data-lang="zh">中文</a></li>
-                  <li><a data-lang="ja">日本語</a></li>
-                  <li><a data-lang="ko">한국어</a></li>
-                  <li><a data-lang="es">Español</a></li>
-                  <li><a data-lang="fr">Français</a></li>
-                  <li><a data-lang="de">Deutsch</a></li>
-                  <li><a data-lang="it">Italiano</a></li>
-                  <li><a data-lang="pt">Português</a></li>
-                  <li><a data-lang="sv">Svenska</a></li>
-                  <li><a data-lang="no">Norsk</a></li>
-                  <li><a data-lang="da">Dansk</a></li>
-                  <li><a data-lang="nl">Nederlands</a></li>
-                  <li><a data-lang="fi">Suomi</a></li>
-                  <li><a data-lang="pl">Русский</a></li>
-                  <li><a data-lang="tr">Türkçe</a></li>
-                  <li><a data-lang="cs">Čeština</a></li>
-                  <li><a data-lang="sk">Slovenčina</a></li>
-                  <li><a data-lang="hu">Magyar</a></li>
-                  <li><a data-lang="ar">العربية</a></li>
-                  <li><a data-lang="bg">Български</a></li>
-                  <li><a data-lang="th">ภาษาไทย</a></li>
-                  <li><a data-lang="vi">Tiếng Việt</a></li>
+                  <li><a data-lang="en" class="<%= selected_opt("en", @params["language"], "active") %>">English</a></li>
+                  <li><a data-lang="zh" class="<%= selected_opt("zh", @params["language"], "active") %>">中文</a></li>
+                  <li><a data-lang="ja" class="<%= selected_opt("ja", @params["language"], "active") %>">日本語</a></li>
+                  <li><a data-lang="ko" class="<%= selected_opt("ko", @params["language"], "active") %>">한국어</a></li>
+                  <li><a data-lang="es" class="<%= selected_opt("es", @params["language"], "active") %>">Español</a></li>
+                  <li><a data-lang="fr" class="<%= selected_opt("fr", @params["language"], "active") %>">Français</a></li>
+                  <li><a data-lang="de" class="<%= selected_opt("de", @params["language"], "active") %>">Deutsch</a></li>
+                  <li><a data-lang="it" class="<%= selected_opt("it", @params["language"], "active") %>">Italiano</a></li>
+                  <li><a data-lang="pt" class="<%= selected_opt("pt", @params["language"], "active") %>">Português</a></li>
+                  <li><a data-lang="sv" class="<%= selected_opt("sv", @params["language"], "active") %>">Svenska</a></li>
+                  <li><a data-lang="no" class="<%= selected_opt("no", @params["language"], "active") %>">Norsk</a></li>
+                  <li><a data-lang="da" class="<%= selected_opt("da", @params["language"], "active") %>">Dansk</a></li>
+                  <li><a data-lang="nl" class="<%= selected_opt("nl", @params["language"], "active") %>">Nederlands</a></li>
+                  <li><a data-lang="fi" class="<%= selected_opt("fi", @params["language"], "active") %>">Suomi</a></li>
+                  <li><a data-lang="pl" class="<%= selected_opt("pl", @params["language"], "active") %>">Русский</a></li>
+                  <li><a data-lang="tr" class="<%= selected_opt("tr", @params["language"], "active") %>">Türkçe</a></li>
+                  <li><a data-lang="cs" class="<%= selected_opt("cs", @params["language"], "active") %>">Čeština</a></li>
+                  <li><a data-lang="sk" class="<%= selected_opt("sk", @params["language"], "active") %>">Slovenčina</a></li>
+                  <li><a data-lang="hu" class="<%= selected_opt("hu", @params["language"], "active") %>">Magyar</a></li>
+                  <li><a data-lang="ar" class="<%= selected_opt("ar", @params["language"], "active") %>">العربية</a></li>
+                  <li><a data-lang="bg" class="<%= selected_opt("bg", @params["language"], "active") %>">Български</a></li>
+                  <li><a data-lang="th" class="<%= selected_opt("th", @params["language"], "active") %>">ภาษาไทย</a></li>
+                  <li><a data-lang="vi" class="<%= selected_opt("vi", @params["language"], "active") %>">Tiếng Việt</a></li>
                 </ul>
                 <input type="hidden" id="language-input" name="language" value=""></input>
               </div>
@@ -252,7 +188,7 @@
 
     <%= if @streams == [] do %>
       <div class="mui-panel">
-      <%= render TwitchDiscovery.StreamView, "no_streams_found.html" %>
+      <%= render TwitchDiscovery.StreamView, "no_streams_found.html", conn: @conn %>
       </div>
     <% else %>
       <div class="mui-panel">

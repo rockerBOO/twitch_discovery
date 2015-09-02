@@ -1,4 +1,6 @@
-function Filter() {}
+var Filter = function (){}
+
+// var offset = 0;
 
 Filter.prototype.getStreams = function () {
   var params = $('#filter_form').serialize();
@@ -37,7 +39,12 @@ Filter.prototype.getStreams = function () {
         items.push(block)
     })
 
-    $("#stream-blocks").html(items.join(""))
+    if (items.length == 0) {
+      $("#stream-blocks").html('<div id="images_404"><img src="/images/404-top.svg"><br><img src="/images/404-bottom.svg"></div>')
+    } else {
+      $("#stream-blocks").html(items.join(""))
+    }
+
     history.pushState(params, "Streams - Discovery", "/streams?"+params+"&offset="+query_offset());
 
     console.log("Updating next stream url", "/streams?"+params+"&offset="+offset("next", 24))
@@ -67,17 +74,73 @@ function query_offset() {
     offset = 0;
   }
 
-  return offset;
+  return parseInt(offset);
 }
 
 function offset(direction, limit) {
-  var offset = query_offset()
-
   if (direction == "previous") {
-    return parseInt(offset) - limit;
+    return query_offset() - limit;
   }
 
-  return parseInt(offset) + limit;
+  return query_offset() + limit;
 }
+
+$("#filter_form :input").change(function(event) {
+  var filter = new Filter()
+  filter.getStreams()
+});
+
+$("#filter_form").submit(function (event) {
+  event.preventDefault()
+
+  var filter = new Filter()
+  filter.getStreams()
+});
+
+$("#languages ul li a").click(function (event) {
+  console.log("Setting language")
+
+  var lang = $(this).attr("data-lang")
+  $("#language-input").val(lang)
+
+  $(this).addClass("active")
+
+  var filter = new Filter()
+  filter.getStreams()
+})
+
+$("input[type=radio]").click(function (event) {
+  var element = $(event.currentTarget)
+
+  if (this.hasAttribute("data-radio-checked")) {
+    console.log("removing checked")
+    element.prop('checked', false)
+
+    $(".radio_block input").removeAttr("data-radio-checked")
+
+    var filter = new Filter()
+    filter.getStreams()
+  } else {
+    console.log("setting as checked")
+    $(".radio_block input").removeAttr("data-radio-checked")
+
+    element.prop("checked", true);
+    this.setAttribute("data-radio-checked", true)
+  }
+});
+
+$("#search-fps-toggle").click(function (event) {
+  $("#search-fps-options").toggleClass("hide-options")
+})
+
+$("#search-mature-toggle").click(function (event) {
+  $("#search-mature-options").toggleClass("hide-options")
+})
+
+$("#games-search-input").autocomplete({
+  serviceUrl: "/games/autocomplete",
+  width: "rekt",
+  onSelect: function () { $("#filter_form").submit() }
+});
 
 module.exports = Filter;

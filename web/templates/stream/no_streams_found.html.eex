@@ -1,4 +1,6 @@
-            <h2>We looked so harddd!</h2>
-            <ul>
-              <li>No streams found... =(</li>
-            </ul>
+          <div id="stream-blocks">
+            <div id="images_404">
+              <img src="<%= static_path(@conn, "/images/404-top.svg") %>"><br>
+              <img src="<%= static_path(@conn, "/images/404-bottom.svg") %>">
+            </div>
+          </div>

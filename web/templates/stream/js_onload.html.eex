@@ -1,3 +1,4 @@
+      var filter = require('web/static/js/filter')
       var slider = require('web/static/js/slider')
 
       slider.hoz("viewers", filter_viewers_min, filter_viewers_max, filter_viewers_range);

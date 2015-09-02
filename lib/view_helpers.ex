@@ -19,6 +19,12 @@ defmodule TwitchDiscovery.View.Helpers do
         end
       end
 
+      def selected_opt(opt, param, text) do
+        if opt == param do
+          text
+        end
+      end
+
       def default_val(value, default) do
         case value do
           nil -> default

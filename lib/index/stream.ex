@@ -112,16 +112,16 @@ defmodule TwitchDiscovery.Index.Stream do
     end
   end
 
-  def parse_viewers(min, max) do
-    min = parse_viewers(min)
-    max = parse_viewers(max)
+  def parse_min_max(min, max) do
+    min = parse_min_max(min)
+    max = parse_min_max(max)
 
     {min, max}
   end
 
-  def parse_viewers(nil), do: nil
-  def parse_viewers("Any"), do: nil
-  def parse_viewers(viewers) do
+  def parse_min_max(nil), do: nil
+  def parse_min_max("Any"), do: nil
+  def parse_min_max(viewers) do
     case viewers do
       x when x > 0 and is_bitstring(x) ->
         {int, _} = Integer.parse(x)
@@ -179,7 +179,9 @@ defmodule TwitchDiscovery.Index.Stream do
     started_at = params["started_at"] |> parse_started_at()
     language   = params["language"]   |> parse_language()
 
-    {viewers_min, viewers_max} = parse_viewers(params["vmin"] , params["vmax"])
+    {viewers_min, viewers_max}     = parse_min_max(params["vmin"] , params["vmax"])
+    {views_min, views_max}         = parse_min_max(params["vsmin"] , params["vsmax"])
+    {followers_min, followers_max} = parse_min_max(params["fmin"] , params["fmax"])
 
     query = %{}
 
@@ -201,6 +203,14 @@ defmodule TwitchDiscovery.Index.Stream do
 
     if viewers_min != nil && viewers_max != nil do
       query = Map.put(query, "viewers", %{"$lt" => viewers_max, "$gt" => viewers_min})
+    end
+
+    if views_min != nil && views_max != nil do
+      query = Map.put(query, "views", %{"$lt" => views_max, "$gt" => views_min})
+    end
+
+    if followers_min != nil && followers_max != nil do
+      query = Map.put(query, "followers", %{"$lt" => followers_max, "$gt" => followers_min})
     end
 
     if language != nil do
