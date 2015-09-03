@@ -1,0 +1,16 @@
+* {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+h1:first-of-type {
+  margin: 0;
+  margin-bottom: .3em;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 36px;
+}

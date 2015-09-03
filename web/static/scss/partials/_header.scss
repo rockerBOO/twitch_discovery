@@ -1,0 +1,41 @@
+header {
+  background-color: $mui-primary-color-dark;
+}
+
+#logo {
+  height: 3em;
+}
+
+#auth {
+  height: 3em;
+  float: right;
+}
+
+.auth_button_container {
+  // padding-top: 10%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+@media all and (max-width: 400px) {
+  #logo {
+    height: 2em;
+  }
+
+  #auth {
+    height: 2em;
+  }
+}
+
+@media all and (min-width: 768px) {
+  #logo {
+    height: 4em;
+  }
+
+  #auth {
+    height: 4em;
+  }
+}

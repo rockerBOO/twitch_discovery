@@ -1,0 +1,39 @@
+
+.mui-tabs {
+  margin-bottom: .3em;
+
+  li {
+    background: rgba(#170020, .8);
+    border-bottom: .1em solid #400058;
+  }
+
+  li a {
+    cursor: pointer;
+  }
+}
+
+.mui-tabs-justified li:hover {
+  background: rgba(#36185e, 0.7);
+  transition: background-color .3s ease-in;
+}
+
+.mui-dropdown-menu {
+  overflow: auto;
+  max-height: 90vh;
+}
+
+.mui-select-menu {
+  background-color: $mui-dropdown-bg-color;
+  top: 0 !important;
+
+  > div {
+    &:hover {
+      background-color: $mui-dropdown-link-bg-color-hover;
+    }
+
+    &[selected] {
+      background-color: $mui-dropdown-link-bg-color-active;
+    }
+  }
+}
+
