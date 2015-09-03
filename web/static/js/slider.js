@@ -51,9 +51,8 @@ var hoz = function(type, start_min, start_max, range) {
 
   slider.noUiSlider.on('change', function(){
     var filter = require('web/static/js/filter')
-    var Filter = new filter()
 
-    Filter.getStreams();
+    filter.getStreams();
   });
 }
 

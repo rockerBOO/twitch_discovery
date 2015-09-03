@@ -7,13 +7,12 @@
 }
 
 #filter_box {
-  // padding: .6em;
   margin-top: .6em;
   background: #000;
 }
 
 #filter_options {
-  padding: .6em;
+  // padding: .6em;
 }
 
 #filter_options .mui-tab-pane {
@@ -40,7 +39,7 @@
   padding: .6em;
 }
 
-.options ul li .active {
+.options ul li.active {
   background: #101010;
 }
 
@@ -54,10 +53,15 @@ i {
 
 #images_404 {
   margin: 0 auto;
-  // max-height: 400px;
-  max-width: 425px;
+  max-width: 768px;
 }
 
 #images_404 img {
   width: 100%;
+  color: #FFF;
 }
+
+#images_404 img:first-of-type {
+  margin-bottom: 5em;
+}
+

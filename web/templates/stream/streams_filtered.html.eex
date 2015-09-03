@@ -31,18 +31,36 @@
             </ul>
           </div>
 
-          <form id="filter_form" name="filter_form">
+        <form id="filter_form" name="filter_form">
           <div id="filter_options" class="mui-tab-content">
-            <div class="mui-tab-pane mui-active input-field" id="pane-justified-1">
-              <%= text_input(:streams, :game, [
-                  placeholder: "Minecraft",
-                  id: "games-search-input",
-                  class: "mui-form-control mui-empty",
-                  name: "game",
-                  value: @params["game"]]) %>
+
+            <!-- PANE-1 -->
+
+            <div class="games_pane mui-tab-pane" id="pane-justified-1">
+
+              <!-- GAMES -->
+
+              <div class="filter_block">
+                <div class="name">
+                  Game
+                </div>
+                <div class=" mui-active input-field" >
+                  <%= text_input(:streams, :game, [
+                      placeholder: "Minecraft",
+                      id: "games-search-input",
+                      class: "mui-form-control mui-empty",
+                      name: "game",
+                      value: @params["game"]]) %>
+                </div>
+              </div>
             </div>
 
-            <div class="mui-tab-pane" id="pane-justified-2">
+            <!-- PANE-2 -->
+
+            <div class="viewers_pane mui-tab-pane" id="pane-justified-2">
+
+              <!-- VIEWERS -->
+
               <div id="viewers" class="filter_block">
                 <div class="name">
                   <span class="meta">
@@ -51,7 +69,7 @@
                   </span>
                   <span>Viewers </span>
                 </div>
-                <div>
+                <div class="slider_block">
                   <div id="viewers_range"></div>
                   <input type="number" id="viewers_min" name="vmin" style="display: none;">
                   <input type="number" id="viewers_max" name="vmax" style="display: none;">
@@ -69,6 +87,8 @@
                 </div>
               </div>
 
+              <!-- VIEWS -->
+
               <div id="views" class="filter_block">
                 <div class="name">
                   <span class="meta">
@@ -77,7 +97,7 @@
                   </span>
                   <span>Views </span>
                 </div>
-                <div>
+                <div class="slider_block">
                   <div id="views_range"></div>
                   <input type="number" id="views_min" name="vsmin" style="display: none;">
                   <input type="number" id="views_max" name="vsmax" style="display: none;">
@@ -94,6 +114,8 @@
                 </div>
               </div>
 
+              <!-- FOLLOWERS -->
+
               <div id="followers" class="filter_block">
                 <div class="name">
                   <span class="meta">
@@ -102,7 +124,7 @@
                   </span>
                   <span>Followers </span>
                 </div>
-                <div>
+                <div class="slider_block">
                   <div id="followers_range"></div>
                   <input type="number" id="followers_min" name="fmin" style="display: none;">
                   <input type="number" id="followers_max" name="fmax" style="display: none;">
@@ -120,71 +142,87 @@
               </div>
             </div>
 
-            <div class="mui-tab-pane" id="pane-justified-3">
+            <!-- PANE-3 -->
+
+            <div class="viewers_pane mui-tab-pane" id="pane-justified-3">
               <div class="input-field options" id="languages">
                 <ul>
-                  <li><a data-lang="en" class="<%= selected_opt("en", @params["language"], "active") %>">English</a></li>
-                  <li><a data-lang="zh" class="<%= selected_opt("zh", @params["language"], "active") %>">中文</a></li>
-                  <li><a data-lang="ja" class="<%= selected_opt("ja", @params["language"], "active") %>">日本語</a></li>
-                  <li><a data-lang="ko" class="<%= selected_opt("ko", @params["language"], "active") %>">한국어</a></li>
-                  <li><a data-lang="es" class="<%= selected_opt("es", @params["language"], "active") %>">Español</a></li>
-                  <li><a data-lang="fr" class="<%= selected_opt("fr", @params["language"], "active") %>">Français</a></li>
-                  <li><a data-lang="de" class="<%= selected_opt("de", @params["language"], "active") %>">Deutsch</a></li>
-                  <li><a data-lang="it" class="<%= selected_opt("it", @params["language"], "active") %>">Italiano</a></li>
-                  <li><a data-lang="pt" class="<%= selected_opt("pt", @params["language"], "active") %>">Português</a></li>
-                  <li><a data-lang="sv" class="<%= selected_opt("sv", @params["language"], "active") %>">Svenska</a></li>
-                  <li><a data-lang="no" class="<%= selected_opt("no", @params["language"], "active") %>">Norsk</a></li>
-                  <li><a data-lang="da" class="<%= selected_opt("da", @params["language"], "active") %>">Dansk</a></li>
-                  <li><a data-lang="nl" class="<%= selected_opt("nl", @params["language"], "active") %>">Nederlands</a></li>
-                  <li><a data-lang="fi" class="<%= selected_opt("fi", @params["language"], "active") %>">Suomi</a></li>
-                  <li><a data-lang="pl" class="<%= selected_opt("pl", @params["language"], "active") %>">Русский</a></li>
-                  <li><a data-lang="tr" class="<%= selected_opt("tr", @params["language"], "active") %>">Türkçe</a></li>
-                  <li><a data-lang="cs" class="<%= selected_opt("cs", @params["language"], "active") %>">Čeština</a></li>
-                  <li><a data-lang="sk" class="<%= selected_opt("sk", @params["language"], "active") %>">Slovenčina</a></li>
-                  <li><a data-lang="hu" class="<%= selected_opt("hu", @params["language"], "active") %>">Magyar</a></li>
-                  <li><a data-lang="ar" class="<%= selected_opt("ar", @params["language"], "active") %>">العربية</a></li>
-                  <li><a data-lang="bg" class="<%= selected_opt("bg", @params["language"], "active") %>">Български</a></li>
-                  <li><a data-lang="th" class="<%= selected_opt("th", @params["language"], "active") %>">ภาษาไทย</a></li>
-                  <li><a data-lang="vi" class="<%= selected_opt("vi", @params["language"], "active") %>">Tiếng Việt</a></li>
+                  <%
+                  languages = [
+                    {"all", "All"}, {"en", "English"}, {"zh","中文"},
+                    {"ja","日本語"}, {"ko","한국어"}, {"es","Español"},
+                    {"fr","Français"}, {"de","Deutsch"}, {"it","Italiano"},
+                    {"pt","Português"}, {"sv","Svenska"}, {"no","Norsk"},
+                    {"da","Dansk"}, {"nl","Nederlands"}, {"fi","Suomi"},
+                    {"pl","Русский"}, {"tr","Türkçe"}, {"cs","Čeština"},
+                    {"sk","Slovenčina"}, {"hu","Magyar"}, {"ar","العربية"},
+                    {"bg","Български"},{"th","ภาษาไทย"}, {"vi","Tiếng Việt"},
+                  ]
+                  %>
+                  <%= render TwitchDiscovery.StreamView, "languages.html",
+                        languages: languages, language: @params["language"] %>
                 </ul>
                 <input type="hidden" id="language-input" name="language" value=""></input>
               </div>
             </div>
 
-            <div class="mui-tab-pane" id="pane-justified-4">
-              <div class="name"><i class="fa fa-chevron-up"></i>
-   Uptime</div>
-              <div class="mui-select input-field">
-                <select name="started_at" autocomplete="off">
-                  <option>All</option>
-                  <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
-                  <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15 mins</option>
-                  <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins</option>
-                  <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins</option>
-                  <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour</option>
-                  <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours</option>
-                  <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours</option>
-                  <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours</option>
-                  <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours</option>
-                  <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours</option>
-                  <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours</option>
-                  <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours</option>
-                  <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours</option>
-                  <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours</option>
-                  <option value="h30"<%= "h30" |> selected(@params["started_at"]) |> raw %>>30 hours</option>
-                </select>
+            <!-- PANE-4 -->
+
+            <div class="more_pane mui-tab-pane" id="pane-justified-4">
+
+              <!-- UPTIME -->
+
+              <div class="filter_block">
+                <div class="name"><i class="fa fa-chevron-up"></i>
+     Uptime</div>
+                <div class="mui-select input-field">
+                  <select name="started_at" autocomplete="off">
+                    <option>All</option>
+                    <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
+                    <option value="m15"<%= "m15" |> selected(@params["started_at"]) |> raw %>>15 mins</option>
+                    <option value="m30"<%= "m30" |> selected(@params["started_at"]) |> raw %>>30 mins</option>
+                    <option value="m45"<%= "m45" |> selected(@params["started_at"]) |> raw %>>45 mins</option>
+                    <option value="h1"<%= "h1" |> selected(@params["started_at"]) |> raw %>>1 hour</option>
+                    <option value="h2"<%= "h2" |> selected(@params["started_at"]) |> raw %>>2 hours</option>
+                    <option value="h3"<%= "h3" |> selected(@params["started_at"]) |> raw %>>3 hours</option>
+                    <option value="h4"<%= "h4" |> selected(@params["started_at"]) |> raw %>>4 hours</option>
+                    <option value="h5"<%= "h5" |> selected(@params["started_at"]) |> raw %>>5 hours</option>
+                    <option value="h7"<%= "h7" |> selected(@params["started_at"]) |> raw %>>7 hours</option>
+                    <option value="h9"<%= "h9" |> selected(@params["started_at"]) |> raw %>>9 hours</option>
+                    <option value="h12"<%= "h12" |> selected(@params["started_at"]) |> raw %>>12 hours</option>
+                    <option value="h16"<%= "h16" |> selected(@params["started_at"]) |> raw %>>16 hours</option>
+                    <option value="h24"<%= "h24" |> selected(@params["started_at"]) |> raw %>>24 hours</option>
+                    <option value="h30"<%= "h30" |> selected(@params["started_at"]) |> raw %>>30 hours</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- MATURE -->
+
+              <div class="filter_block">
+                <div class="name">
+                  Mature
+                </div>
+                <div id="search-mature-options" class="input-field options">
+                  <div class="radio_block">
+                    <label>
+                      <% mature_opts = "yes" |> checked_opts(@params["mature"]) %>
+                      <%= radio_button(:streams, :mature, "yes", Keyword.put(mature_opts, :name, "mature")) %>
+                      <span class="radio_button noselect">Yes</span>
+                    </label>
+                    <label>
+                      <% mature_opts = "no" |> checked_opts(@params["mature"]) %>
+                      <%= radio_button(:streams, :mature, "no", Keyword.put(mature_opts, :name, "mature")) %>
+                      <span class="radio_button noselect">No</span>
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </form>
-
-<!--         <form id="filter_form" name="filter_form">
-          <div style="float: right;">
-            <button type="submit" class="mui-btn mui-btn-primary mui-btn-raised">Find!</button>
-          </div>
-        </form> -->
-      </div>
+    </div>
 
     <%= if @streams == [] do %>
       <div class="mui-panel">
@@ -198,9 +236,8 @@
         <% end %>
         </div>
       </div>
-
+    <% end %>
       <div class="mui-panel">
         <%= render TwitchDiscovery.PageView, "pagination.html", conn: @conn, streams: @streams, params: @params, limit: @limit %>
       </div>
-    <% end %>
     </div>

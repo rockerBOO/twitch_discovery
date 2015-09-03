@@ -1,8 +1,4 @@
-var Filter = function (){}
-
-// var offset = 0;
-
-Filter.prototype.getStreams = function () {
+var getStreams = function () {
   var params = $('#filter_form').serialize();
 
   // console.log(params)
@@ -86,27 +82,29 @@ function offset(direction, limit) {
 }
 
 $("#filter_form :input").change(function(event) {
-  var filter = new Filter()
-  filter.getStreams()
+  getStreams()
 });
 
 $("#filter_form").submit(function (event) {
   event.preventDefault()
 
-  var filter = new Filter()
-  filter.getStreams()
+  getStreams()
 });
 
 $("#languages ul li a").click(function (event) {
   console.log("Setting language")
 
-  var lang = $(this).attr("data-lang")
+  var element = $(this)
+
+  var lang = element.attr("data-lang")
   $("#language-input").val(lang)
 
-  $(this).addClass("active")
+  var parent = element.parent()
 
-  var filter = new Filter()
-  filter.getStreams()
+  parent.siblings().removeClass("active")
+  parent.addClass("active")
+
+  getStreams()
 })
 
 $("input[type=radio]").click(function (event) {
@@ -118,8 +116,7 @@ $("input[type=radio]").click(function (event) {
 
     $(".radio_block input").removeAttr("data-radio-checked")
 
-    var filter = new Filter()
-    filter.getStreams()
+    getStreams()
   } else {
     console.log("setting as checked")
     $(".radio_block input").removeAttr("data-radio-checked")
@@ -140,7 +137,8 @@ $("#search-mature-toggle").click(function (event) {
 $("#games-search-input").autocomplete({
   serviceUrl: "/games/autocomplete",
   width: "rekt",
+  delay: 500,
   onSelect: function () { $("#filter_form").submit() }
 });
 
-module.exports = Filter;
+export{getStreams};

@@ -43,20 +43,13 @@
   height: 1.4em;
 }
 
-.name {
-  width: 100%;
-}
-
-#range {
-  margin-top: 1em;
-}
-
 #viewers, #views, #followers {
-  width: 14em;
+  min-width: 12em;
   margin-left: 1.6em;
   margin-right: 1.6em;
+  margin-top: .7em;
 }
 
-#viewers .meta {
+#viewers .meta, #views .meta, #followers .meta {
   float: right;
 }

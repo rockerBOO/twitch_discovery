@@ -11,7 +11,7 @@ defmodule TwitchDiscovery.GameController do
   end
 
   def find_games(game, games \\ [], offset \\ 0) do
-    found_games = Game.find([], [
+    found_games = Game.find(%{"game.name" => %BSON.Regex{pattern: game, options: "i"}}, [
       limit: 2000,
       sort: %{"game.name" => -1},
       skip: offset,
@@ -26,13 +26,14 @@ defmodule TwitchDiscovery.GameController do
   end
 
   def autocomplete(conn, params) do
-    suggestions = find_games(params["query"])
-    |> Enum.filter(fn(game) ->
-      game["game"]["name"] =~ params["query"]
-    end)
+    IO.inspect "/#{params["query"]}/i"
+
+    suggestions = find_games("#{params["query"]}")
     |> Enum.map(fn (match) ->
       %{"value" => match["game"]["name"], "data" => match["game"]["name"]}
     end)
+
+    IO.inspect suggestions
 
     json conn, %{suggestions: suggestions}
  	end

@@ -1,0 +1,4 @@
+
+      <%= for {code, lang} <- @languages do %>
+        <li class="<%= selected_opt("all", code, "active") %>"><a data-lang="<%= code %>"><%= lang %></a></li>
+      <% end %>
