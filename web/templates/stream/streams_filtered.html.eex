@@ -3,7 +3,29 @@
         <h1 id="title">Streams</h1>
 
         <div id="filter_meta">
-          <!-- Streams between <span>0-100</span> whos language is <span>English</span> and has been streaming for <span>8 hours</span>. -->
+          Streams with
+          viewers
+          <div class="range-block">
+            <div class="range"><span id="viewers_min_meta"><%= default_val @params["vmin"], 0 %></span>-<span id="viewers_max_meta"><%= default_val @params["vmax"], 1000 %></span></div>
+            <div class="slider_block" id="viewers_range_meta"></div>
+          </div>,
+          followers <div class="range-block">
+            <div class="range"><span id="followers_min_meta"><%= default_val @params["fmin"], 0 %></span>-<span id="followers_max_meta"><%= default_val @params["fmin"], "100,000" %></span></div>
+            <div class="slider_block" id="followers_range_meta"></div>
+          </div>,
+          views <div class="range-block">
+            <div class="range"><span id="views_min_meta"><%= default_val @params["vsmin"], 0 %></span>-<span id="views_max_meta"><%= default_val @params["vsmin"], "5,000,000" %></span></div>
+            <div class="slider_block" id="views_range_meta"></div>
+          </div>.
+        </div>
+
+        <div id="filter_selected">
+          <span class="game">Minecraft <a onclick="return removeFilter('game', 'Minecraft');">X</a></span>
+          <span class="game">Rocket League <a onclick="return removeFilter('game', 'Rocket League');">X</a></span>
+          <span class="language">Language: English <a onclick="return removeFilter('language', 'English');">X</a></span>
+          <span class="language">Language: Español <a onclick="return removeFilter('language', 'Español');">X</a></span>
+          <span class="mature">Mature: Yes <a onclick="return removeFilter('mature');">X</a></span>
+          <span class="uptime">Uptime: 15mins <a onclick="return removeFilter('uptime');">X</a></span>
         </div>
         <div id="filter_box">
           <div id="filter_tabs">
@@ -36,7 +58,7 @@
 
             <!-- PANE-1 -->
 
-            <div class="games_pane mui-tab-pane" id="pane-justified-1">
+            <div class="games_pane mui-tab-pane mui-active" id="pane-justified-1">
 
               <!-- GAMES -->
 
@@ -44,7 +66,7 @@
                 <div class="name">
                   Game
                 </div>
-                <div class=" mui-active input-field" >
+                <div class="mui-active input-field game">
                   <%= text_input(:streams, :game, [
                       placeholder: "Minecraft",
                       id: "games-search-input",
@@ -58,86 +80,89 @@
             <!-- PANE-2 -->
 
             <div class="viewers_pane mui-tab-pane" id="pane-justified-2">
+              <div class="flex_pane">
+                <!-- VIEWERS -->
 
-              <!-- VIEWERS -->
-
-              <div id="viewers" class="filter_block">
-                <div class="name">
-                  <span class="meta">
-                    <span id="viewers_min_show"></span> to
-                    <span id="viewers_max_show"></span>
-                  </span>
-                  <span>Viewers </span>
+                <div id="viewers">
+                  <div class="name">
+                    <span class="meta">
+                      <span id="viewers_min_show"></span> to
+                      <span id="viewers_max_show"></span>
+                    </span>
+                    <span>Viewers </span>
+                  </div>
+                  <div class="slider_block">
+                    <div id="viewers_range"></div>
+                    <input type="number" id="viewers_min" name="vmin" style="display: none;">
+                    <input type="number" id="viewers_max" name="vmax" style="display: none;">
+                    <script type="text/javascript">
+                      var filter_viewers_min = <%= default_val @params["vmin"], 0 %>
+                      var filter_viewers_max = <%= default_val @params["vmax"], 1000 %>
+                      var filter_viewers_range = {
+                        'min': [ 0 ],
+                        '33%': [ 25, 5 ],
+                        '66%': [ 100, 25 ],
+                        '90%': [ 250, 250 ],
+                        'max': [ 1000 ]
+                      }
+                    </script>
+                  </div>
                 </div>
-                <div class="slider_block">
-                  <div id="viewers_range"></div>
-                  <input type="number" id="viewers_min" name="vmin" style="display: none;">
-                  <input type="number" id="viewers_max" name="vmax" style="display: none;">
-                  <script type="text/javascript">
-                    var filter_viewers_min = <%= default_val @params["vmin"], 0 %>
-                    var filter_viewers_max = <%= default_val @params["vmax"], 1000 %>
-                    var filter_viewers_range = {
-                      'min': [ 0 ],
-                      '33%': [ 25, 5 ],
-                      '66%': [ 100, 25 ],
-                      '90%': [ 250, 250 ],
-                      'max': [ 1000 ]
-                    }
-                  </script>
-                </div>
-              </div>
 
-              <!-- VIEWS -->
 
-              <div id="views" class="filter_block">
-                <div class="name">
-                  <span class="meta">
-                    <span id="views_min_show"></span> to
-                    <span id="views_max_show"></span>
-                  </span>
-                  <span>Views </span>
-                </div>
-                <div class="slider_block">
-                  <div id="views_range"></div>
-                  <input type="number" id="views_min" name="vsmin" style="display: none;">
-                  <input type="number" id="views_max" name="vsmax" style="display: none;">
-                  <script type="text/javascript">
-                    var filter_views_min = <%= default_val @params["vsmin"], 0 %>
-                    var filter_views_max = <%= default_val @params["vsmax"], 50000000 %>
-                    var filter_views_range = {
-                      'min': [ 0, 250 ],
-                      '33%': [ 2000, 1000 ],
-                      '66%': [ 100000, 5000 ],
-                      'max': [ 5000000 ]
-                    }
-                  </script>
-                </div>
-              </div>
+                <!-- FOLLOWERS -->
 
-              <!-- FOLLOWERS -->
-
-              <div id="followers" class="filter_block">
-                <div class="name">
-                  <span class="meta">
-                    <span id="followers_min_show"></span> to
-                    <span id="followers_max_show"></span>
-                  </span>
-                  <span>Followers </span>
+                <div id="followers">
+                  <div class="name">
+                    <span class="meta">
+                      <span id="followers_min_show"></span> to
+                      <span id="followers_max_show"></span>
+                    </span>
+                    <span>Followers </span>
+                  </div>
+                  <div class="slider_block">
+                    <div id="followers_range"></div>
+                    <input type="number" id="followers_min" name="fmin" style="display: none;">
+                    <input type="number" id="followers_max" name="fmax" style="display: none;">
+                    <script type="text/javascript">
+                      var filter_followers_min = <%= default_val @params["fmin"], 0 %>
+                      var filter_followers_max = <%= default_val @params["fmax"], 100000 %>
+                      var filter_followers_range = {
+                        'min': [ 0, 10 ],
+                        '33%': [ 250, 50 ],
+                        '66%': [ 1000, 250 ],
+                        'max': [ 100000 ]
+                      }
+                    </script>
+                  </div>
                 </div>
-                <div class="slider_block">
-                  <div id="followers_range"></div>
-                  <input type="number" id="followers_min" name="fmin" style="display: none;">
-                  <input type="number" id="followers_max" name="fmax" style="display: none;">
-                  <script type="text/javascript">
-                    var filter_followers_min = <%= default_val @params["fmin"], 0 %>
-                    var filter_followers_max = <%= default_val @params["fmax"], 100000 %>
-                    var filter_followers_range = {
-                      'min': [ 0, 10 ],
-                      '33%': [ 250, 50 ],
-                      '66%': [ 1000, 250 ],
-                      'max': [ 100000 ]
-                    }
-                  </script>
+
+
+                <!-- VIEWS -->
+
+                <div id="views">
+                  <div class="name">
+                    <span class="meta">
+                      <span id="views_min_show"></span> to
+                      <span id="views_max_show"></span>
+                    </span>
+                    <span>Views </span>
+                  </div>
+                  <div class="slider_block">
+                    <div id="views_range"></div>
+                    <input type="number" id="views_min" name="vsmin" style="display: none;">
+                    <input type="number" id="views_max" name="vsmax" style="display: none;">
+                    <script type="text/javascript">
+                      var filter_views_min = <%= default_val @params["vsmin"], 0 %>
+                      var filter_views_max = <%= default_val @params["vsmax"], 50000000 %>
+                      var filter_views_range = {
+                        'min': [ 0, 250 ],
+                        '33%': [ 2000, 1000 ],
+                        '66%': [ 100000, 5000 ],
+                        'max': [ 5000000 ]
+                      }
+                    </script>
+                  </div>
                 </div>
               </div>
             </div>
@@ -162,7 +187,7 @@
                   <%= render TwitchDiscovery.StreamView, "languages.html",
                         languages: languages, language: @params["language"] %>
                 </ul>
-                <input type="hidden" id="language-input" name="language" value=""></input>
+                <input type="hidden" id="language-input" name="language" value="">
               </div>
             </div>
 
@@ -175,7 +200,7 @@
               <div class="filter_block">
                 <div class="name"><i class="fa fa-chevron-up"></i>
      Uptime</div>
-                <div class="mui-select input-field">
+                <div class="mui-select input-field uptime">
                   <select name="started_at" autocomplete="off">
                     <option>All</option>
                     <option value="m5"<%= "m5" |> selected(@params["started_at"]) |> raw %>>Just now!</option>
@@ -203,8 +228,8 @@
                 <div class="name">
                   Mature
                 </div>
-                <div id="search-mature-options" class="input-field options">
-                  <div class="radio_block">
+                <div class="input-field options">
+                  <div class="radio_block mature">
                     <label>
                       <% mature_opts = "yes" |> checked_opts(@params["mature"]) %>
                       <%= radio_button(:streams, :mature, "yes", Keyword.put(mature_opts, :name, "mature")) %>

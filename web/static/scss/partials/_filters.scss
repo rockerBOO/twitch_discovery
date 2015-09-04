@@ -1,64 +1,188 @@
+#filter_form {
+  .input-field {
+    font-size: 1.2em;
+  }
+
+  .mui-select {
+    font-size: 1.3em;
+  }
+
+  // SELECTORS
+  input[type="radio"]:checked + span {
+    background: #6441A5;
+  }
+
+  .name {
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.3em;
+    padding-bottom: .1em;
+    margin-top: .3em;
+    border-bottom: .1em solid #111;
+    text-align: center;
+
+    .meta {
+      margin-top: .2em;
+      font-size: .7em;
+      font-weight: normal;
+    }
+  }
+
+  .flex_pane {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    & > div {
+      flex-grow: 1;
+      flex-basis: 1.4em;
+    }
+  }
+}
+
+#filter_meta {
+  color: rgba(white, .3);
+  margin-bottom: 1rem;
+
+  .range-block {
+    display: inline-block;
+    position: relative;
+  }
+
+  .range {
+    border-bottom: 1px rgba(white, .3) dotted;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .slider_block {
+    z-index: 2;
+    opacity: 0;
+    visibility: none;
+    display: none;
+    position: absolute;
+    width: 250px;
+    height: 75px;
+    background-color: #010101;
+    // left: 50%;
+    // margin-left: 100px;
+    transform: translateX(-50%);
+    margin-left: 50%;
+    margin-top: 15px;
+    padding: 25px;
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  .show {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+  }
+
+  .slider_block:after, .slider_block:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .slider_block:after {
+    border-color: rgba(16, 16, 16, 0);
+    border-bottom-color: #101010;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+}
+
+#filter_box {
+  margin-top: .6em;
+  background: #000;
+}
+
+#filter_options {
+  // padding: .6em;
+  .mui-tab-pane {
+    min-height: 8.5em;
+  }
+}
+
+#filter_tabs {
+  ul li {
+    padding: .3em;
+  }
+
+  ul li a {
+    padding: .3em;
+    font-size: 1em;
+    font-weight: 500;
+  }
+}
+
+#filter_selected {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: space-around;
+
+  span {
+    // flex-grow: 1;
+    // flex-basis: .6rem;
+    padding: .6rem;
+    background: #101010;
+
+    margin-right: .6rem;
+    margin-bottom: .6rem;
+  }
+
+  a {
+    cursor: pointer;
+  }
+}
+
+
+.options {
+  opacity: 100;
+  transition: opacity .4s, visibilty .4s;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    display: inline-block;
+    padding: .6em;
+  }
+
+  ul li.active {
+    background: #101010;
+  }
+
+  ul li a {
+    cursor: pointer;
+  }
+}
 
 .filter_block {
   margin-right: .3em;
   margin-bottom: .3em;
   display: inline-block;
-  height: 6.5em;
-  // background: #000;
-  // background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk5JSIgc3RvcC1jb2xvcj0iIzQzMWU2MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-  // background: -moz-linear-gradient(top, #000 0%, #11001b 100%);
-  // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000), color-stop(100%,#11001b));
-  // background: -webkit-linear-gradient(top, #000 0%,#11001b 100%);
-  // background: -o-linear-gradient(top, #000 0%,#11001b 100%);
-  // background: -ms-linear-gradient(top, #000 0%,#11001b 100%);
-  // background: linear-gradient(top, #000 0%,#11001b 100%);
-  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000', endColorstr='#11001b',GradientType=0 );
+  vertical-align: top;
   padding: .3em;
-}
 
-.filter_block .name {
-  font-weight: 300;
-  font-style: italic;
-  font-size: 1.3em;
-  padding-bottom: .1em;
-  margin-top: .3em;
-  border-bottom: .1em solid #111;
-  text-align: center;
-}
-
-#filter_form .input-field {
-  font-size: 1.2em;
-}
-
-#filter_form .mui-select {
-  font-size: 1.3em;
-}
-
-// .input-field label {
-//   font-weight: normal;
-// }
-
-.input-field input,
-.input-field select,
-.input-field option {
-  margin-top: .5em;
-  margin-bottom: .5em;
-  font-weight: 700;
-  font-style: italic;
-  font-size: 1.1em;
-}
-
-// Placeholder colors, do not group
-::-webkit-input-placeholder {
-   color: #333;
-}
-
-::-moz-placeholder {
-   color: #333;
-}
-
-:-ms-input-placeholder {
-   color: #333;
+  input[type="radio"] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
 }
 
 .hide-options {
@@ -67,18 +191,6 @@
   visibility: none;
 }
 
-.options {
-  opacity: 100;
-  transition: opacity .4s, visibilty .4s;
-}
-
-.meta {
-  margin-top: .2em;
-  font-size: .7em;
-  font-weight: normal;
-}
-
-// SELECTORS
 .radio_button {
   padding: .5em;
   float: left;
@@ -89,37 +201,17 @@
   cursor: pointer;
 }
 
-.filter_block input[type="radio"] {
-   position: absolute;
-   top: -9999px;
-   left: -9999px;
-}
-
-input[type="radio"]:checked + span {
-  background: #6441A5;
-}
-
 // GAMES SEARCH
-
-#games-search {
-  float: left;
-}
-
-// Hackalis (Blasted Jesus Edition)
 .games-search-input {
   width: 0;
   opacity: 0;
   transition: all .4s;
-}
 
-#games-search > form > div {
-  padding-top: 9px;
-}
-
-.games-search-input.games-search-on   {
-  width: 250px;
-  opacity: 1;
-  margin-left: 10px;
+  &.games-search-on   {
+    width: 250px;
+    opacity: 1;
+    margin-left: 10px;
+  }
 }
 
 .broadcast-game-search {
@@ -133,6 +225,11 @@ input[type="radio"]:checked + span {
   background: #111;
   cursor: default;
   overflow: auto;
+
+  strong {
+    font-weight: normal;
+    color: #673AB7;
+  }
 }
 
 .autocomplete-suggestion {
@@ -142,10 +239,11 @@ input[type="radio"]:checked + span {
   overflow: hidden;
   cursor: pointer;
 }
+
 .autocomplete-selected {
   background: rgba(0, 0, 0, 0.87);
 }
-.autocomplete-suggestions strong {
-  font-weight: normal;
-  color: #673AB7;
-}
+
+
+
+

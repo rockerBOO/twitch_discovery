@@ -1,3 +1,5 @@
+import {hoz} from "web/static/js/slider"
+
 var getStreams = function () {
   var params = $('#filter_form').serialize();
 
@@ -104,7 +106,42 @@ $("#languages ul li a").click(function (event) {
   parent.siblings().removeClass("active")
   parent.addClass("active")
 
+  $("#filter_selected .language").remove()
+  $("#filter_selected").append('<span class="language">Language: '+element.text()+' <a href="">X</a></span>')
+
   getStreams()
+})
+
+function capitalize(s) {
+  // returns the first letter capitalized + the string from index 1 and out aka. the rest of the string
+  return s[0].toUpperCase() + s.substr(1);
+}
+
+$(".uptime select").change(function (event) {
+  var val = $(this).val()
+
+  var first = val.substr(0, 1)
+  var time = val.substr(1)
+
+  if (first == 'h') {
+    if (time == '1') {
+      var text = time + ' hour'
+    } else {
+      var text = time + ' hours'
+    }
+  } else if (first == 'm') {
+    if (time == '5') {
+      var text = "Just now!"
+    } else {
+      var text = time + ' mins'
+    }
+  }
+
+  $("#filter_selected .uptime").remove()
+
+  if (text) {
+    $("#filter_selected").append('<span class="uptime">Uptime: '+text+' <a href="return removeFilter(\'uptime\');">X</a></span>')
+  }
 })
 
 $("input[type=radio]").click(function (event) {
@@ -124,7 +161,39 @@ $("input[type=radio]").click(function (event) {
     element.prop("checked", true);
     this.setAttribute("data-radio-checked", true)
   }
-});
+})
+
+// $(document).on('click', function (event) {
+//   if (!($(event.target).hasClass("range") || $(event.target).parent().hasClass("range"))) {
+//     $(".slider_block").removeClass("show")
+//   }
+// });
+
+$("#filter_meta .range").click(function (event) {
+  if ($(this).siblings(".slider_block").hasClass("show")) {
+    console.log("Hiding slider block")
+
+    $(".slider_block").removeClass("show")
+  } else {
+    console.log("Showing slider block")
+
+    $(".slider_block").removeClass("show")
+    $(this).siblings(".slider_block").addClass("show")
+  }
+})
+
+$(".mature input").click(function (event) {
+  console.log("Changing mature input")
+
+  var element = $(this)
+  var val = element.val()
+
+  $("#filter_selected .mature").remove()
+
+  if (element.prop("checked")) {
+    $("#filter_selected").append('<span class="mature">Mature: '+capitalize(val)+' <a href="return removeFilter(\'mature\')">X</a></span>')
+  }
+})
 
 $("#search-fps-toggle").click(function (event) {
   $("#search-fps-options").toggleClass("hide-options")

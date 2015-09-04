@@ -1,7 +1,45 @@
+import {getStreams} from "web/static/js/filter"
 
+var sliders = {}
 
-var hoz = function(type, start_min, start_max, range) {
-  var slider = document.getElementById(type + '_range');
+var hoz_ref = function (slider, ref, start_min, start_max, range) {
+  noUiSlider.create(slider, {
+    start: [start_min, start_max],
+    range: range,
+    step: 1,
+    connect: true, // Display a colored bar between the handles
+    orientation: 'horizontal', // Orient the slider vertically
+    behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+  });
+
+  var ref_min = document.getElementById(ref + '_min');
+  var ref_max = document.getElementById(ref + '_max');
+
+  var min_show = document.getElementById(ref + '_min_show');
+  var max_show = document.getElementById(ref + '_max_show');
+
+  slider.noUiSlider.on('update', function(values, handle) {
+    if (handle == 1) {
+      ref_max.value = values[handle]
+      max_show.innerHTML = parseInt(values[handle]);
+      document.getElementById(ref +"_max_meta").innerHTML = parseInt(values[handle])
+
+      sliders[ref].noUiSlider.set([null, values[handle]])
+    } else {
+      ref_min.value = values[handle]
+      min_show.innerHTML = parseInt(values[handle]);
+      document.getElementById(ref +"_min_meta").innerHTML = parseInt(values[handle])
+      sliders[ref].noUiSlider.set([values[handle], null])
+    }
+  });
+
+  slider.noUiSlider.on('change', function(){
+    getStreams();
+  });
+}
+
+var hoz = function(slider, type, start_min, start_max, range) {
+  sliders[type] = slider == null ? document.getElementById(type + '_range') : slider;
 
   var default_range = {
     'min': [ 0 ],
@@ -13,7 +51,7 @@ var hoz = function(type, start_min, start_max, range) {
 
   var range = range ? range : default_range
 
-  noUiSlider.create(slider, {
+  noUiSlider.create(sliders[type], {
     start: [start_min, start_max],
     range: range,
     step: 1,
@@ -31,15 +69,15 @@ var hoz = function(type, start_min, start_max, range) {
 
   // When the input changes, set the slider value
   min.addEventListener('change', function(){
-    slider.noUiSlider.set([null, this.value]);
+    sliders[type].noUiSlider.set([this.value, null]);
   });
 
   max.addEventListener('change', function(){
-    slider.noUiSlider.set([null, this.value]);
+    sliders[type].noUiSlider.set([null, this.value]);
   });
 
   // When the slider value changes, update the input and span
-  slider.noUiSlider.on('update', function(values, handle) {
+  sliders[type].noUiSlider.on('update', function(values, handle) {
     if (handle == 1) {
       max.value = values[handle];
       max_show.innerHTML = parseInt(values[handle]);
@@ -49,11 +87,9 @@ var hoz = function(type, start_min, start_max, range) {
     }
   });
 
-  slider.noUiSlider.on('change', function(){
-    var filter = require('web/static/js/filter')
-
-    filter.getStreams();
+  sliders[type].noUiSlider.on('change', function(){
+    getStreams();
   });
 }
 
-export {hoz};
+export {hoz, hoz_ref};

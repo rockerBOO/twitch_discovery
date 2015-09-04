@@ -14,3 +14,34 @@ h1:first-of-type {
   font-style: italic;
   font-size: 36px;
 }
+
+i {
+  vertical-align: text-top;
+}
+
+// Placeholder colors, do not group
+::-webkit-input-placeholder {
+   color: #333;
+}
+
+::-moz-placeholder {
+   color: #333;
+}
+
+:-ms-input-placeholder {
+   color: #333;
+}
+
+#images_404 {
+  margin: 0 auto;
+  max-width: 768px;
+
+  img {
+    width: 100%;
+    color: #FFF;
+
+    &:first-of-type {
+      margin-bottom: 5em;
+    }
+  }
+}

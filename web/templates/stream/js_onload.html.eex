@@ -1,8 +1,14 @@
       var filter = require('web/static/js/filter')
       var slider = require('web/static/js/slider')
 
-      slider.hoz("viewers", filter_viewers_min, filter_viewers_max, filter_viewers_range);
+      slider.hoz(null, "viewers", filter_viewers_min, filter_viewers_max, filter_viewers_range);
 
-      slider.hoz("followers", filter_followers_min, filter_followers_max, filter_followers_range);
+      slider.hoz(null, "followers", filter_followers_min, filter_followers_max, filter_followers_range);
 
-      slider.hoz("views", filter_views_min, filter_views_max, filter_views_range);
+      slider.hoz(null, "views", filter_views_min, filter_views_max, filter_views_range);
+
+      slider.hoz_ref(document.getElementById("viewers_range_meta"), "viewers", filter_viewers_min, filter_viewers_max, filter_viewers_range);
+
+      slider.hoz_ref(document.getElementById("followers_range_meta"), "followers", filter_followers_min, filter_followers_max, filter_followers_range);
+
+      slider.hoz_ref(document.getElementById("views_range_meta"), "views", filter_views_min, filter_views_max, filter_views_range);

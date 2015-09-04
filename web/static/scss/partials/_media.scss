@@ -32,28 +32,21 @@
   height: 6.5em;
 }
 
-
-
-.stream-block img,
-.channel-block img,
-.video-block img,
-.broadcast-block img  {
-
-}
-
 @media screen and (max-width: 993px) {
-  .stream-block img,
-  .channel-block img,
-  .video-block img,
-  .broadcast-block img {
-    height: auto;
+  .stream-block,
+  .channel-block,
+  .video-block,
+  .broadcast-block {
+    img {
+      height: auto;
+    }
   }
 }
 
-.stream-block .stream-image,
-.channel-block .channel-image,
-.video-block .video-image,
-.broadcast-block .broadcast-image {
+.stream-image,
+.channel-image,
+.video-image,
+.broadcast-image {
   width: 100%;
   padding-bottom: 56.25%; /* defines aspect ratio */
   position: relative;
@@ -72,15 +65,4 @@
   .stream-block img {
     width: calc(100vw - 75px);
   }
-}
-
-
-.stream-image:hover .preview,
-.broadcast-image:hover .preview {
-  opacity: 1;
-  visibility: visible;
-}
-
-.stream-image,.broadcast-image {
-  position: relative;
 }
