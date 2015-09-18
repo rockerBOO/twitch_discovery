@@ -1,12 +1,35 @@
   <div class="mui-container">
     <div class="mui-panel">
       <h1>About</h1>
+
       <p>Discovery aims to provide a better platform to explore and discover new streamers on <a href="http://www.twitch.tv/">Twitch</a>.</p>
 
-      <p>The tool was made after hearing time after time about having a hard time finding people to streams and people wanting to find new and interesting streamers. If you are a game category that has a lot of streamers running, it can be hard to grow.
+      <hr>
+
+      <p>In October 2014, I came across the more recent version of the site as Twitch, which is a live-streaming site for gaming. I was immediately of the good times I had in AOL chat rooms when I was a kid, and how there was thousands of people possibly chatting together about what they were watching in real-time.</p>
+
+      <p>As I continued to the use the site, I found I was analysing how communities were formed and supported. Immediately was impressed how people would contribute their time and money to keep a broadcaster online through subscriptions and donations. They did this with almost no kickbacks, and seemingly out of general support of the broadcaster.</p>
+
+      <p>Over time I found what types of communities I wanted to be apart of beyond the most popular streamers. On Twitch, the browsing of streams is purely based on how many viewers you have. Smaller streamers were left to fend for themselves to find people to come and watch and join their community.</p>
 
       <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Some REALLY good discussion and suggestions regarding <a href="https://twitter.com/Twitch">@Twitch</a> Discovery in the <a href="https://twitter.com/hashtag/JackassPodcast?src=hash">#JackassPodcast</a> right now&#10;&#10;<a href="http://t.co/lzbfAj6O0t">http://t.co/lzbfAj6O0t</a></p>&mdash; Jacklifear (@Jacklifear) <a href="https://twitter.com/Jacklifear/status/615048100244287488">June 28, 2015</a></blockquote>
       <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <p>I started to gravitate to talk show type streams like the <a href="http://twitch.tv/jacklifear">Jackass Podcast</a>, <a href="http://twitch.tv/">Dropped Frames</a> which talked about what streamers were dealing with, and how to grow their communities. They were a range of streamers from small to large, growing and stagnate.</p>
+
+      <p>Continually they would discuss how they would have to make choices on what game to play because of how the browsing works based on viewers. If you play a popular game that has 700-1000 streamers playing it, and don't have a lot of viewers, you might never be seen. They would suggest playing non-popular games to possibly get a community going.</p>
+
+      <p>This really set a cord for me because it was purely based on how the Twitch organizes its content. With more options to find more streamers that were doing a quality stream that people might enjoy, there might be better communities for people to be apart of. A large number of people I talk to enjoy smaller streamers because they get lost in the larger communities, and can have a more intimate experience with the community and the streamers.</p>
+
+      <h2>I set out to change how people found streams.</h2>
+
+      <p>I immediately grasped the concern of finding these streamers and how to find them. With my experience making multiple social networks, I was able to create the site Discovery in a couple of weeks. Its goals are to make it easy to find smaller streamers with more control over the values you wish to see in a streamer.</p>
+
+      <p>Built on the brand new <a href="http://www.phoenixframework.org/">Phoenix Framework</a>, which was written in close collaboration with the core <a href="http://elixir-lang.org/">Elixir</a> developers. This allowed me to create a very fast, stable, and comprehensive site. Currently able to run autonomously as it caches streams every 5 minutes, and allows you to find those streamers that would normally get lost.</p>
+
+      <p>Previewing streams as you browsed around was always a hassle because you might want to see a bunch of streamers to find one that you might enjoy. Creating the preview area of streams as you browse, and making it mobile friendly was important. Chat was always a big thing to me and making it as a priority as the stream was important.</p>
+
+      <p>Discovery is an evolving tool that has many opportunities to make streamers on other networks also more easily accessible. Plans for Hitbox, Youtube Gaming and Beam are in the works. Also are plans to develop a more comprehensive experience with navigating up-and-coming streamers, and niche streamers that people recommend. Using outside resources like Twitter to gauge support as well as the data from Twitch and other providers to analyse and evaluate streamers on their community and making that easily accessible.</p>
 
       <p>
         Goals:
@@ -17,7 +40,7 @@
         </ul>
       </p>
 
-      <p><a href="https://github.com/rockerBOO/twitch_discovery">Github</a>
+      <p>Source available on <a href="https://github.com/rockerBOO/twitch_discovery">Github</a>
       </p>
     </div>
   </div>

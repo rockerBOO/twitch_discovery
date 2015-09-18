@@ -24,9 +24,9 @@ $mui-divider-color:                     mui-color('white-alpha-12');
 
 $mui-body-bg-color:                     mui-color('black-alpha-87');
 
-$mui-base-font-family:                  Roboto, Helvetica, Calibri, Arial, sans;
+$mui-base-font-family:                  Roboto, "Helvetica Neue", Helvetica, Arial, Verdana,"Trebuchet MS", serif, "Segoe UI Emoji","Segoe UI Symbol";
 $mui-base-font-color:                   mui-color('grey', '400');
-$mui-base-font-size:                    16px;
+$mui-base-font-size:                    18px;
 
 $mui-panel-bg-color:                    mui-color('black-alpha-87');
 
@@ -38,6 +38,9 @@ $mui-dropdown-link-bg-color-hover:      mui-color('deep-purple', 'A700');
 $mui-dropdown-link-bg-color-active:     mui-color('deep-purple', 'A700');
 
 $mui-btn-default-bg-color:              mui-color('black-alpha-87');
+
+$mui-base-line-height:                  1.6;
+
 
 // import MUI SASS
 @import "bower_components/mui/src/sass/mui";
