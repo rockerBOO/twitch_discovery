@@ -13,7 +13,7 @@
     }
 
     .stream-image {
-      background-image: url("<%= static_path(@conn, "/images/default-stream-image.png") %>");
+      background-image: url("<%= static_path(@conn, "/images/default-stream-image.svg") %>");
       background-clip: content-box;
     }
     </style>
