@@ -27,7 +27,7 @@ defmodule TwitchDiscovery.View.Helpers do
       end
 
       def format_time(time) do
-        Timex.parse!(time, "{ISOz}")
+        Timex.parse!(time, "{ISO:Extended:Z}")
         |> Timex.format!("{ISOdate} {kitchen}")
       end
 

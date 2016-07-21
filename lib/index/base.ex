@@ -140,7 +140,7 @@ defmodule TwitchDiscovery.Index.Base do
       def is_last?(resultset) do
         total = resultset["_total"]
 
-        [{"limit", limit}, {"offset", offset}] =
+        [{"limit", limit}, {"offset", offset}, _] =
           URI.parse(resultset["_links"]["self"])
           |> Map.fetch!(:query)
           |> URI.query_decoder

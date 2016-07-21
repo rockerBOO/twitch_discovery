@@ -150,15 +150,15 @@ defmodule TwitchDiscovery.Index.Stream do
 
   def parse_started_at(uptime) do
     datetime = case parse_started_at_to_offset(uptime) do
-      {:mins, mins} -> Date.now |> Date.subtract(Time.to_timestamp(mins, :mins))
-      {:hours, hours} -> Date.now |> Date.subtract(Time.to_timestamp(hours, :hours))
+      {:mins, mins} -> Timex.now |> Timex.shift(minutes: mins)
+      {:hours, hours} -> Timex.now |> Timex.shift(hours: hours)
       nil -> nil
     end
 
     if datetime == nil do
       nil
     else
-      {:ok, min_uptime} = DateFormat.format(datetime, "{s-epoch}")
+      {:ok, min_uptime} = Timex.format(datetime, "{s-epoch}")
       {min_uptime, _} = Integer.parse(min_uptime)
 
       min_uptime
