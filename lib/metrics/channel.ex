@@ -17,7 +17,7 @@ defmodule TwitchDiscovery.Metric.Channel do
   def save(channel, type, value) do
     :calendar.universal_time
 
-    date = Date.now |> DateFormat.format!("{s-epoch}")
+    date = Timex.now |> Timex.format!("{s-epoch}")
 
     {date, _} = Integer.parse(date)
 

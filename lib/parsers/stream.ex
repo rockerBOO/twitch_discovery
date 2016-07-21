@@ -17,8 +17,8 @@ defmodule TwitchDiscovery.Parser.Stream do
   end
 
   def filters(stream) do
-    {:ok, created_at} = case DateFormat.parse(stream["created_at"], "{ISOz}") do
-      {:ok, created_at} -> DateFormat.format(created_at, "{s-epoch}")
+    {:ok, created_at} = case Timex.parse(stream["created_at"], "{ISO:Extended:Z}") do
+      {:ok, created_at} -> Timex.format(created_at, "{s-epoch}")
       {:error, message} -> Logger.error message
     end
 

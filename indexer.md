@@ -15,7 +15,7 @@
 	channel = {broadcast, "rockerboo"}
  	game = {broadcast, "Gunbound"} # stream"game"
   	started = {broadcast, "2011-03-19T15:42:22Z"} # stream"created_at"
-	ended = {broadcast, Date.now}
+	ended = {broadcast, Timex.now}
 
 # Stream
 ## Meta
@@ -74,7 +74,7 @@
 
 ## Filter
 	# "2015-06-24T04:50:34-0500" |>
-	# DateFormat.parse("{ISOz}")
+	# DateFormat.parse("{ISO:Extended:Z}")
 	created_at = {user, "2011-03-19T15:42:22Z"}
 	updated_at = {user,"2012-06-14T00:14:27Z"}
 

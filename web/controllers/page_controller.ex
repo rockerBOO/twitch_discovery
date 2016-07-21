@@ -5,9 +5,9 @@ defmodule TwitchDiscovery.PageController do
   alias TwitchDiscovery.Index.Stream
 
   def index(conn, _params) do
-    date_now = Date.now
-    datetime = date_now |> Date.subtract(Time.to_timestamp(5, :mins))
-    {:ok, min_uptime} = DateFormat.format(datetime, "{s-epoch}")
+    date_now = Timex.now
+    datetime = date_now |> Timex.shift(minutes: 5)
+    {:ok, min_uptime} = Timex.format(datetime, "{s-epoch}")
     {min_uptime, _} = Integer.parse(min_uptime)
 
     streams = %{"viewers" => %{"$lt" => 100}, "started_at" => %{"$lt" => min_uptime}}

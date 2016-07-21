@@ -50,7 +50,7 @@
           <% end %>
       </div>
     <div class="inner">
-      <%= @inner %>
+       <%= render @view_module, @view_template, assigns %>
     </div>
     <div class="mui-container">
       <footer>

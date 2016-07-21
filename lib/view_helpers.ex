@@ -27,8 +27,8 @@ defmodule TwitchDiscovery.View.Helpers do
       end
 
       def format_time(time) do
-        DateFormat.parse!(time, "{ISOz}")
-        |> DateFormat.format!("{ISOdate} {kitchen}")
+        Timex.parse!(time, "{ISO:Extended:Z}")
+        |> Timex.format!("{ISOdate} {kitchen}")
       end
 
       def checked_opts(option, check) do
