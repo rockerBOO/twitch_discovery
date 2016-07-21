@@ -26,14 +26,14 @@ defmodule TwitchDiscovery.Parser.Broadcast do
   #   started = {broadcast, "2011-03-19T15:42:22Z"} # stream"created_at"
   #   ended = {broadcast, Date.now}
   def filters(stream) do
-    {:ok, created_at} = case DateFormat.parse(stream["created_at"], "{ISOz}") do
-      {:ok, created_at} -> DateFormat.format(created_at, "{s-epoch}")
+    {:ok, created_at} = case Timex.parse(stream["created_at"], "{ISOz}") do
+      {:ok, created_at} -> Timex.format(created_at, "{s-epoch}")
       {:error, message} -> Logger.error message
     end
 
     {created_at, _} = Integer.parse(created_at)
 
-    # created_at = DateFormat.format(created_at, "{s-epoch}")
+    # created_at = Timex.format(created_at, "{s-epoch}")
 
     [{"language",   stream["channel"]["broadcaster_language"]},
      {"mature",     stream["channel"]["mature"]},

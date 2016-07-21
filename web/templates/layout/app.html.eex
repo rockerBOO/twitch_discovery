@@ -13,7 +13,7 @@
     }
 
     .stream-image {
-      background-image: url("<%= static_path(@conn, "/images/default-stream-image.png") %>");
+      background-image: url("<%= static_path(@conn, "/images/default-stream-image.svg") %>");
       background-clip: content-box;
     }
     </style>
@@ -50,13 +50,13 @@
           <% end %>
       </div>
     <div class="inner">
-      <%= @inner %>
+       <%= render @view_module, @view_template, assigns %>
     </div>
     <div class="mui-container">
       <footer>
         <div id="footer_blocks">
           <div class="block">
-            <h3>About</h3>
+            <h3><a href="/about">About</a></h3>
             Built on
             <ul>
               <li><a href="http://elixir-lang.org/">Elixir</a></li>

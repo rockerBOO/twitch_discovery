@@ -4,7 +4,7 @@ defmodule TwitchDiscovery.Mixfile do
   def project do
     [app: :twitch_discovery,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -20,7 +20,7 @@ defmodule TwitchDiscovery.Mixfile do
      applications: [:phoenix, :phoenix_html, :cowboy,
                     :logger, :phoenix_ecto, :postgrex,
                     :quantum, :httpoison,
-                    :exredis, :mongodb]]
+                    :exredis, :mongodb, :tzdata]]
   end
 
   # Specifies which paths to compile per environment
@@ -31,10 +31,10 @@ defmodule TwitchDiscovery.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.0"},
+    [{:phoenix, "~> 1.2"},
      {:phoenix_ecto, "~> 1.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.1.2"},
+     {:phoenix_html, "~> 2.6"},
      {:exredis, ">= 0.1.1"},
      {:number, "~> 0.3.4"},
      {:quantum, ">= 1.2.4"},
@@ -43,7 +43,7 @@ defmodule TwitchDiscovery.Mixfile do
      {:rest_twitch, github: "rockerBOO/rest_twitch"},
      # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
      {:httpoison, "~> 0.7"},
-     {:timex, "~> 0.16"},
+     {:timex, "~> 3.0"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:exrm, "~> 0.15.3", only: :dev},
      {:exprof, ">= 0.2.0", only: :dev},
