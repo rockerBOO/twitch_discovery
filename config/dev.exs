@@ -28,8 +28,4 @@ config :logger, :console, format: "[$level] $message\n"
 
 # Configure your database
 config :twitch_discovery, TwitchDiscovery.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "twitch_discovery_dev",
-  size: 10 # The amount of database connections in the pool
+  database: "twitch_discovery_dev"
