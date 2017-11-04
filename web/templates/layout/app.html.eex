@@ -37,17 +37,11 @@
       </div>
     </header>
         <div class="mui-container" style="margin-top: 10px; margin-bottom: 10px;">
-          <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';">Streams</button>
+          <button class="mui-btn mui-btn-<%= "streams" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/streams';"><a href="/streams" style="color: #FFF">Streams</a></button>
 <!--           <button class="mui-btn mui-btn-<%= "channels" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/channels';">Channels</button> -->
 <!--           <button class="mui-btn mui-btn-<%= "broadcasts" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/broadcasts';">Broadcasts</button> -->
  <!--          <button class="mui-btn mui-btn-<%= "discover/videos/top" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/discover/videos/top';">Videos</button> -->
           <button class="mui-btn mui-btn-<%= "search" |> is_active_page?(@conn) |> button_toggle_mui %>" onclick="window.location = '/search';">Search</button>
-          <%= if logged_in?(@conn) == false do %>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/auth/twitch';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> Auth</button>
-          <% else %>
-          <button class="mui-btn mui-btn-primary" onclick="window.location = '/user';"><img src="<%= static_path(@conn, "/images/twitch.svg") %>" style="border: 0; width: 18px; margin-top: -1px;"> <%= current_user(@conn) |> Map.fetch!("display_name") %></button>
-          <style type="text/css">.preview_logged_in { display: true; } </style>
-          <% end %>
       </div>
     <div class="inner">
        <%= render @view_module, @view_template, assigns %>
