@@ -32,6 +32,7 @@ defmodule TwitchDiscovery.Index.Stream do
       finish_indexing()
     else
       Logger.info "Processing failed to get results, and not at the end."
+	:timer.sleep(1000)
       spawn(fn ->
         request(resultset["_links"]["next"])
         |> process()
@@ -49,6 +50,7 @@ defmodule TwitchDiscovery.Index.Stream do
     |> parse_filters()
     |> save_to_mongo()
 
+    :timer.sleep(1000)
     spawn(fn ->
       request(resultset["_links"]["next"])
       |> process()
