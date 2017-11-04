@@ -35,8 +35,6 @@ defmodule TwitchDiscovery.Index.Base do
         end
       end
 
-
-
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
       end
@@ -96,9 +94,10 @@ defmodule TwitchDiscovery.Index.Base do
 
       def handle_request_error(url, error) do
         case error do
+          %RestTwitch.Error{code: 400} -> :ok
           %RestTwitch.Error{code: 404} -> :ok
           %RestTwitch.Error{code: 503} -> retry_request(url)
-          _                            -> Logger.error "Unhandled error in Index.Base"
+          _                            -> error |> Map.fetch(:reason) |> Logger.error
         end
       end
 

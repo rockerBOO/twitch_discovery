@@ -48,6 +48,7 @@ defmodule TwitchDiscovery.Index.Game do
   def parse_filters(games) do
     games
     |> Enum.map(fn (game) ->
+      IO.inspect game
       Game.process(game)
     end)
   end
