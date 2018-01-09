@@ -21,10 +21,6 @@ defmodule TwitchDiscovery do
 
     Process.register(redis_client, :redis_client)
 
-    # {:ok, mongo_pool} = MongoPool.start_link(database: "discovery", size: 20, max_overflow: 5)
-
-    # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
-
     children = [
       supervisor(TwitchDiscovery.Endpoint, []),
       worker(Mongo, [[name: :mongo, database: "discovery", pool: DBConnection.Poolboy]]),
