@@ -10,8 +10,8 @@ defmodule TwitchDiscovery.PageController do
     {:ok, min_uptime} = Timex.format(datetime, "{s-epoch}")
     {min_uptime, _} = Integer.parse(min_uptime)
 
-    streams = %{"viewers" => %{"$lt" => 100}, "started_at" => %{"$lt" => min_uptime}}
-    |> Stream.find(limit: 3)
+    streams = %{"viewers" => %{"$lt" => 100}} 
+      |> Stream.find(limit: 20)
 
     render conn, "index.html", streams: streams
   end

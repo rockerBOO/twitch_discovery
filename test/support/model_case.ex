@@ -29,6 +29,12 @@ defmodule TwitchDiscovery.ModelCase do
       Ecto.Adapters.SQL.restart_test_transaction(TwitchDiscovery.Repo, [])
     end
 
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TwitchDiscovery.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(TwitchDiscovery.Repo, {:shared, self()})
+    end
+
     :ok
   end
 

@@ -1,24 +1,22 @@
 {
-  "repository": {
-  },
-  "dependencies": {
-    "brunch": "^1.8.5",
-    "babel-brunch": "^5.1.1",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "javascript-brunch": ">= 1.0 < 1.8",
-    "sass-brunch": "^1.8.10",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
-  },
+  "repository": {},
   "eslintConfig": {
-      "env": {
-          "browser": true,
-          "jquery": true
-      },
-      "rules": {
-        "semi": 0,
-        "no-multi-spaces": 0,
-        "camelcase": 0
-      }
+    "env": {
+      "browser": true,
+      "jquery": true
+    },
+    "rules": {
+      "semi": 0,
+      "no-multi-spaces": 0,
+      "camelcase": 0
+    }
+  },
+  "devDependencies": {
+    "babel-brunch": "6.1.1",
+    "brunch": "2.10.9",
+    "clean-css-brunch": "2.10.0",
+    "uglify-js-brunch": "2.10.0",
+    "sass-brunch": "^2.10.4",
+    "muicss": "^0.9.35"
   }
 }

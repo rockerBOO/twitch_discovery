@@ -21,23 +21,16 @@ defmodule TwitchDiscovery do
 
     Process.register(redis_client, :redis_client)
 
-    {:ok, mongo_pool} = MongoPool.start_link(database: "discovery", size: 20, max_overflow: 5)
-
-    # {:ok, twitch_cache} =  RestTwitch.Cache.start_link(redis_client)
-
     children = [
       supervisor(TwitchDiscovery.Endpoint, []),
-
-      worker(TwitchDiscovery.Repo, []),
+      worker(Mongo, [[name: :mongo, database: "discovery", pool: DBConnection.Poolboy]]),
+      # worker(TwitchDiscovery.Repo, []),
+      worker(TwitchDiscovery.Scheduler, []),
       worker(RestTwitch.Cache, [redis_client]),
     ]
 
     opts = [strategy: :one_for_one, name: TwitchDiscovery.Supervisor]
     Supervisor.start_link(children, opts)
-  end
-
-  def quantum() do
-
   end
 
   # Tell Phoenix to update the endpoint configuration
