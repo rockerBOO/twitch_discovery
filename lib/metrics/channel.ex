@@ -14,22 +14,22 @@ defmodule TwitchDiscovery.Metric.Channel do
 #     59: 2000000
 #   }
 
-  def save(channel, type, value) do
-    :calendar.universal_time
+  # def save(channel, type, value) do
+  #   :calendar.universal_time
 
-    date = Timex.now |> Timex.format!("{s-epoch}")
+  #   date = Timex.now |> Timex.format!("{s-epoch}")
 
-    {date, _} = Integer.parse(date)
+  #   {date, _} = Integer.parse(date)
 
-    update = %{
-      "timestamp" => %BSON.DateTime{utc: date},
-      "channel"   => channel,
-      "type"      => type,
-      "value"     => value
-    }
+  #   update = %{
+  #     "timestamp" => %BSON.DateTime{utc: date},
+  #     "channel"   => channel,
+  #     "type"      => type,
+  #     "value"     => value
+  #   }
 
-    MongoPool.run(fn (conn) ->
-      conn |> Mongo.Connection.insert("test", update)
-    end)
-  end
+  #   MongoPool.run(fn (conn) ->
+  #     conn |> Mongo.Connection.insert("test", update)
+  #   end)
+  # end
 end

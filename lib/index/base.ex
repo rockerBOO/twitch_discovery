@@ -35,8 +35,6 @@ defmodule TwitchDiscovery.Index.Base do
         end
       end
 
-
-
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
       end
@@ -97,14 +95,22 @@ defmodule TwitchDiscovery.Index.Base do
       def handle_request_error(url, error) do
         case error do
           %RestTwitch.Error{code: 404} -> :ok
+          %RestTwitch.Error{code: 401} -> Logger.error "401 Unauthorized"
+          %RestTwitch.Error{code: 403} -> Logger.error "403 Forbidden"
+          %RestTwitch.Error{code: 404} -> Logger.error "404 Not Found"
+          %RestTwitch.Error{code: 404} -> Logger.error "429 Too Many Requests"
+          %RestTwitch.Error{code: 500} -> retry_request(url)
           %RestTwitch.Error{code: 503} -> retry_request(url)
-          _                            -> Logger.error "Unhandled error in Index.Base"
+          %RestTwitch.Error{code: nil} -> retry_request(url)
+          error                        -> Logger.error error.reason
         end
       end
 
       def find(query, opts \\ []) do
         try do
-          Mongo.find(MongoPool, collection_name(), query, opts)
+          IO.inspect query
+          IO.inspect opts
+          Mongo.find(:mongo, collection_name(), query, Enum.into(opts, pool: DBConnection.Poolboy))
           |> Enum.to_list
           |> filter_results()
         rescue
@@ -167,7 +173,7 @@ defmodule TwitchDiscovery.Index.Base do
 
       def mongo_save(data, id) do
         try do
-          case Mongo.insert_one(MongoPool, get_processing_index() |> db_key(), data) do
+          case Mongo.insert_one(:mongo, get_processing_index() |> db_key(), data, pool: DBConnection.Poolboy) do
             {:ok, _} -> :ok
             {:error, error} -> Logger.error error.message
           end
@@ -183,7 +189,7 @@ defmodule TwitchDiscovery.Index.Base do
       def mongo_save_many([]), do: :ok
       def mongo_save_many(documents) do
         try do
-          Mongo.insert_many(MongoPool, get_processing_index() |> db_key(), documents, [ordered: false])
+          Mongo.insert_many(:mongo, get_processing_index() |> db_key(), documents, [ordered: false, pool: DBConnection.Poolboy])
         rescue
           e in Mongo.Error -> Logger.error e.message
         end

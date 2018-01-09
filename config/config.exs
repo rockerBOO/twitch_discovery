@@ -12,7 +12,8 @@ config :twitch_discovery, TwitchDiscovery.Endpoint,
   secret_key_base: "zN2grEQjPFFdYaiVuYU1bLTHrMOcchLsIBXPz9lP7UOMGyH0dXq0tZZNxQOdsw74",
   render_errors: [default_format: "html"],
   pubsub: [name: TwitchDiscovery.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  ecto_repos: [TwitchDiscovery.Repo]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -23,8 +24,13 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-config :quantum, cron: [
-  # Every minute
-  "*/15 * * * *": &TwitchDiscovery.Index.index/0
-  # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
-]
+# config :quantum, cron: [
+#   # Every minute
+#   "*/15 * * * *": &TwitchDiscovery.Index.index/0
+#   # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
+# ]
+
+config :twitch_discovery, TwitchDiscovery.Scheduler, 
+  jobs: [
+    {"*/15 * * * *", &TwitchDiscovery.Index.index/0}
+  ]
