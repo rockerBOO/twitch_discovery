@@ -24,12 +24,6 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
-# config :quantum, cron: [
-#   # Every minute
-#   "*/15 * * * *": &TwitchDiscovery.Index.index/0
-#   # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
-# ]
-
 config :twitch_discovery, TwitchDiscovery.Scheduler, 
   jobs: [
     {"*/15 * * * *", &TwitchDiscovery.Index.index/0}
