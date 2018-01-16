@@ -25,6 +25,6 @@ import_config "#{Mix.env}.exs"
 
 config :quantum, cron: [
   # Every minute
-  "*/15 * * * *": &TwitchDiscovery.Index.index/0
+  {"*/15 * * * *", {TwitchDiscovery.Index, :index}}
   # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
 ]
