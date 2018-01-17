@@ -23,7 +23,6 @@ defmodule TwitchDiscovery do
 
     children = [
       supervisor(TwitchDiscovery.Endpoint, []),
-
       worker(Mongo, [[name: :mongo, hostname: "mongo", database: "discovery", pool: DBConnection.Poolboy]]),
       # worker(TwitchDiscovery.Repo, []),
       worker(TwitchDiscovery.Scheduler, []),
@@ -32,10 +31,6 @@ defmodule TwitchDiscovery do
 
     opts = [strategy: :one_for_one, name: TwitchDiscovery.Supervisor]
     Supervisor.start_link(children, opts)
-  end
-
-  def quantum() do
-
   end
 
   # Tell Phoenix to update the endpoint configuration

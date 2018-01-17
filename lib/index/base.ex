@@ -35,8 +35,6 @@ defmodule TwitchDiscovery.Index.Base do
         end
       end
 
-
-
       def index_to_string(index) when is_integer(index) do
         Integer.to_string(index)
       end
@@ -98,8 +96,14 @@ defmodule TwitchDiscovery.Index.Base do
       def handle_request_error(url, error) do
         case error do
           %RestTwitch.Error{code: 404} -> :ok
+          %RestTwitch.Error{code: 401} -> Logger.error "401 Unauthorized"
+          %RestTwitch.Error{code: 403} -> Logger.error "403 Forbidden"
+          %RestTwitch.Error{code: 404} -> Logger.error "404 Not Found"
+          %RestTwitch.Error{code: 404} -> Logger.error "429 Too Many Requests"
+          %RestTwitch.Error{code: 500} -> retry_request(url)
           %RestTwitch.Error{code: 503} -> retry_request(url)
-          _                            -> Logger.error "Unhandled error in Index.Base"
+          %RestTwitch.Error{code: nil} -> retry_request(url)
+          error                        -> Logger.error error.reason
         end
       end
 

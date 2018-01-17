@@ -12,7 +12,8 @@ config :twitch_discovery, TwitchDiscovery.Endpoint,
   secret_key_base: "zN2grEQjPFFdYaiVuYU1bLTHrMOcchLsIBXPz9lP7UOMGyH0dXq0tZZNxQOdsw74",
   render_errors: [default_format: "html"],
   pubsub: [name: TwitchDiscovery.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  ecto_repos: [TwitchDiscovery.Repo]
 
 # Configures Elixir's Logger
 config :logger, :console,

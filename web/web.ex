@@ -30,7 +30,6 @@ defmodule TwitchDiscovery.Web do
 
       # Alias the data repository and import query/model functions
       alias TwitchDiscovery.Repo
-      # import Ecto.Model
       import Ecto
       import Ecto.Query, only: [from: 2]
 
