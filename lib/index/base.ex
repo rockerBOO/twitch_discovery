@@ -172,7 +172,7 @@ defmodule TwitchDiscovery.Index.Base do
 
       def mongo_save(data, id) do
         try do
-          case Mongo.insert_one(:mongo, get_processing_index() |> db_key(), data) do
+          case Mongo.insert_one(:mongo, get_processing_index() |> db_key(), data, pool: DBConnection.Poolboy) do
             {:ok, _} -> :ok
             {:error, error} -> Logger.error error.message
           end
