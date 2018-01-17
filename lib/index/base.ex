@@ -59,9 +59,10 @@ defmodule TwitchDiscovery.Index.Base do
         finish()
 
         Mongo.delete_many(
-          MongoPool,
+          :mongo,
           current_index |> collection_name(),
-          %{}
+          %{}, 
+          pool: DBConnection.Poolboy
         )
       end
 
@@ -104,7 +105,7 @@ defmodule TwitchDiscovery.Index.Base do
 
       def find(query, opts \\ []) do
         try do
-          Mongo.find(MongoPool, collection_name(), query, opts)
+          Mongo.find(:mongo, collection_name(), query, Enum.into(opts, pool: DBConnection.Poolboy))
           |> Enum.to_list
           |> filter_results()
         rescue
@@ -167,7 +168,7 @@ defmodule TwitchDiscovery.Index.Base do
 
       def mongo_save(data, id) do
         try do
-          case Mongo.insert_one(MongoPool, get_processing_index() |> db_key(), data) do
+          case Mongo.insert_one(:mongo, get_processing_index() |> db_key(), data) do
             {:ok, _} -> :ok
             {:error, error} -> Logger.error error.message
           end
@@ -183,7 +184,7 @@ defmodule TwitchDiscovery.Index.Base do
       def mongo_save_many([]), do: :ok
       def mongo_save_many(documents) do
         try do
-          Mongo.insert_many(MongoPool, get_processing_index() |> db_key(), documents, [ordered: false])
+          Mongo.insert_many(:mongo, get_processing_index() |> db_key(), documents, [ordered: false, pool: DBConnection.Poolboy])
         rescue
           e in Mongo.Error -> Logger.error e.message
         end

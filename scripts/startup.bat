@@ -1,0 +1,1 @@
+docker run --network discovery -p 4000:4000 -e TWITCH_CLIENT_ID --add-host=redis:172.18.0.2 --add-host=mongo:172.18.0.3 -t td-build

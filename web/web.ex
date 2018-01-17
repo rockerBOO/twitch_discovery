@@ -18,7 +18,9 @@ defmodule TwitchDiscovery.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
+      import Ecto
+      import Ecto.Changeset
     end
   end
 
@@ -28,7 +30,8 @@ defmodule TwitchDiscovery.Web do
 
       # Alias the data repository and import query/model functions
       alias TwitchDiscovery.Repo
-      import Ecto.Model
+      # import Ecto.Model
+      import Ecto
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
@@ -67,7 +70,7 @@ defmodule TwitchDiscovery.Web do
 
       # Alias the data repository and import query/model functions
       alias TwitchDiscovery.Repo
-      import Ecto.Model
+      import Ecto
       import Ecto.Query, only: [from: 2]
 
     end

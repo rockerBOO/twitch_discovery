@@ -19,12 +19,19 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :twitch_discovery, TwitchDiscovery.Scheduler,
+  jobs: [
+    {"*/15 * * * *", {TwitchDiscovery.Index, :index, []}}
+  ]
+
+config :exredis,
+  host: "redis",
+  port: 6379,
+  password: "",
+  db: 0,
+  reconnect: :no_reconnect,
+  max_queue: :infinity
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
-config :quantum, cron: [
-  # Every minute
-  {"*/15 * * * *", {TwitchDiscovery.Index, :index}}
-  # "* */1 * * *": &TwitchDiscovery.Index.index_games/0
-]

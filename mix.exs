@@ -9,7 +9,7 @@ defmodule TwitchDiscovery.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -36,15 +36,15 @@ defmodule TwitchDiscovery.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [
-      {:phoenix, "~> 1.2"},
-      {:phoenix_ecto, "~> 1.1"},
+      {:phoenix, "~> 1.3"},
+      {:phoenix_ecto, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
-      {:exredis, ">= 0.1.1"},
+      {:exredis, ">= 0.2.4"},
       {:number, "~> 0.3.4"},
-      {:quantum, ">= 1.2.4"},
+      {:quantum, ">= 2.2.1"},
       {:exprintf, "~> 0.1", override: true},
-      {:mongodb, github: "ericmj/mongodb"},
+      {:mongodb, "~> 0.4.3"},
       {:rest_twitch, github: "rockerBOO/rest_twitch"},
       # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
       {:httpoison, "~> 0.7"},
