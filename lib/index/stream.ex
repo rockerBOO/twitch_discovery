@@ -57,6 +57,12 @@ defmodule TwitchDiscovery.Index.Stream do
     end)
   end
 
+  def process(result) do 
+    case result do 
+      :ok -> :ok
+    end
+  end
+
   def map_result(result) do
     map_result(result, "id")
   end

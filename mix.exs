@@ -3,7 +3,7 @@ defmodule TwitchDiscovery.Mixfile do
 
   def project do
     [app: :twitch_discovery,
-     version: "0.0.1",
+     version: "0.0.6",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
@@ -17,10 +17,14 @@ defmodule TwitchDiscovery.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {TwitchDiscovery, []},
-     applications: [:phoenix, :phoenix_html, :cowboy,
-                    :logger, :phoenix_ecto, 
-                    :quantum, :httpoison,
-                    :exredis, :mongodb, :tzdata]]
+      applications: [
+        :phoenix, :phoenix_html, :cowboy,
+        :logger, :phoenix_ecto, :postgrex,
+        :quantum, :httpoison, :exprintf, :number,
+        :exredis, :mongodb, :tzdata,
+        :rest_twitch, :timex
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment
@@ -31,23 +35,27 @@ defmodule TwitchDiscovery.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 1.2"},
-     {:plug, "~>1.3.5", override: true},
-     {:phoenix_ecto, "~> 3.3"},
-     {:postgrex, "~> 0.13"},
-     {:phoenix_html, "~> 2.6"},
-     {:exredis, ">= 0.1.1"},
-     {:number, "~> 0.3.4"},
-     {:quantum, ">= 2.2.1"},
-     {:exprintf, "~> 0.1", override: true},
-     {:mongodb, "~> 0.4.3"},
-     {:rest_twitch, github: "rockerBOO/rest_twitch"},
-     {:httpoison, "~> 0.13"},
-     {:timex, "~> 3.1"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:exrm, "~> 0.15.3", only: :dev},
-     {:exprof, ">= 0.2.0", only: :dev},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 1.3"},
+      {:phoenix_ecto, "~> 3.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:exredis, ">= 0.2.4"},
+      {:number, "~> 0.3.4"},
+      {:quantum, ">= 2.2.1"},
+      {:exprintf, "~> 0.1", override: true},
+      {:mongodb, "~> 0.4.3"},
+      {:rest_twitch, github: "rockerBOO/rest_twitch"},
+      # {:rest_twitch, path: "/home/rockerboo/projects/rest_twitch"},
+      {:httpoison, "~> 0.7"},
+      {:timex, "~> 3.1"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:exrm, "~> 0.15.3", only: :dev},
+      {:exprof, ">= 0.2.0", only: :dev},
+      {:distillery, "~> 1.5", runtime: false},
+      # {:beaker, ">= 0.0.3"},
+      {:cowboy, "~> 1.0"}
+    ]
   end
 
   defp aliases do

@@ -57,9 +57,10 @@ defmodule TwitchDiscovery.Index.Base do
         finish()
 
         Mongo.delete_many(
-          MongoPool,
+          :mongo,
           current_index |> collection_name(),
-          %{}
+          %{}, 
+          pool: DBConnection.Poolboy
         )
       end
 
@@ -108,8 +109,6 @@ defmodule TwitchDiscovery.Index.Base do
 
       def find(query, opts \\ []) do
         try do
-          IO.inspect query
-          IO.inspect opts
           Mongo.find(:mongo, collection_name(), query, Enum.into(opts, pool: DBConnection.Poolboy))
           |> Enum.to_list
           |> filter_results()

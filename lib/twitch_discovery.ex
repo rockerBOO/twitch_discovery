@@ -16,14 +16,14 @@ defmodule TwitchDiscovery do
 
     redis_client = case Exredis.start_link() do
       {:ok, redis_client} -> redis_client
-      {:error, error} -> raise %RedisError{response: error, message: "Couldn't connect to Redis"}
+      {:error, error} -> raise %RedisError{response: error, message: error}
     end
 
     Process.register(redis_client, :redis_client)
 
     children = [
       supervisor(TwitchDiscovery.Endpoint, []),
-      worker(Mongo, [[name: :mongo, database: "discovery", pool: DBConnection.Poolboy]]),
+      worker(Mongo, [[name: :mongo, hostname: "mongo", database: "discovery", pool: DBConnection.Poolboy]]),
       # worker(TwitchDiscovery.Repo, []),
       worker(TwitchDiscovery.Scheduler, []),
       worker(RestTwitch.Cache, [redis_client]),

@@ -17,7 +17,8 @@
       background-clip: content-box;
     }
     </style>
-
+<%#     <link href="//cdn.muicss.com/mui-0.9.35/css/mui.min.css" rel="stylesheet" type="text/css" /> %>
+    <script src="//cdn.muicss.com/mui-0.9.35/js/mui.min.js"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
@@ -28,6 +29,7 @@
         return true;
     }
     </script>
+
   </head>
   <body>
     <header>
